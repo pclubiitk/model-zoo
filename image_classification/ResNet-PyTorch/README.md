@@ -1,17 +1,19 @@
-# how to run the code
-- on colab notebook :
+# Pytorch Implementation of ResNet Model (CIFAR-10 Dataset)
+### Usage
+```bash
+$ python3 main.py --block "basic" --epoch 75
+```
+NOTE: on Colab Notebook use following command:
 ```python
 !git clone link-to-repo
-%run main.py --block "basic" --epoch 50 #customize according to what you want!
+%run main.py --block "basic" --epoch 75
 ```
-- on  a local machine :
-```bash
-git clone link-to-repo
-```
-```python
-python3 main.py --block "basic" --epoch 50 # customize as you want!
-```
-# A short summary and implementation on the ResNet model(CIFAR-10 Dataset)([He et.al 2015](https://arxiv.org/abs/1512.03385))
+### References
+* He, Kaiming, et al. "Deep residual learning for image recognition." Proceedings of the IEEE conference on computer vision and pattern recognition. 2016. [arXiv:1512.03385]( https://arxiv.org/abs/1512.03385 )
+### Contributed by:
+* [Pramodh Gopalan](https://github.com/pramodh-1612)
+
+# Summary
 
 ## Introduction and Intuition 
 
@@ -168,5 +170,3 @@ Clearly,The model accuracies weren't even close to SOTA (*lol*).I feel that this
 - Increasing the depth could provide more accuracy(*That was the point of the paper*,*facepalm!*)     (*Also,Gathering information from my peers showed this to be true indeed;ResNet-50's got you an accuracy of about **89%**(No Dropout implemented,trained for only 60 epochs!)*).
 - Some of my peers had left the network to over-fit the data,thereby getting training accuracy of **99**% and a test accuracy of **84**%.(*seems counter intuitive,but works!*)(*No Droupout,No Regularization,No Data-Augmentation*)
 - I still felt that increasing the epochs could lead to some improvement on the train-test accuracy.
-
-fin.
