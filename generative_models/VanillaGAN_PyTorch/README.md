@@ -1,24 +1,21 @@
-# how to run the code
-- on colab notebook :
-```python
+# Pytorch Implementation of VanillaGAN (MNIST Dataset)
+
+### Usage
+```bash
+$ python3 main.py --k_steps 5 --epoch 50 
+```
+NOTE: on Colab Notebook use following command:
+```bash
 !git clone link-to-repo
 %run main.py --k_steps 5 --epoch 50 
 ```
-- on  a local machine :
-```bash
-$ git clone link-to-repo
-```
-```python
-$ python3 main.py --k_steps 5 --epoch 50 
-```
-## References :
+### References :
+* Goodfellow et al. Generative adversarial networks.2014. [arXiv:1406.2661](https://arxiv.org/abs/1406.2661)
 
-- Goodfellow et al. Generative adversarial networks.2014.[ 	arXiv:1406.2661](https://arxiv.org/abs/1406.2661)
+### Contributed by:
+* [Pramodh Gopalan](https://github.com/pramodh-1612/)
 
-## Contributed by :
-
-- [Pramodh Gopalan](https://github.com/pramodh-1612/)
-# A Short summary on the GAN paper
+# Summary
 
 ## Introduction
 
@@ -32,7 +29,7 @@ Most generative algorithms,such as Naive Bayes (*Yes,it has some role to play he
 sample and generate images on it's own.But,the main drawback with them was the fact that it involved
 optimizing a lower bound(*Not getting into the specifics*),which didn't yield the best results.GANs,on the other hand involve no such assumption.In fact,they use game theory concepts in order to acheive results better then the VAE's themseves.
 
-## A few keywords before we get started : 
+## A few keywords before we get started: 
 
 ### Minimax-2-player-game :(definitions taken from [here](https://brilliant.org/wiki/minimax/)) 
 
@@ -85,7 +82,7 @@ analogous to the police, trying to detect the counterfeit currency. Competition 
 both teams to improve their methods until the counterfeits are indistiguishable from the genuine
 articles.
 
-## Math :
+## Math:
 
 Like other generative models,this does have some probability behind it.
 lets take a look at this figure : 
@@ -111,13 +108,13 @@ lets try and find some intuition behind it :
 We try and maximize the function wrt the parameters of the generator and the discriminator.
 
 
-## Implementation/Architecture :
+## Implementation/Architecture:
 
 The paper suggests that we use simple MLP architecture,with activations of sigmoids at some layers
 and Relu(*for the generator*) and Maxout activations(*for the generators*).We also need to train 
 the discriminator for 'k' steps,and then train the generator for 1 step.
 
-### In our implementation :
+### In our implementation:
 
 - We use the BCE loss (Binary cross entropy.For more on these confusing names,check [this](https://gombru.github.io/2018/05/23/cross_entropy_loss/) out!)
 - Train both the models for 200 epochs.(*this happened in 40 minutes*)(*generative models are fast!*)
@@ -128,12 +125,12 @@ gif!
 
 Here is the loss graph :
 
-![loss](./losses.png)
+![loss](./assets/losses.png)
 
 Here is the gif !
 
-![results](./progress.gif)
+![results](./assets/progress.gif)
 
-## Scope for improvement :
+## Scope for improvement:
 
 I think this is pretty much the limit of what a MLP can do.With that said,maybe tweaking 'k' could lead to better quality.
