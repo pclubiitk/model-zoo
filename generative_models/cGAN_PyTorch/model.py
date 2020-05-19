@@ -66,8 +66,6 @@ class Discriminator(nn.Module):
           out = self.model(x)
           return out
 
-
-
 def init_weights(m):
     if type(m)==nn.Linear:
         torch.nn.init.xavier_uniform(m.weight)
