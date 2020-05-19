@@ -170,7 +170,7 @@ def main():
     image = []
     for i in range(1,args.epochs+1):
       image.append(imageio.imread(args.outdir+'Image/'+str(i)+'.png'))
-    imageio.mimsave(args.n_classes+'.gif', image)
+    imageio.mimsave(args.ndata+'.gif', image, fps=5)
 
 
 if __name__ == '__main__':
