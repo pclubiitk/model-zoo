@@ -15,12 +15,10 @@ import torchvision.utils
 from torch.autograd import Variable
 import torchvision.utils as vutils
 from torchvision.utils import save_image
-from tensorboardX import SummaryWriter
 torch.backends.cudnn.benchmark = True
 import matplotlib.pyplot as plt
-#%matplotlib notebook#inline
-#get_ipython().magic('matplotlib inline')
 from dataset import get_loader
+import imageio
 from model import *
 
 
@@ -95,17 +93,12 @@ def train(args, generator, discriminator, dataloader, loss, img_type,label_type,
         print('Epoch {} || G_loss: {} || D_loss: {} || Time elapsed: {}'.format(epoch, G_loss / (i), D_loss / (i),time.time()-start_time))
         G_losses.append(G_loss / (i))
         D_losses.append(D_loss / (i))
-        image = sample_image(args,fix_noise,fix_label, epoch, generator)
+
+        sample_image(args,fix_noise,fix_label, epoch, generator)
 
         # Checkpoint
         torch.save(generator.state_dict(), args.outdir + 'generator_state/generator_{}_.pth'.format(epoch))
         torch.save(discriminator.state_dict(),args.outdir + 'discriminator_state/discriminator_{}_.pth'.format(epoch))
-
-        plt.plot(G_losses, label='Generator')
-        plt.plot(D_losses, label='Discriminator')
-        plt.legend()
-        plt.savefig(args.outdir+"hello.png")
-        plt.show()
 
     return G_losses, D_losses
 
