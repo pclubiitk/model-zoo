@@ -3,7 +3,7 @@
 ```bash
 $ python3 main.py --ndata 'cifar10' --epochs 100
 ```
-NOTE: on Colab Notebook use following command:
+> **_NOTE:_** on Colab Notebook use following command:
 ```python
 !git clone link-to-repo
 %run main.py --ndata 'cifar10' --epochs 100 
