@@ -147,7 +147,7 @@ def train(args, generator, discriminator, dataloader, loss, img_type, label_type
             # print(d_fake.shape," ",f_label.shape)
             loss_fake = loss(d_fake, f_label)
 
-            d_loss = 0.5 * (loss_fake + loss_real)
+            d_loss = loss_fake + loss_real
 
             d_loss.backward()
             d_optimizer.step()
