@@ -42,7 +42,7 @@ def main():
     args = parser.parse_args()
     os.environ['CUDA_VISIBLE_DEVICES'] = '0'
     args.device = torch.device('cuda:0') if torch.cuda.is_available() else 'cpu'
-    args.channel = 3 if ndata=='cifar10' else 1
+    args.channel = 3 if args.ndata=='cifar10' else 1
 
     seed = args.seed
     torch.manual_seed(seed)
