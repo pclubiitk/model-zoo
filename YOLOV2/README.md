@@ -1,3 +1,25 @@
+## Dataset
+```
+> VOC2012 dataset
+wget http://host.robots.ox.ac.uk/pascal/VOC/voc2012/VOCtrainval_11-May-2012.tar
+```
+```
+> Unzippping Dataset
+tar -xvf  'VOCtrainval_11-May-2012.tar'
+```
+```
+> Also download weights 
+wget https://pjreddie.com/media/files/yolov2.weights
+```
+## Usage
+```bash
+$ python3 main.py --epochs 50 --batch_size 32
+```
+> **_NOTE:_** on Colab Notebook use following command:
+```python
+!git clone link-to-repo
+%run main.py --epochs 50 --batch_size 32
+```
 # Paper
 
 * **Title**: YOLO9000:Better, Faster, Stronger
