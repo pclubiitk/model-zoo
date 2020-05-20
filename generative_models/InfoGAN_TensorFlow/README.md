@@ -6,7 +6,7 @@ $ python3 main.py --dataset CIFAR10 --noise_dim 64
 > **_NOTE:_** on Colab Notebook use following command:
 ```python
 !git clone link-to-repo
-%run main.py main.py --dataset CIFAR10 --noise_dim 64
+%run main.py --dataset CIFAR10 --noise_dim 64
 ```
 
 ## Help Log
