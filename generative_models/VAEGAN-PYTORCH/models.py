@@ -1,6 +1,7 @@
 import torch
 import torch.nn as nn
 
+#weight initialisation with mean=0 and stddev=0.02
 def weights_init(m):
     classname = m.__class__.__name__
     if classname.find('Conv') != -1:
@@ -10,9 +11,9 @@ def weights_init(m):
         nn.init.constant_(m.bias.data, 0)
 
 class Encoder(nn.Module):
-  def __init__(self):
+  def __init__(self,in_channels,latent_dim):              #in_channels=1 for MNIST and in_channels=3 for CIFAR10
     super(Encoder,self).__init__()
-    self.conv1=nn.Conv2d(1,64,5,padding=2,stride=2)   #in_channels=3
+    self.conv1=nn.Conv2d(in_channels,64,5,padding=2,stride=2)   
     self.bn1=nn.BatchNorm2d(64,momentum=0.9)
     self.conv2=nn.Conv2d(64,128,5,padding=2,stride=2)
     self.bn2=nn.BatchNorm2d(128,momentum=0.9)
@@ -21,8 +22,8 @@ class Encoder(nn.Module):
     self.relu=nn.LeakyReLU(0.2)
     self.fc1=nn.Linear(256*8*8,2048)
     self.bn4=nn.BatchNorm1d(2048,momentum=0.9)
-    self.fc_mean=nn.Linear(2048,128)
-    self.fc_logvar=nn.Linear(2048,128)   #latent dim=128
+    self.fc_mean=nn.Linear(2048,latent_dim)
+    self.fc_logvar=nn.Linear(2048,latent_dim)   #latent dim=128
   
   def forward(self,x):
     batch_size=x.size()[0]
@@ -35,10 +36,11 @@ class Encoder(nn.Module):
     logvar=self.fc_logvar(out)
     
     return mean,logvar
+
 class Decoder(nn.Module):
-  def __init__(self):
+  def __init__(self,latent_dim,out_channels):
     super(Decoder,self).__init__()
-    self.fc1=nn.Linear(128,8*8*256)
+    self.fc1=nn.Linear(latent_dim,8*8*256)
     self.bn1=nn.BatchNorm1d(8*8*256,momentum=0.9)
     self.relu=nn.LeakyReLU(0.2)
     self.deconv1=nn.ConvTranspose2d(256,256,6, stride=2, padding=2)
@@ -47,7 +49,7 @@ class Decoder(nn.Module):
     self.bn3=nn.BatchNorm2d(128,momentum=0.9)
     self.deconv3=nn.ConvTranspose2d(128,32,6, stride=2, padding=2)
     self.bn4=nn.BatchNorm2d(32,momentum=0.9)
-    self.deconv4=nn.ConvTranspose2d(32,1,5, stride=1, padding=2)
+    self.deconv4=nn.ConvTranspose2d(32,out_channels,5, stride=1, padding=2)
     self.tanh=nn.Tanh()
 
   def forward(self,x):
@@ -59,10 +61,11 @@ class Decoder(nn.Module):
     x=self.relu(self.bn4(self.deconv3(x)))
     x=self.tanh(self.deconv4(x))
     return x
+
 class Discriminator(nn.Module):
-  def __init__(self):
+  def __init__(self,in_channels):
     super(Discriminator,self).__init__()
-    self.conv1=nn.Conv2d(1,32,5,padding=2,stride=1)
+    self.conv1=nn.Conv2d(in_channels,32,5,padding=2,stride=1)
     self.relu=nn.LeakyReLU(0.2)
     self.conv2=nn.Conv2d(32,128,5,padding=2,stride=2)
     self.bn1=nn.BatchNorm2d(128,momentum=0.9)
@@ -87,12 +90,13 @@ class Discriminator(nn.Module):
     x=self.sigmoid(self.fc2(x))
 
     return x,x1
+
 class VAE_GAN(nn.Module):
-  def __init__(self):
+  def __init__(self,in_channels,out_channels,latent_dim):
     super(VAE_GAN,self).__init__()
-    self.encoder=Encoder()
-    self.decoder=Decoder()
-    self.discriminator=Discriminator()
+    self.encoder=Encoder(in_channels,latent_dim)
+    self.decoder=Decoder(latent_dim,out_channels)
+    self.discriminator=Discriminator(in_channels)
     self.encoder.apply(weights_init)
     self.decoder.apply(weights_init)
     self.discriminator.apply(weights_init)
@@ -102,9 +106,9 @@ class VAE_GAN(nn.Module):
     bs=x.size()[0]
     z_mean,z_logvar=self.encoder(x)
     std = z_logvar.mul(0.5).exp_()
-        
+    l_dim=z_mean.size()[1]    
     #sampling epsilon from normal distribution
-    epsilon=Variable(torch.randn(bs,128)).to(device)
+    epsilon=Variable(torch.randn(bs,l_dim)).to(device)
     z=z_mean+std*epsilon
     x_tilda=self.decoder(z)
       
