@@ -96,7 +96,7 @@ We use the following default configuration:
 ## On MNIST Dataset
 
 Results after training for 50 epochs:
-![mnistGIF](https://github.com/AthaSSiN/model-zoo/blob/master/generative_models/InfoGAN_TensorFlow/assets/ReadmeImages/mnist.gif)
+![mnistFinal](https://github.com/AthaSSiN/model-zoo/blob/master/generative_models/InfoGAN_TensorFlow/assets/ReadmeImages/mnistfinal.png)
 
 > **_NOTE:_** In this graph orange plot corresponds to dicriminator loss, blue to generator loss, Green to loss of continuous variables and Gray to loss in categorical variables.
 
@@ -124,7 +124,7 @@ Note: In some cases, the digits have also changed while varying the continuous c
 
 Results after training for 137 epochs
 
-![cifargif](https://github.com/AthaSSiN/model-zoo/blob/master/generative_models/InfoGAN_TensorFlow/assets/ReadmeImages/CIFAR.gif)
+![cifargif](https://github.com/AthaSSiN/model-zoo/blob/master/generative_models/InfoGAN_TensorFlow/assets/ReadmeImages/CIFARfinal.png)
 
 > **_NOTE:_** In this graph blue plot corresponds to generator loss and orange to discriminator loss
 
