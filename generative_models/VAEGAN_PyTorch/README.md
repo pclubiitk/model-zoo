@@ -37,13 +37,13 @@ $ python3 main.py --ndata 'mnist' --epochs 50
 
 A VAE consists of two networks that encode a data samplex to a latent representation z and decode the latent representation back to data space, respectively:
 
- ![1](./images/vae.png)                                            
+ ![1](./assets/vae.png)                                            
                                               
 The VAE regularizes the encoder by imposing a prior over the latent distribution p(z). Typically z ∼ N (0, I) is chosen. The VAE loss is minus the sum of the expected log likelihood (the reconstruction error) and a prior regularization term:
 
-![2](./images/l_vae.png) 
+![2](./assets/l_vae.png) 
 
-![3](./images/vae1.png) 
+![3](./assets/vae1.png) 
 
 ## Generative Adversarial Network
 
@@ -51,26 +51,26 @@ A GAN consists of two networks: the generator network Gen(z) maps latents z to d
 and z ∼ p(z).
 
 
-![4](./images/gan_l.png)
+![4](./assets/gan_l.png)
 
 ## Beyond element-wise reconstruction error with VAE/GAN
 
 Specifically, since element-wise reconstruction errors are not adequate for images and other signals with invariances,
 we propose replacing the VAE reconstruction (expected log likelihood) error term with a reconstruction error expressed in the GAN discriminator.. To achieve this,let Disl(x) denote the hidden representation of the lth layer of the discriminator. We introduce a Gaussian observation model for Disl(x) with mean Disl(x˜) and identity covariance.We train our combined model with the triple criterion:
 
-![4](./images/tripl.png)
+![4](./assets/tripl.png)
 
 Notably, we optimize the VAE wrt Lgan which we regard as a style error in addition to the reconstruction error which
 can be interpreted as a content error using the terminology from Gatys et al. (2015). Moreover, since both Dec and
 Gen map from z to x, we share the parameters between the two.
 
 
-![4](./images/model.png)
+![4](./assets/model.png)
 
 ### Algorithm used for training
 
 
-![4](./images/algo.png)
+![4](./assets/algo.png)
 
 
 ## Implementation and Model Architecture:
@@ -167,31 +167,31 @@ Estimated Total Size (MB): 483.53
 
 ## Generated images after 25 epochs(MNIST)
 
-![4](./images/MNISTrec_noise_epoch_24.png.png)
+![4](./assets/MNISTrec_noise_epoch_24.png.png)
 
 ## Reconstructed images after 25 epochs(MNIST)
 
-![4](./images/MNISTrec_epoch_24.png.png)
+![4](./assets/MNISTrec_epoch_24.png.png)
 
 ## Generated images after 30 epochs(CIFAR10)
 
-![4](./images/rec_epoch_28.png.png)
+![4](./assets/rec_epoch_28.png.png)
 
 ## Reconstructed images after 30 epochs(CIFAR10)
 
-![4](./images/rec_epoch_32.png.png)
+![4](./assets/rec_epoch_32.png.png)
 
 ## Plot of Prior Loss vs Iterations
 
-![4](./images/kl_divergence.png)
+![4](./assets/kl_divergence.png)
 
 ## Plot of GAN Loss vs Iterations
 
-![4](./images/gan_loss.png)
+![4](./assets/gan_loss.png)
 
 ## Plot of Reconstruction Loss vs Iterations
 
-![4](./images/recon_loss.png)
+![4](./assets/recon_loss.png)
 
 
 
