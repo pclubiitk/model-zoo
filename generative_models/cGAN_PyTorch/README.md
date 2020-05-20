@@ -1,5 +1,5 @@
 # Pytorch Implementation of Conditional GAN 
-### Usage
+## Usage
 ```bash
 $ python3 main.py --ndata 'cifar10' --epochs 100
 ```
@@ -8,7 +8,11 @@ $ python3 main.py --ndata 'cifar10' --epochs 100
 !git clone link-to-repo
 %run main.py --ndata 'cifar10' --epochs 100 
 ```
-# Paper
+
+## Contributed by:
+* [Ayush Gupta](https://github.com/ayush12gupta)
+
+## References
 
 * **Title**: Conditional Generative Adversarial Nets
 * **Authors**: Mehdi Mirza, Simon Osindero
