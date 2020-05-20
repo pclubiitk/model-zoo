@@ -20,21 +20,20 @@ device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
 torch.autograd.set_detect_anomaly(True)
 
 parser = argparse.ArgumentParser()
-    # model config
-    parser.add_argument('--image_size', type=int, default=64)
-    parser.add_argument('--latent_dim', type=int, default=128)
-    # run config
-    parser.add_argument('--ndata', type=str, required=True)
-    parser.add_argument('--root', type=str, default=../data)
-    # optim config
-    parser.add_argument('--epochs', type=int, default=25)
-    parser.add_argument('--batch_size', type=int, default=64)
-    parser.add_argument('--lr', type=float, default=0.0003)
-    parser.add_argument('--alpha', type=float, default=0.1)
-    parser.add_argument('--beta', type=int, default=5)
-    parser.add_argument('--gamma', type=float, default=15)
-
-    args = parser.parse_args()
+# model config
+parser.add_argument('--image_size', type=int, default=64)
+parser.add_argument('--latent_dim', type=int, default=128)
+# run config
+parser.add_argument('--ndata', type=str, required=True)
+parser.add_argument('--root', type=str, default=../data)
+# optim config
+parser.add_argument('--epochs', type=int, default=25)
+parser.add_argument('--batch_size', type=int, default=64)
+parser.add_argument('--lr', type=float, default=0.0003)
+parser.add_argument('--alpha', type=float, default=0.1)
+parser.add_argument('--beta', type=int, default=5)
+parser.add_argument('--gamma', type=float, default=15)
+args = parser.parse_args()
 
 batch_size=args.batch_size
 latent_dim=args.latent_dim
@@ -47,7 +46,7 @@ if args.ndata=='cifar10':
   out_channels=3 
 
 data_loader=dataloader(args.batch_size,args.root,args.ndata,args.image_size)
-
+#model initialization
 gen=VAE_GAN(in_channels,out_channels,latent_dim).to(device)
 discrim=Discriminator(in_channels).to(device)
 
