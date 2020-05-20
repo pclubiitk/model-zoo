@@ -1,4 +1,20 @@
-# Paper
+# PyTorch Implementation of VAEGAN
+
+## Usage
+
+```bash
+$ python3 main.py --ndata 'mnist' --epochs 50 
+```
+> **_NOTE:_** on Colab Notebook use following command:
+```python
+!git clone link-to-repo
+%run main.py --ndata 'cifar10' --epochs 50 
+```
+
+## Contributed by:
+* [Rishabh Dugaye](https://github.com/rishabhd786)
+
+## References
 
 * **Title**: Autoencoding beyond pixels using a learned similarity metric
 * **Authors**: Anders Boesen Lindbo Larsen,Søren Kaae Sønderby,Hugo Larochelle,Ole Winther
@@ -6,10 +22,7 @@
 * **Tags**: Neural Network, Generative Networks, GANs
 * **Year**: 2016
 
-### Usage
-```bash
-$ python3 main.py 
-```
+
 # Summary
 
 ## Introduction
