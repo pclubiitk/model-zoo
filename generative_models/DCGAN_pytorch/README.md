@@ -70,7 +70,7 @@ optional arguments:
 
 ## Model Architecture
 
-![architecture](images/architecture.png)
+![architecture](assets/architecture.png)
  
 ## Network Design of DCGAN:
 * Replace all pooling layers with strided convolutions for the downsampling
@@ -96,14 +96,14 @@ Hyperparameters are chosen as given in the paper.
 <td> DCGAN after 10 epochs </td>
 </tr>
 <tr>
-<td><img src = 'images/raw_MNIST.png'>
-<td><img src = 'images/MNIST_DCGAN_10.png'>
+<td><img src = 'assets/raw_MNIST.png'>
+<td><img src = 'assets/MNIST_DCGAN_10.png'>
 </tr>
 </table>
 
 ## Training loss
 
-![Loss](images/loss.png)
+![Loss](assets/loss.png)
 
 ## contributions of the research paper
 
