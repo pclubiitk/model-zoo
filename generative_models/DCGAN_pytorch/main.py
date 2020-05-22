@@ -8,16 +8,17 @@ from torch.utils.data import DataLoader     # Gives easier dataset managment and
 
 import argparse
 parser = argparse.ArgumentParser()
-parser.add_argument('--num_epochs', type=int, default=10)
-parser.add_argument('--batch_size', type=int, default=128)
-parser.add_argument('--channels_noise', type=int, default=100)
-parser.add_argument('--lr_g', type=float, default=0.0002)
-parser.add_argument('--lr_d', type=float, default=0.0002)
-parser.add_argument('--beta1', type=float, default=0.5)
+parser.add_argument('--num_epochs', type=int, default=10 , help="no. of epochs : default=10")
+parser.add_argument('--batch_size', type=int, default=128, help="batch size : default=128")
+parser.add_argument('--channels_noise', type=int, default=100, help="size of noise vector : default=100")
+parser.add_argument('--lr_g', type=float, default=0.0002, help="learning rate generator : default=0.0002")
+parser.add_argument('--lr_d', type=float, default=0.0002, help="learning rate discriminator : default=0.0002")
+parser.add_argument('--beta1', type=float, default=0.5, help="bet1 value for adam optimi" )
 args = parser.parse_args()
 
 lr_g = args.lr_g
 lr_d = args.lr_d
+beta1 = args.beta1
 batch_size = args.batch_size
 channels_noise = args.channels_noise
 num_epochs = args.num_epochs
@@ -43,8 +44,8 @@ netG = Generator(channels_noise, channels_img, features_g).to(device)
 netG=netG.apply(weights_init)
 netD=netD.apply(weights_init)
 
-optimizerD = optim.Adam(netD.parameters(), lr=lr, betas=(0.5, 0.999) )
-optimizerG = optim.Adam(netG.parameters(), lr=lr, betas=(0.5, 0.999) )
+optimizerD = optim.Adam(netD.parameters(), lr=lr_d, betas=(beta1, 0.999) )
+optimizerG = optim.Adam(netG.parameters(), lr=lr_g, betas=(beta1, 0.999) )
 
 criterion = nn.BCELoss()
 
