@@ -1,4 +1,5 @@
-# Tensorflow Implementation of YOLOv2 
+# Tensorflow Implementation of YOLOv2
+Download dataset
 ```bash
 $ wget http://host.robots.ox.ac.uk/pascal/VOC/voc2012/VOCtrainval_11-May-2012.tar
 $ tar -xvf  'VOCtrainval_11-May-2012.tar'
