@@ -3,6 +3,27 @@
 ```bash
 > python main.py --arguments
 ```
+To download the dataset, run the following command-
+```bash
+> wget https://github.com/SomTambe/ModelNet10-dataset/blob/master/monitor.npy.gz
+```
+The arguments are as follows-
+```bash
+usage: main.py [-h] [--latent_dim LATENT_DIM] [--directory DIRECTORY]
+               [--epochs EPOCHS] [--batch_size BATCH_SIZE] [--gen-lr GEN_LR]
+               [--dis-lr DIS_LR] [--threshold THRESHOLD] [--filename FILENAME]
+
+optional arguments:
+  -h, --help            show this help message and exit
+  --latent_dim LATENT_DIM
+  --directory DIRECTORY
+  --epochs EPOCHS
+  --batch_size BATCH_SIZE
+  --gen-lr GEN_LR
+  --dis-lr DIS_LR
+  --threshold THRESHOLD
+  --filename FILENAME
+```
 ## **Contributed by:**
 - [Som Tambe](https://github.com/SomTambe)
 ## **References**

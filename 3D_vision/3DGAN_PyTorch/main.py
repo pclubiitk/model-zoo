@@ -30,7 +30,6 @@ parser.add_argument('--dis-lr', type=float, default=0.00001)
 parser.add_argument('--threshold', type=float, default=0.8)
 
 parser.add_argument('--filename', type=str, default='monitor.npy.gz')
-parser.add_argument('--batch_size', type=int, default=50)
 args = parser.parse_args()
 
 # Defining ModelNet10 dataset for GAN
