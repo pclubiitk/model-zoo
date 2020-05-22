@@ -18,17 +18,13 @@ MNIST dataset : http://yann.lecun.com/exdb/mnist/
 ## Generator
  
 * The generator `G` is designed to map the latent space vector `z` (random noise) to data-space (images same as training images) 
-
 * involves a series of transpose Conv2d layers, each with BatchNorm2d and relu activation.
-
 * The output of the generator is fed through a tanh function to return it to the input data range of `[-1,1]`.
 
 ## Discriminator
 
 * The discriminator `D` is a binary classification network that takes an image as input and outputs a scalar probability that the input image is real or fake. 
-
 * `D` involves a series of Conv2d, BatchNorm2d, and LeakyReLU layers.
-
 * outputs the final probability through a Sigmoid activation function.
 
 
@@ -76,8 +72,11 @@ Hyperparameters are chosen as given in the paper.
 
 * proposes and evaluates Deep Convolutional GANs (DCGAN) which are a set of constraints on the architectural topology of Convolutional
 GANs that make them stable to train in most settings.
+
 * use of trained discriminators for image classification tasks, showing competitive performance with other unsupervised algorithms.
+
 * visualize the filters learnt by GANs and empirically show that specific filters have learned to draw specific objects.
+
 * show that the generators have interesting vector arithmetic properties allowing for easy manipulation of many semantic qualities of generated samples.
 
 ## Conclusion of research paper
