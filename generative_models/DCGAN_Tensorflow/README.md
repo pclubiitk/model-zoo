@@ -1,13 +1,29 @@
 # TensorFlow Implementation of DCGAN 
 ## Usage
 ```bash
-$ python3 main.py
+$ python3 main.py --EPOCHS 50 --noise_dim 100
 ```
 > **_NOTE:_** on Colab Notebook use following command:
 ```python
 !git clone link-to-repo
-%run main.py
+%run main.py --EPOCHS 50 --noise_dim 100
 ```
+
+## Help log
+```
+usage: main.py [-h] [--EPOCHS EPOCHS]
+               [--noise_dim NOISE_DIM] 
+               [--BATCH_SIZE BATCH_SIZE] []
+
+optional arguments:
+  -h, --help                   show this help message and exit
+  --EPOCHS EPOCHS              No of epochs: default 50 
+  --noise_dim NOISE_DIM        Dimension of noise vector
+  --batch_size BATCH_SIZE      Batch size, default 256
+  --num_examples_to_generate   no of images shown after each epoch in output, default 16
+                           
+  ```
+
 ## Contributed by:
 * [Shivamshree Gupta](https://github.com/shvmshri)
 
