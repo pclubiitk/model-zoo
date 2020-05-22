@@ -13,7 +13,7 @@ parser.add_argument('--batch_size', type=int, default=128, help="batch size : de
 parser.add_argument('--channels_noise', type=int, default=100, help="size of noise vector : default=100")
 parser.add_argument('--lr_g', type=float, default=0.0002, help="learning rate generator : default=0.0002")
 parser.add_argument('--lr_d', type=float, default=0.0002, help="learning rate discriminator : default=0.0002")
-parser.add_argument('--beta1', type=float, default=0.5, help="bet1 value for adam optimi" )
+parser.add_argument('--beta1', type=float, default=0.5, help="bet1 value for adam optimizer" )
 args = parser.parse_args()
 
 lr_g = args.lr_g
