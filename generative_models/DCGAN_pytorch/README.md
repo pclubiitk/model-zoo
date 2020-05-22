@@ -1,10 +1,47 @@
 # DCGAN implementation in pytorch on MNIST
 
-contributed by : [Nakul Jindal](https://github.com/nakul-jindal)
+## Usage
+```bash
+$ python3 main.py --num_epochs 10
+```
+> **_NOTE:_** on Colab Notebook use following command:
+```python
+!git clone link-to-repo
+%run main.py --num_epochs 10
+```
 
-original paper :  [Unsupervised Representation Learning with Deep Convolutional Generative Adversarial Networks](https://arxiv.org/abs/1511.06434)
+## Help log
+```
+usage: main.py [-h] [--num_epochs NUM_EPOCHS]
+               [--batch_size  BATCH_SIZE] 
+               [--channels_noise CHANNELS_NOISE] 
+               [--lr_g LR_G][--lr_d LR_D]
+               [--beta1 BETA1]
 
-MNIST dataset : http://yann.lecun.com/exdb/mnist/
+optional arguments:
+  -h, --help                           show this help message and exit
+  --num_epochs NUM_EPOCHS              no. of epochs : default=10
+  --batch_size  BATCH_SIZE             batch size : default=128
+  --channels_noise CHANNELS_NOISE      size of noise vector : default=100
+  --lr_g LR_G                          learning rate generator : default=0.0002
+  --lr_d LR_D                          learning rate discriminator : default=0.0002
+  --beta1 BETA1                        bet1 value for adam optimizer
+                        
+  ```
+
+## contributed by : 
+* [Nakul Jindal](https://github.com/nakul-jindal)
+
+## References
+
+* **Title**: UNSUPERVISED REPRESENTATION LEARNING WITH DEEP CONVOLUTIONAL GENERATIVE ADVERSARIAL NETWORKS
+* **Authors**: Alec Radford, Luke Metz, Soumith Chintala
+* **Link**: https://arxiv.org/pdf/1511.06434.pdf
+* **Tags**: Neural Network, Generative Networks, GANs
+* **Year**: 2015
+
+
+#summary
 
 ## Introduction
 * Deep Convolution Generative Adversarial Networks (DCGANs) belong to a set of algorithms called generative models, which are widely used for unupervised learning tasks which aim to learn the underlying structure of the given data. 
