@@ -1,28 +1,42 @@
 # DCGAN implementation in pytorch on MNIST
 
-## contributed by :
-
-![Nakul Jindal](https://github.com/nakul-jindal)
+contributed by [Nakul Jindal](https://github.com/nakul-jindal)
 
 original paper :  [Unsupervised Representation Learning with Deep Convolutional Generative Adversarial Networks](https://arxiv.org/abs/1511.06434)
 
 MNIST dataset: http://yann.lecun.com/exdb/mnist/
 
 ## Introduction
-Generative Adversarial Networks (GANs) are one of the most popular Machine Learning algorithms developed in recent times. They belong to a set of algorithms called generative models, which are widely used for unupervised learning tasks which aim to learn the uderlying structure of the given data. As the name suggests GANs allow you to generate new unseen data that mimic the actual given real data. However, GANs pose problems in training and require carefullly tuned hyperparameters. This paper aims to solve this problem.
+* Deep Convolution Generative Adversarial Networks (DCGANs) belong to a set of algorithms called generative models, which are widely used for unupervised learning tasks which aim to learn the underlying structure of the given data. 
 
-DCGAN is one of the most popular and succesful network design for GAN. A DCGAN is a direct extension of the GAN described except that it explicitly uses convolutional and convolutional-transpose layers in the discriminator and generator, respectively. DCGANs basically convert the laplacian pyramid technique (many pairs of G and D to progressively upscale an image) to a single pair of G and D.
+* Simple GANs allow you to generate new unseen data that mimic the actual given real data. However, GANs pose problems in training and require carefullly tuned hyperparameters.
+
+* DCGAN aims to solve this problem by explicitly using convolutional and convolutional-transpose layers in the discriminator and generator, respectively. 
+
+* DCGANs basically convert the laplacian pyramid technique (many pairs of G and D to progressively upscale an image) to a single pair of G and D.
 
 ## Generator
  
-The generator `G` is designed to map the latent space vector `z` to data-space. Since our data are images, converting `z` to data-space means ultimately creating a RGB image with the same size as the training images (i.e. 3x64x64). In practice, this is accomplished through a series of strided two dimensional convolutional transpose layers, each paired with a 2d batch norm layer and a relu activation. The output of the generator is fed through a tanh function to return it to the input data range of `[-1,1]`. The batch norm functional layers help with the flow of gradients during training.
+* The generator `G` is designed to map the latent space vector `z` (random noise) to data-space (images same as training images) 
+
+* involves a series of transpose Conv2d layers, each with BatchNorm2d and relu activation.
+
+* The output of the generator is fed through a tanh function to return it to the input data range of `[-1,1]`.
 
 ## Discriminator
 
-The discriminator `D` is a binary classification network that takes an image as input and outputs a scalar probability that the input image is real (as opposed to fake). `D` takes a 3x64x64 input image, processes it through a series of Conv2d, BatchNorm2d, and LeakyReLU layers, and outputs the final probability through a Sigmoid activation function.The DCGAN paper mentions it is a good practice to use strided convolution rather than pooling to downsample because it lets the network learn its own pooling function. Also batch norm and leaky relu functions promote healthy gradient flow which is critical for the learning process of both `G` and `D`.
- 
-![architecture](images/architecture.png)
+* The discriminator `D` is a binary classification network that takes an image as input and outputs a scalar probability that the input image is real or fake. 
 
+* `D` involves a series of Conv2d, BatchNorm2d, and LeakyReLU layers.
+
+* outputs the final probability through a Sigmoid activation function.
+
+> The DCGAN paper mentions it is a good practice to use strided convolution rather than pooling to downsample because it lets the network learn its own pooling function. Also batch norm and leaky relu functions promote healthy gradient flow which is critical for the learning process of both `G` and `D`.
+
+## Model Architecture
+
+![architecture](images/architecture.png)
+ 
 ## Network Design of DCGAN:
 * Replace all pooling layers with strided convolutions for the downsampling
 * Remove all fully connected layers.
@@ -55,6 +69,18 @@ Hyperparameters are chosen as given in the paper.
 ## Training loss
 
 ![Loss](images/loss.png)
+
+## contributions of the research paper
+
+
+* proposes and evaluates Deep Convolutional GANs (DCGAN) which are a set of constraints on the architectural topology of Convolutional
+GANs that make them stable to train in most settings.
+
+* use of trained discriminators for image classification tasks, showing competitive performance with other unsupervised algorithms.
+
+* visualize the filters learnt by GANs and empirically show that specific filters have learned to draw specific objects.
+
+* show that the generators have interesting vector arithmetic properties allowing for easy manipulation of many semantic qualities of generated samples.
 
 ## Conclusion of research paper
 
