@@ -4,6 +4,8 @@ import matplotlib.pyplot as plt
 import matplotlib.animation as animation
 from IPython.display import HTML
 
+device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
+
 def animation(img_list):
   fig = plt.figure(figsize=(8,8))
   plt.axis("off")
