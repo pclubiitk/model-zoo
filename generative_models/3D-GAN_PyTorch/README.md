@@ -6,7 +6,7 @@
 ## **Contributed by:**
 - [Som Tambe](https://github.com/SomTambe)
 ## **References**
-Learning a Probabilistic Latent Space of Object Shapes via 3D Generative-Adversarial Modeling
+**Learning a Probabilistic Latent Space of Object Shapes via 3D Generative-Adversarial Modeling**
 Jiajun Wu*, Chengkai Zhang*, Tianfan Xue, William T. Freeman, and Joshua B. Tenenbaum
 
 **NeurIPS 2016** / **[ArXiv](https://arxiv.org/abs/1610.07584)** / **[MIT CSAIL Research](http://3dgan.csail.mit.edu/)** /
