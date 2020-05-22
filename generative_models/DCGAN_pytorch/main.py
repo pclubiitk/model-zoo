@@ -37,9 +37,19 @@ my_transforms = transforms.Compose([
 dataset = datasets.MNIST(root='dataset/', train=True, transform=my_transforms, download=True)
 dataloader = DataLoader(dataset, batch_size=batch_size, shuffle=True, num_workers=2)
 
-from models import Generator , Discriminator , weights_init
+from models import Generator , Discriminator
 netD = Discriminator(channels_img, features_d).to(device)
 netG = Generator(channels_noise, channels_img, features_g).to(device)
+
+# weight initialisation with mean=0 and stddev=0.02
+def weights_init(m):
+    classname = m.__class__.__name__
+    if classname.find('Conv') != -1:
+        nn.init.normal_(m.weight.data, 0.0, 0.02)
+    elif classname.find('BatchNorm') != -1:
+        nn.init.normal_(m.weight.data, 1.0, 0.02)
+        nn.init.constant_(m.bias.data, 0)
+        
 netG=netG.apply(weights_init)
 netD=netD.apply(weights_init)
 
