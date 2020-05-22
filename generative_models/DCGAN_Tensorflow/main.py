@@ -18,7 +18,7 @@ parser.add_argument('--BATCH_SIZE', type = int, default = 128, help = "Batch siz
 parser.add_argument('--num_examples_to_generate', type = int, default = 16, help = "no of images shown after each epoch in output, default 16")
 parser.add_argument('--lr_gen', type = int, default = 0.0002, help = "Learning rate for generator optimizer,default 0.0002 ")
 parser.add_argument('--lr_disc', type = int, default = 0.0002, help = "Learning rate for discriminator optimizer,default 0.0002 ")
-parser.add_argument('--outdir', type = str, default = '.', help = "Directory in which to store data, don't put '/' at the end!")
+parser.add_argument('--outdir', type = str, default = '.', help = "Directory in which to store data")
 
 args = parser.parse_args()
 
@@ -62,7 +62,7 @@ generator_optimizer = Adam(learning_rate=lr_gen)
 discriminator_optimizer = Adam(learning_rate=lr_disc)
 
 # Saving Checkpoints
-checkpoint_dir = f'{args.outdir}/training_checkpoints'
+checkpoint_dir = os.path.join(args.outdir, "training_checkpoints")
 checkpoint_prefix = os.path.join(checkpoint_dir, "ckpt")
 checkpoint = tf.train.Checkpoint(generator_optimizer=generator_optimizer,
                                  discriminator_optimizer=discriminator_optimizer,
