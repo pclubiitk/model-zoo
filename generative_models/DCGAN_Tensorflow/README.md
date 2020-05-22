@@ -13,7 +13,9 @@ $ python3 main.py --EPOCHS 50 --noise_dim 100
 ```
 usage: main.py [-h] [--EPOCHS EPOCHS]
                [--noise_dim NOISE_DIM] 
-               [--BATCH_SIZE BATCH_SIZE] []
+               [--BATCH_SIZE BATCH_SIZE] [--num_examples_to_generate num_examples_to_generate]
+               [--lr_gen lr_gen][--lr_disc lr_disc]
+               [--outdir OUTDIR]
 
 optional arguments:
   -h, --help                   show this help message and exit
@@ -21,7 +23,10 @@ optional arguments:
   --noise_dim NOISE_DIM        Dimension of noise vector
   --batch_size BATCH_SIZE      Batch size, default 256
   --num_examples_to_generate   no of images shown after each epoch in output, default 16
-                           
+  --lr_gen                     learning rate of generator's optimizer,default 0.0002
+  --lr_disc                    learning rate of discriminator's optimizer,default 0.0002
+  --outdir OUTDIR              Directory in which to store data, don't put '/' at the end.
+                        
   ```
 
 ## Contributed by:

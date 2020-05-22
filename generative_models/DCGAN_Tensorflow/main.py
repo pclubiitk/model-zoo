@@ -16,6 +16,9 @@ parser.add_argument('--EPOCHS', type = int, default = 50, help = "No of EPOCHS: 
 parser.add_argument('--noise_dim', type = int, default = 100, help = "Noise dimension, default 100 ")
 parser.add_argument('--BATCH_SIZE', type = int, default = 128, help = "Batch size, default 128")
 parser.add_argument('--num_examples_to_generate', type = int, default = 16, help = "no of images shown after each epoch in output, default 16")
+parser.add_argument('--lr_gen', type = int, default = 0.0002, help = "Learning rate for generator optimizer,default 0.0002 ")
+parser.add_argument('--lr_disc', type = int, default = 0.0002, help = "Learning rate for discriminator optimizer,default 0.0002 ")
+parser.add_argument('--outdir', type = str, default = '.', help = "Directory in which to store data, don't put '/' at the end!")
 
 args = parser.parse_args()
 
@@ -27,6 +30,9 @@ BATCH_SIZE = args.BATCH_SIZE
 EPOCHS = args.EPOCHS
 noise_dim = args.noise_dim
 num_examples_to_generate = args.num_examples_to_generate
+lr_gen = args.lr_gen
+lr_disc = args.lr_disc
+
 
 seed = tf.random.normal([num_examples_to_generate, noise_dim])
 
@@ -52,11 +58,11 @@ def generator_loss(fake_output):
     return cross_entropy(tf.ones_like(fake_output), fake_output)
 
 # Defining optimizers
-generator_optimizer = Adam(learning_rate=0.0002)  
-discriminator_optimizer = Adam(learning_rate=0.0002)
+generator_optimizer = Adam(learning_rate=lr_gen)  
+discriminator_optimizer = Adam(learning_rate=lr_disc)
 
 # Saving Checkpoints
-checkpoint_dir = './training_checkpoints'
+checkpoint_dir = f'{args.outdir}/training_checkpoints'
 checkpoint_prefix = os.path.join(checkpoint_dir, "ckpt")
 checkpoint = tf.train.Checkpoint(generator_optimizer=generator_optimizer,
                                  discriminator_optimizer=discriminator_optimizer,
