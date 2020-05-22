@@ -1,10 +1,10 @@
 # DCGAN implementation in pytorch on MNIST
 
-contributed by [Nakul Jindal](https://github.com/nakul-jindal)
+contributed by : [Nakul Jindal](https://github.com/nakul-jindal)
 
 original paper :  [Unsupervised Representation Learning with Deep Convolutional Generative Adversarial Networks](https://arxiv.org/abs/1511.06434)
 
-MNIST dataset: http://yann.lecun.com/exdb/mnist/
+MNIST dataset : http://yann.lecun.com/exdb/mnist/
 
 ## Introduction
 * Deep Convolution Generative Adversarial Networks (DCGANs) belong to a set of algorithms called generative models, which are widely used for unupervised learning tasks which aim to learn the underlying structure of the given data. 
@@ -31,7 +31,9 @@ MNIST dataset: http://yann.lecun.com/exdb/mnist/
 
 * outputs the final probability through a Sigmoid activation function.
 
+
 > The DCGAN paper mentions it is a good practice to use strided convolution rather than pooling to downsample because it lets the network learn its own pooling function. Also batch norm and leaky relu functions promote healthy gradient flow which is critical for the learning process of both `G` and `D`.
+
 
 ## Model Architecture
 
@@ -72,14 +74,10 @@ Hyperparameters are chosen as given in the paper.
 
 ## contributions of the research paper
 
-
 * proposes and evaluates Deep Convolutional GANs (DCGAN) which are a set of constraints on the architectural topology of Convolutional
 GANs that make them stable to train in most settings.
-
 * use of trained discriminators for image classification tasks, showing competitive performance with other unsupervised algorithms.
-
 * visualize the filters learnt by GANs and empirically show that specific filters have learned to draw specific objects.
-
 * show that the generators have interesting vector arithmetic properties allowing for easy manipulation of many semantic qualities of generated samples.
 
 ## Conclusion of research paper
