@@ -1,24 +1,25 @@
-# DCGAN_Tensorflow
-
+# TensorFlow Implementation of DCGAN 
 ## Usage
-`$ python3 main.py`
+```bash
+$ python3 main.py
+```
+> **_NOTE:_** on Colab Notebook use following command:
+```python
+!git clone link-to-repo
+%run main.py
+```
+## Contributed by:
+* [Shivamshree Gupta](https://github.com/shvmshri)
 
-##### *NOTE* : 
->On colab notebook use the following commmand:
-`!git clone link-to-repo
- %run main.py `
- 
-_Contributed by_: ____[Shivamshree Gupta](https://github.com/shvmshri)____
+## References
 
-## References:
-___Title___ : Unsupervised Representation Learning with Deep Convolutional Generative Adversarial Networks
-
-___Author___ : Alec Radford, Luke Metz, Soumith Chintala
-
-___Link___ : [https://arxiv.org/pdf/1511.06434.pdf](https://arxiv.org/pdf/1511.06434.pdf)
+* **Title**: Unsupervised Representation Learning with Deep Convolutional Generative Adversarial Networks
+* **Authors**: Alec Radford, Luke Metz, Soumith Chintala
+* **Link**: [https://arxiv.org/pdf/1511.06434.pdf](https://arxiv.org/pdf/1511.06434.pdf)
+* **Tags**: Neural Network, Generative Networks, GANs
+* **Year**: 2015
 
 ## SUMMARY
- •	DCGAN
 ### *Deep Convolutional Generative Adversarial Networks*
 #### Introduction	
 One way to build good natural images is by training Generative Adversarial Networks (GANS). ,and we can later even reuse parts of the generator and discriminator networks as feature extractors for supervised tasks .DCGANs is actually one of the class of GANs using CNNs architecture for both of its components i.e.  a generator and a discriminator.
@@ -64,10 +65,3 @@ This becomes a __minimax__ type loss function as above illustrated.
 ## Sources
 1. [Deep Learning Part -II(CS7015),Lec-1](https://www.youtube.com/watch?v=1ju4qmdtRdY&t=142s)
 2. [Deep Learning Part -II(CS7015),Lec-2](https://www.youtube.com/watch?v=uyuYfTMHZM0)
-
-
-
-  
-
-
-
