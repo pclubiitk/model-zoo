@@ -25,7 +25,7 @@ optional arguments:
   --num_examples_to_generate   no of images shown after each epoch in output, default 16
   --lr_gen                     learning rate of generator's optimizer,default 0.0002
   --lr_disc                    learning rate of discriminator's optimizer,default 0.0002
-  --outdir OUTDIR              Directory in which to store data, don't put '/' at the end.
+  --outdir OUTDIR              Directory in which to store data
                         
   ```
 
