@@ -41,7 +41,7 @@ optional arguments:
 * **Year**: 2015
 
 
-#summary
+# summary
 
 ## Introduction
 * Deep Convolution Generative Adversarial Networks (DCGANs) belong to a set of algorithms called generative models, which are widely used for unupervised learning tasks which aim to learn the underlying structure of the given data. 
