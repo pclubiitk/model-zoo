@@ -25,7 +25,7 @@ class ModelNet10GAN(Dataset):
         self.transform=transform
         if not _check_exists():
             raise RuntimeError(filename,' not present in '+self.dir)
-        with gzip.open(self.dir+,'rb') as f:
+        with gzip.open(self.dir+filename,'rb') as f:
             self.arr=np.load(f)
         
 

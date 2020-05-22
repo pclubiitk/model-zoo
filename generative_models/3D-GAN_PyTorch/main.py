@@ -21,7 +21,7 @@ torch.autograd.set_detect_anomaly(True)
 parser=argparse.ArgumentParser()
 
 parser.add_argument('--latent_dim', type=int, default=200)
-parser.add_argument('--directory', type=str, default=./)
+parser.add_argument('--directory', type=str, default='./')
 
 parser.add_argument('--epochs', type=int, default=10000)
 parser.add_argument('--batch_size', type=int, default=50)
@@ -29,7 +29,7 @@ parser.add_argument('--gen-lr', type=float, default=0.0025)
 parser.add_argument('--dis-lr', type=float, default=0.00001)
 parser.add_argument('--threshold', type=float, default=0.8)
 
-parser.add_argument('--filename', type=str, default=monitor.npy.gz)
+parser.add_argument('--filename', type=str, default='monitor.npy.gz')
 parser.add_argument('--batch_size', type=int, default=50)
 args = parser.parse_args()
 
