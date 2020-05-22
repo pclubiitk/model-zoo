@@ -8,23 +8,23 @@ from torch.utils.data import DataLoader     # Gives easier dataset managment and
 
 import argparse
 parser = argparse.ArgumentParser()
-parser.add_argument('--image_size', type=int, default=64)
 parser.add_argument('--num_epochs', type=int, default=10)
 parser.add_argument('--batch_size', type=int, default=128)
-parser.add_argument('--features_d', type=int, default=128)
-parser.add_argument('--features_g', type=int, default=128)
 parser.add_argument('--channels_noise', type=int, default=100)
-parser.add_argument('--lr', type=float, default=0.0002)
+parser.add_argument('--lr_g', type=float, default=0.0002)
+parser.add_argument('--lr_d', type=float, default=0.0002)
 parser.add_argument('--beta1', type=float, default=0.5)
 args = parser.parse_args()
 
-lr = args.lr
+lr_g = args.lr_g
+lr_d = args.lr_d
 batch_size = args.batch_size
-image_size = args.image_size
 channels_noise = args.channels_noise
 num_epochs = args.num_epochs
-features_d = args.features_d
-features_g = args.features_d
+
+image_size = 64
+features_d = 128
+features_g = 128
 
 device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 
