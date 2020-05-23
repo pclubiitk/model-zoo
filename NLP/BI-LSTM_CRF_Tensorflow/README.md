@@ -65,7 +65,7 @@ An input layer represents features at time t. An input layer has the __same dime
         y(t) = g(Vh(t)), (2)**
       
  where U, W, and V are the connection weights to be computed in training time, and f(z) is sigmoid and g(z) is softmax function
- <img src="https://github.com/pclubiitk/model-zoo/NLP/BI-LSTM-CRF_Tensorflow/data/bilstm_graph.png" width="425"/> <img src="https://github.com/pclubiitk/model-zoo/NLP/BI-LSTM-CRF_Tensorflow/data/bilstm_eq.png" width="425"/>
+ <img src="https://github.com/pclubiitk/model-zoo/tree/master/NLP/BI-LSTM_CRF_Tensorflow/data/bilstm_graph.png" width="425"/> <img src="https://github.com/akshay-gupta123/model-zoo/tree/master/NLP/BI-LSTM_CRF_Tensorflow/data/bilstm_eq.png" width="425"/>
  
  where σ is the logistic sigmoid function, and i, f, o and c are the input gate, forget gate, output gate and cell vectors, all of which are the same size as the hidden vector h
 
@@ -74,7 +74,7 @@ An input layer represents features at time t. An input layer has the __same dime
 In sequence tagging task, we have access to both past and future input features for a given time, we can thus utilize a      bidirectional LSTM network
 In doing so, we can efficiently make use of past features (via forward states) and future features (viab ackward states) for a specific time frame. The forward and backward passes over the unfolded network over time are carried out in a similar way to regular network forward and backward passes, except unfolding the hidden states for all time steps,also need a special treatment at the beginning and the end of the data points. In paper,authors do forward and backward for whole sentences and reset the hidden states to 0 at the begning of each sentence and batch implementation enables multiple sentences to be processed at the same time.
 
-![A BI-LSTM-Network](https://github.com/pclubiitk/model-zoo/NLP/BI-LSTM-CRF_Tensorflow/data/bilstm.png)
+![A BI-LSTM-Network](https://github.com/akshay-gupta123/model-zoo/tree/master/NLP/BI-LSTM_CRF_Tensorflow/data/bilstm.png)
 
 **3. CRF Networks**
 
@@ -82,29 +82,29 @@ There are two different ways to make use of neighbor tag information in predicti
 first is to predict a distribution of tags for each time step and then use beam-like decoding to find optimal tag sequences. The second one is to focus on sentence level instead of individual positions, thus leading to Conditional Random Fields
 (CRF) models. It has been shown that CRFs can produce higher tagging accuracy in general.
 
-![A CRF Model](https://github.com/pclubiitk/model-zoo/NLP/BI-LSTM-CRF_Tensorflow/data/crf.png)
+![A CRF Model](https://github.com/akshay-gupta123/model-zoo/tree/master/NLP/BI-LSTM_CRF_Tensorflow/data/crf.png)
 
 **4. LSTM-CRF Networks**
  
 Combinig a CRF and LSTM model can efficiently use past input features via a LSTM layer and sentence level tag information via a CRF layer. A CRF layer has a state transition matrix as parameters. With such a layer, we can efficiently use past and future tags to predict the current tag. The element __[f0]*i,t*__ of the matrix is the score output by the network with parameters θ, for the sentence __[x]^T*1*__ and for the i-th tag,at the t-th word and introduce a a transition score __[A]*i,j*__ to model the transition from i-th state to jth for a pair of consecutive time steps.
 
-![Score Equation](https://github.com/pclubiitk/model-zoo/NLP/BI-LSTM-CRF_Tensorflow/data/eq.png)
+![Score Equation](https://github.com/akshay-gupta123/model-zoo/tree/master/NLP/BI-LSTM_CRF_Tensorflow/data/eq.png)
 
 Note that this transition matrix is *position independent*. We now denote the new parameters for our network as __*˜θ = θ∪ {[A]i,j∀i, j}*__. The score of a sentence [x]^T*1*
 along with a path of tags __[i]^T*1*__ is then given by the sum of transition scores and network scores:
 
-![LSTM-CRF](https://github.com/pclubiitk/model-zoo/NLP/BI-LSTM-CRF_Tensorflow/data/lstm-crf.png)
+![LSTM-CRF](https://github.com/akshay-gupta123/model-zoo/tree/master/NLP/BI-LSTM_CRF_Tensorflow/data/lstm-crf.png)
 
 **5. BI-LSTM-CRF-Networks**
 
 Similar to a LSTM-CRF network, we combine a bidirectional LSTM network and a CRF network to form a BI-LSTM-CRF network. In addition to the past input features and sentence level tag information used in a LSTM-CRF model, a BILSTM-CRF model can use the future input features. The extra features can boost tagging accuracy as we will show in experiments.
-![ BI-LSTM-CRF model](https://github.com/pclubiitk/model-zoo/NLP/BI-LSTM-CRF_Tensorflow/data/bilstm-crf.png)
+![ BI-LSTM-CRF model](https://github.com/akshay-gupta123/model-zoo/tree/master/NLP/BI-LSTM_CRF_Tensorflow/data/bilstm-crf.png)
 
 ## Training
 
 All models used in this paper share a generic SGD forward and backward training procedure. authors choose the most complicated model, BI-LSTM-CRF, to illustrate the training algorithm as shown in Algorithm 1.
 
-![Training Algorithm](https://github.com/pclubiitk/model-zoo/NLP/BI-LSTM-CRF_Tensorflow/data/algorithm.png)
+![Training Algorithm](https://github.com/akshay-gupta123/model-zoo/tree/master/NLP/BI-LSTM_CRF_Tensorflow/data/algorithm.png)
 
 In each epoch,the whole training data is divided into batches and process one batch at a time. Each batch contains a list of
 sentences which is determined by the parameter of *batch size*. For each batch,first run bidirectional LSTM-CRF model forward pass which includes the forward pass for both forward state and backward state of LSTM. As a result, we get the the output score
@@ -129,11 +129,11 @@ __Default Parameters__
 
 * Loss vs Steps Graph
 
-![Loss](https://github.com/pclubiitk/model-zoo/NLP/BI-LSTM-CRF_Tensorflow/data/loss.png)
+![Loss](https://github.com/akshay-gupta123/model-zoo/tree/master/NLP/BI-LSTM_CRF_Tensorflow/data/loss.png)
 
 * Accuracy vs Steps Graph
 
-![Accuracy](https://github.com/pclubiitk/model-zoo/NLP/BI-LSTM-CRF_Tensorflow/data/accuracy.png)
+![Accuracy](https://github.com/akshay-gupta123/model-zoo/tree/master/NLP/BI-LSTM_CRF_Tensorflow/data/accuracy.png)
 
 ## Robustness
 
