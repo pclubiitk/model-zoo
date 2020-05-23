@@ -47,7 +47,7 @@ One way to build good natural images is by training Generative Adversarial Netwo
 #### Model Architecture	
 In general, GANs consist of a generator and a discriminator. These two are separately a CNN architecture and are trained together.
 
-![alt text](https://github.com/shvmshri/DCGAN_Tensorflow/blob/master/images/DG.png) 
+![alt text](assets/DG.png) 
 ##### GENERATOR :
 A ANN model which is aimed for the generation of new images. They took in input a random noise z and various convolution transpose layers are applied and it generates a image i.e. a matrices of pixel values (G(z)) .Generator never get to see the real world actual images or the training dataset of images.
 ##### DISCRIMINATOR:
@@ -55,7 +55,7 @@ A CNN classification model used to classify whether an image passed to it is rea
 
 Now, while training the model, generator tries to increase the discriminator error as it tries to fool discriminator by improving its generated image so that they resemble real images while discriminator tries to decrease it’s error by trying to judge correctly the real and the fake images. For weights of the model normally initiated ,we first train generator say for y no. of images keeping the discriminator’s weights constant .Then, as generator’s weight are updated ,we train discriminator keeping generator’s weights to be constant for y fake and y real images and this process is then repeated for several epochs using cross entropy loss function.
 
-![alt text](https://github.com/shvmshri/DCGAN_Tensorflow/blob/master/images/loss%20eq.jpg) 
+![alt text](assets/loss%20eq.jpg) 
 
 This becomes a __minimax__ type loss function as above illustrated.
 
@@ -77,11 +77,11 @@ This becomes a __minimax__ type loss function as above illustrated.
 
 #### Images generated of MNIST dataset after 50 epochs:
 
-![alt text](https://github.com/shvmshri/DCGAN_Tensorflow/blob/master/images/image_at_epoch_0050.png) 
+![alt text](assets/image_at_epoch_0050.png) 
 
 #### Plot of generator loss vs. discriminator loss
 
-![alt text](https://github.com/shvmshri/DCGAN_Tensorflow/blob/master/images/loss_plot.png) 
+![alt text](assets/loss_plot.png) 
 
 ## Sources
 1. [Deep Learning Part -II(CS7015),Lec-1](https://www.youtube.com/watch?v=1ju4qmdtRdY&t=142s)
