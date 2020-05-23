@@ -2,7 +2,7 @@
 
 ### Usage
 ```bash
-$ python3 main.py --epochs 50 --batch_size 128 --outdir 'desired location in system' 
+$ python3 main.py --epochs 50 --batch_size 128 --outdir "" 
 ```
 NOTE: on Colab Notebook use following command:
 ```bash
