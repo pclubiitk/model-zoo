@@ -15,6 +15,16 @@ In order to use the model on custom images add them into images directory
 !wget https://pjreddie.com/media/files/yolov3.weights
 !python main.py
 ```
+```
+usage: main.py [-h] [--class_threshold CLASS_THRESHOLD]
+               [--nms_iou_threshold NMS_IOU_THRESHOLD] [--iou IOU]
+
+optional arguments:
+  -h, --help            show this help message and exit
+  --class_threshold CLASS_THRESHOLD
+  --nms_iou_threshold NMS_IOU_THRESHOLD
+  --iou IOU
+```
 ## Contributed by:
 * [Antreev Singh Brar](https://github.com/antreev-brar)
 ## References
