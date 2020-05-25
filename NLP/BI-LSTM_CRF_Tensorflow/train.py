@@ -7,7 +7,7 @@ import os
 import numpy as np
 import datetime
 import argsparse
-
+from dataloader import load_data
 
 ######################################################################################################
 
@@ -33,8 +33,7 @@ train_summary_writer = tf.summary.create_file_writer(train_log_dir)
 
 #########################################################################################################
 #Preprocessing Data
-data_train = pd.read_csv("./data/Train_ner.csv",engine="python")
-data = data_train.fillna(method="ffill")
+data_train = load_data()
 getter = modifying(data_train)
 getter.get_next()
 
