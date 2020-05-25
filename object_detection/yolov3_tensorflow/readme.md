@@ -12,8 +12,6 @@ In order to use the model on custom images add them into images directory
 
 > **_NOTE:_** on Colab Notebook use following command:
 ```python
-!git clone https://github.com/antreev-brar/model-zoo.git
-%cd /content/model-zoo/yolov3
 !wget https://pjreddie.com/media/files/yolov3.weights
 !python main.py
 ```
