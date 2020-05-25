@@ -40,13 +40,11 @@ def decode_netout(netout, anchors, obj_thresh, net_h, net_w):
     nb_class = netout.shape[-1] - 5
     boxes = []
     netout[..., :2]  = _sigmoid(netout[..., :2])
-    #print(netout[...,:2].shape)
     netout[..., 4:]  = _sigmoid(netout[..., 4:])
     #print(netout[...,4:].shape)
     netout[..., 5:]  = netout[..., 4][..., np.newaxis] * netout[..., 5:]
     #print(netout[...,5:].shape)
     netout[..., 5:] *= netout[..., 5:] > obj_thresh
-    #print(netout[...,5:].shape)
  
     for i in range(grid_h*grid_w):
         row = i / grid_w
@@ -145,7 +143,7 @@ def get_boxes(boxes, labels, thresh):
     return v_boxes, v_labels, v_scores
  
 # draw all results
-def draw_boxes(filename, v_boxes, v_labels, v_scores):x
+def draw_boxes(filename, v_boxes, v_labels, v_scores):
     data = pyplot.imread(filename)
     pyplot.imshow(data)
     ax = pyplot.gca()
@@ -156,5 +154,5 @@ def draw_boxes(filename, v_boxes, v_labels, v_scores):x
         rect = Rectangle((x1, y1), width, height, fill=False, color='white')
         ax.add_patch(rect)
         label = "%s (%.3f)" % (v_labels[i], v_scores[i])
-        pyplot.text(x1, y1, label, color='red')
+        pyplot.text(x1, y1, label, color='white')
     pyplot.show()

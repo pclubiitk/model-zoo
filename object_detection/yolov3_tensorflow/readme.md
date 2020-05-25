@@ -73,18 +73,49 @@ The best way to see it is , you are telling the model about the minimum value th
 ##### Lets make predictions 
 
 - We pass the image of shape (416,416,3) into the neural architecture then it makes ((13 * 13 )+(26 * 26) +(52 * 52) * 3 * 3) predictions . As for each cell on each scales it makes 3 bounding box predictions and for each box we have 3 anchor boxes so total 9 . 
+![4](./assets/box.png)
+
 - Look at the architecture the ouput seems to be three 3D arrays of shape (13,13,69) , (26,26,69) ,(52,52,69) . Here in our case the number is 255 , but the 13,26,52 are fixed as they describe that u divided the image into 13 * 13 cells and then made predictions on them , likewise for 26 and 52.
+
+```
+this is almost correct but we have 3 bounding boxes instead of 5
+```
+![4](./assets/array.png)
+
 - Lets have a look on the 255 number itself it is 3 * 85 , 3 being the number of boxes predicted for each cell and 85 comes from 5 + number_of_classes (i.e 80 ) .This is all the information u need to make a predication . The 5 values in the begining are :
-* tx - will give us X cordinate of the centre of box after an operation;  
-* ty - will give us Y cordinate of the centre of box after an operation;
-* th - will give us height of box after an operation;
-* tw - will give us width of box after an operation;
-* p - probability of having any object at all in the cell
+* tx -(range : 0-1) will give us X cordinate of the centre of box after  operation;  
+* ty -(range : 0-1) will give us Y cordinate of the centre of box after an operation;
+* th -(range : 0-1) will give us height of box after an operation;
+* tw -(range : 0-1) will give us width of box after an operation;
+* p -(range : 0-1) probability of having any object at all in the cell
 
 
+The operations are :
 
 
+![4](./assets/op.png)
+```
+I know u have no idea what these operations mean :
+𝑐𝑥 and 𝑐𝑦 are the top-left coordinates of the grid. 𝑝𝑤 and 𝑝ℎ are anchors dimensions for the box.
+The main thing is after these operations we get all the four cordinates of a prediction box with respect to image 
+If top-left corner is (0,0) and bottom right is (1,1) . This will be helpful in drawing box on orginal image , not the processed (416,416) one , pretty dope right !!
+```
+![4](./assets/opp.png)
 
+ Now we have the boxes but we dont know if which object is in there (if any ) , So here is what we do , we multiply probability of any object in the cell to the class values. This gives a number that would be a measure what is the chance that there is an object in the box && the object is of a particular class.
+![4](./assets/a.png)
+
+- Now half the job is done, u take the maximum value among all classes and if that exceeds class threshold , add it to list of possible boxes ,( :) possible bcz we still got some job to do).
+
+- Note that the multiple boxes can enclose an image or a part of an image , so we need a method to check if the box is the best possible . We do this by IOU (Intersection over Union ) , just :
+For the best possible fit this would be 1 , we choose another number to set as a threshold to remove arbitrary boxes.
+**IOU = intersection area / union area**
+![4](./assets/iou.png)
+- Still there can be more than one box surrounding an object , we do **nms** here namely (Non-maximum supression) , as the name suggest for a particular class all boxes that don't have maximum chance of enclosing an object && overlap with the box (having maximum chance) are supressed . We use IOU index again to check overlap , and if it is greater than 0.5 (set manually)
+![4](./assets/nms.png)
+Congratulations u made it this far - Now u have all the boxes u want in final output , just draw on them on image u need and u have the result :)
+
+PS :- I have uploaded the whole yolov3 notebook that i used to make video .You can copy the contents and run it in colab to generate ur own.
 # Results
 
 ## Images

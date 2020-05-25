@@ -1,6 +1,7 @@
 
 import struct
 import numpy as np
+import keras
 from keras.layers import Conv2D
 from keras.layers import Input
 from keras.layers import BatchNormalization
