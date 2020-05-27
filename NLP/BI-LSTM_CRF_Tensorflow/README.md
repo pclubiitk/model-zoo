@@ -1,4 +1,12 @@
 ﻿# Tensoflow Implementation Of BI-LSTM-CRF
+## Downloading Dataset
+```python
+!kaggle datasets download -d abhinavwalia95/entity-annotated-corpus   
+import zipfile
+with zipfile.ZipFile("/entity-annotated-corpus.zip", 'r') as zip_ref:
+    zip_ref.extractall("/entity-annotated-corpus")
+
+```
 ## Usage
 ```bash
 $ python3 train.py 
