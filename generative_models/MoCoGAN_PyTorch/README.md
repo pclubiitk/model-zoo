@@ -162,4 +162,4 @@ Estimated Total Size (MB): 70.67
 
 Some samples of the generated videos are as follows:
 
- ![gif](https://github.com/ayush12gupta/model-zoo/blob/master/generative_models/MoCoGAN_PyTorch/assets/gif2.gif)   ![gif](https://github.com/ayush12gupta/model-zoo/blob/master/generative_models/MoCoGAN_PyTorch/assets/gif1.gif)   ![gif](https://github.com/ayush12gupta/model-zoo/blob/master/generative_models/MoCoGAN_PyTorch/assets/gif1.gif) 
+ ![gif](https://github.com/ayush12gupta/model-zoo/blob/master/generative_models/MoCoGAN_PyTorch/assets/gif2.gif)   ![gif](https://github.com/ayush12gupta/model-zoo/blob/master/generative_models/MoCoGAN_PyTorch/assets/gif1.gif)   ![gif](https://github.com/ayush12gupta/model-zoo/blob/master/generative_models/MoCoGAN_PyTorch/assets/gif3.gif) 
