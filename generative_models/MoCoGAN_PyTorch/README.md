@@ -160,6 +160,6 @@ Estimated Total Size (MB): 70.67
 
 ## Results
 
-Some of the good generated videos given as follows:
+Some samples of the generated videos are as follows:
 
 | ![gif](https://github.com/ayush12gupta/model_zoo/blob/master/MoCoGAN/ezgif.com-video-to-gif.gif)| ![gif](https://github.com/ayush12gupta/model_zoo/blob/master/MoCoGAN/ezgif.com-video-to-gif%20(2).gif)| ![gif](https://github.com/ayush12gupta/model_zoo/blob/master/MoCoGAN/ezgif.com-video-to-gif%20(1).gif)| 
