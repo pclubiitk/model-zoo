@@ -54,11 +54,11 @@ one-layer GRU network. A generator GI produces a frame, x˜<sup>(k)</sup>, using
 respectively, sampled from the training set v and the generated set v˜. The function S<sub>1</sub> samples a single frame from a
 video, S<sub>T</sub> samples T consequtive frames. 
 
-<img src="https://github.com/ayush12gupta/model_zoo/blob/master/MoCoGAN/101574503_3226320640922153_3481496598897229824_n.jpg" height="390" width="400">
+<img src="https://github.com/ayush12gupta/model-zoo/blob/master/generative_models/MoCoGAN_PyTorch/assets/framework.jpg" height="390" width="400">
 
 We train MoCoGAN using the alternating gradient update algorithm as in. In one step, we update D<sub>I</sub> and D<sub>V</sub> while fixing G<sub>I</sub> and R<sub>M</sub>. In the alternating step, we update G<sub>I</sub> and R<sub>M</sub> while fixing D<sub>I</sub> and D<sub>V</sub> using a min-max game with value function F<sub>V</sub>(D<sub>I</sub>,D<sub>V</sub>,G<sub>I</sub>,R<sub>M</sub>)
 
-<img src="https://github.com/ayush12gupta/model_zoo/blob/master/MoCoGAN/101062734_558005641575327_6046969998902034432_n.jpg" height="180" width="400">
+<img src="https://github.com/ayush12gupta/model-zoo/blob/master/generative_models/MoCoGAN_PyTorch/assets/Value_fn.jpg" height="180" width="400">
 
 In this objective function the first and second terms helps to train the Image Discriminator so that it can generate 1 for images samples from real videos and zero for those from fake videos. Similarly the third and fourth term help us to train the Video Discriminator.
 
@@ -162,4 +162,4 @@ Estimated Total Size (MB): 70.67
 
 Some samples of the generated videos are as follows:
 
-| ![gif](https://github.com/ayush12gupta/model_zoo/blob/master/MoCoGAN/ezgif.com-video-to-gif.gif)| ![gif](https://github.com/ayush12gupta/model_zoo/blob/master/MoCoGAN/ezgif.com-video-to-gif%20(2).gif)| ![gif](https://github.com/ayush12gupta/model_zoo/blob/master/MoCoGAN/ezgif.com-video-to-gif%20(1).gif)| 
+ ![gif](https://github.com/ayush12gupta/model-zoo/blob/master/generative_models/MoCoGAN_PyTorch/assets/gif2.gif)   ![gif](https://github.com/ayush12gupta/model-zoo/blob/master/generative_models/MoCoGAN_PyTorch/assets/gif1.gif)   ![gif](https://github.com/ayush12gupta/model-zoo/blob/master/generative_models/MoCoGAN_PyTorch/assets/gif1.gif) 
