@@ -192,15 +192,6 @@ def main():
 
         end_time = time.time()
 
-        # Plot 
-        plt.plot(Gi_loss, label='Image Generator')
-        plt.plot(Gv_loss, label='Video Generator')
-        plt.plot(Di_loss, label='Image Discriminator')
-        plt.plot(Dv_loss, label='Video Discriminator')
-        plt.legend()
-        plt.savefig("plot.png")
-        # #plt.show()
-
         if epoch % 100 == 0:
             print('[%d/%d] Time_taken: %f || Gi loss: %.3f || Gv loss: %.3f || Di loss: %.3f || Dv loss: %.3f'%(epoch, args.epochs, end_time-start_time, gi_loss, gv_loss, di_loss, dv_loss))
 
@@ -212,6 +203,15 @@ def main():
 
         if epoch % 1000 == 0:
             save_video(fake_vid[0].data.cpu().numpy().transpose(1, 2, 3, 0), epoch, current_path)
+            
+    # Plot 
+    plt.plot(Gi_loss, label='Image Generator')
+    plt.plot(Gv_loss, label='Video Generator')
+    plt.plot(Di_loss, label='Image Discriminator')
+    plt.plot(Dv_loss, label='Video Discriminator')
+    plt.legend()
+    plt.savefig("plot.png")
+    #plt.show()
 
 if __name__ == '__main__':
     main()
