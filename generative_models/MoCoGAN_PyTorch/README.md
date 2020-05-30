@@ -22,8 +22,7 @@ $ python3 main.py --epochs 40000
 
 * **Title**: MoCoGAN: Decomposing Motion and Content for Video Generation
 * **Authors**: Sergey Tulyakov, Ming-Yu Liu, Xiaodong Yang, Jan Kautz
-* **Link**: https://arxiv.org/pdf/1411.1784.pdf
-* **Tags**: Neural Network, Generative Networks, GANs
+* **Link**: https://arxiv.org/pdf/1707.04993.pdf
 * **Year**: 2017
 
 # Summary 
