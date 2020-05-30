@@ -15,6 +15,22 @@ $ python3 main.py --epochs 40000
 %run main.py --epochs 40000
 ```
 
+```
+usage: main.py [-h] [--cuda CUDA] [--batch-size BATCH_SIZE] [--epochs EPOCHS]
+               [--pre-train PRE_TRAIN]
+
+Start trainning MoCoGAN.....
+
+optional arguments:
+  -h, --help            show this help message and exit
+  --cuda CUDA           set -1 when you use cpu
+  --batch-size BATCH_SIZE
+                        set batch_size
+  --epochs EPOCHS       set num of iterations
+  --pre-train PRE_TRAIN
+                        set 1 when you use pre-trained models
+```
+
 ## Contributed by:
 * [Ayush Gupta](https://github.com/ayush12gupta)
 
