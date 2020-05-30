@@ -15,23 +15,20 @@ from util import *
 
 def main():
     parser = argparse.ArgumentParser(description='Start trainning MoCoGAN.....')
-    parser.add_argument('--cuda', type=int, default=1,
-                     help='set -1 when you use cpu')
     parser.add_argument('--batch-size', type=int, default=16,
                      help='set batch_size')
     parser.add_argument('--epochs', type=int, default=60000,
                      help='set num of iterations')
     parser.add_argument('--pre-train', type=int, default=-1,
                      help='set 1 when you use pre-trained models')
-    #parser.add_argument('-dir', typr=str, )
 
-    args       = parser.parse_args()
-    cuda       = args.cuda
+    args = parser.parse_args()
     batch_size = args.batch_size
     pre_train  = args.pre_train
     os.environ['CUDA_VISIBLE_DEVICES'] = '0'
     args.device = torch.device('cuda:0') if torch.cuda.is_available() else 'cpu'
-
+    cuda = 1 if torch.cuda.is_available() else -1
+    
     # Making required folder
     if not os.path.exists('./generated_videos'):
       os.makedirs('./generated_videos')
