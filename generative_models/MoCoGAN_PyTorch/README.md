@@ -16,14 +16,13 @@ $ python3 main.py --epochs 40000
 ```
 
 ```
-usage: main.py [-h] [--cuda CUDA] [--batch-size BATCH_SIZE] [--epochs EPOCHS]
+usage: main.py [-h] [--batch-size BATCH_SIZE] [--epochs EPOCHS]
                [--pre-train PRE_TRAIN]
 
 Start trainning MoCoGAN.....
 
 optional arguments:
   -h, --help            show this help message and exit
-  --cuda CUDA           set -1 when you use cpu
   --batch-size BATCH_SIZE
                         set batch_size
   --epochs EPOCHS       set num of iterations
