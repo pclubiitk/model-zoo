@@ -2,10 +2,7 @@
 
 ## Usage
 
-To download the dataset run the following command:
-```
-!wget https://github.com/ayush12gupta/model_zoo/tree/master/MoCoGAN/MoCoGAN/resized_data
-```
+We are using [this dataset](http://www.wisdom.weizmann.ac.il/%7Evision/SpaceTimeActions.html) which you need to extact and place all the files in a file named data. 
 
 ```bash
 $ python3 resize,py
