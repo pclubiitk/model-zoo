@@ -97,7 +97,7 @@ def main():
       print("Using Pre-trained model")
 
     def checkpoint(model, optimizer, epoch):
-      state = {'epoch': epoch+1, 'Gi': Gi_loss, 'Gv': Gv_loss, 'Di': Dv_loss, 'Di': Di_loss}
+      state = {'epoch': epoch+1, 'Gi': Gi_loss, 'Gv': Gv_loss, 'Dv': Dv_loss, 'Di': Di_loss}
       torch.save(state, os.path.join(trained_path, 'last_state'))
       filename = os.path.join(trained_path, '%s' % (model.__class__.__name__))
       torch.save(model.state_dict(), filename + '.model')
