@@ -8,7 +8,7 @@ import matplotlib.pyplot as plt
 import torchvision.transforms as transforms
 import numpy as np
 import torch.utils.data as loader
-from torchsummary import summary
+# from torchsummary import summary
 import tqdm
 from models import Discriminator, Generator
 
@@ -28,16 +28,16 @@ parser.add_argument('--epochs', help='total number of epochs you want to run. De
 parser.add_argument('--batch_size', help='Batch size for dataset', type=int, default=16)
 parser.add_argument('--gen_lr', help='generator learning rate', type=float, default=1e-4)
 parser.add_argument('--dis_lr', help='discriminator learning rate', type=float, default=1e-4)
-parser.add_argument('--selected_attrs', '--list', nargs='+', help='selected attributes for the CelebA dataset',
-                        default=['Black_Hair', 'Blond_Hair', 'Brown_Hair', 'Male', 'Young'])
 parser.add_argument('--d_times', help='No of times you want D to update before updating G', type=int, default=5)
 parser.add_argument('--lam_cls', help='Value of lambda for domain classification loss', type=int, default=1)
 parser.add_argument('--lam_recomb', help='Value of lambda for image recombination loss', type=int, default=10)
 parser.add_argument('--image_dim', help='Image dimension you want to resize to.', type=int, default=64)
 parser.add_argument('--download', help='Argument to download dataset. Set to True.', type=bool, default=True)
 parser.add_argument('--eval_idx', help='Index of image you want to run evaluation on.', type=int, default=0)
-parser.add_argument('--eval_attr', '--list', nargs='+', help='Attributes you want to translate the eval image to.',
-                        default=[0,0,1,0,1])
+# parser.add_argument('--eval_attr', '--list', nargs='+', help='Attributes you want to translate the eval image to.',
+#                         default=[0,0,1,0,1])
+parser.add_argument('--attrs', '--list', nargs='+', help='selected attributes for the CelebA dataset', 
+                        default=['Black_Hair', 'Blond_Hair', 'Brown_Hair', 'Male', 'Young'])
 
 args = parser.parse_args()
 
@@ -144,4 +144,4 @@ for epoch in range(args.epochs):
 from utils import *
 
 plotter(g_losses,d_losses)
-evaluate(args.eval_idx, args.eval_attr)
+evaluate(args.eval_idx, [0,0,1,0,1])
