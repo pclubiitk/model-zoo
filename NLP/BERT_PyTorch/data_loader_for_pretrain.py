@@ -1,5 +1,5 @@
 import os
-from pytorch_pretrained_bert import BertTokenizer
+from pytorch_pretrained_bert.tokenization import BertTokenizer
 from preprocess_pretraining import PreProcess
 import torch
 from utils import seek_random_offset
