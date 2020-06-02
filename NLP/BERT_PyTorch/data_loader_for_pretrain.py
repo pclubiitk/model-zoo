@@ -8,7 +8,7 @@ import random as rand
 
 class DataLoader():
     """ Load sentence pair from corpus """
-    def __init__(self, file, batch_size, max_len, short_sampling_prob):
+    def __init__(self, file, batch_size, max_len, short_sampling_prob=0.1):
         super().__init__()
         self.f_pos = open(file, "r", encoding='utf-8', errors='ignore')
         self.f_neg = open(file, "r", encoding='utf-8', errors='ignore') 
