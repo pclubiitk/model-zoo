@@ -4,6 +4,8 @@ import model_pretrain
 import preprocess_pretraining
 import data_loader_for_pretrain
 from pytorch_pretrained_bert.tokenization import BertTokenizer
+import transformers
+from utils import save_model
 
 
 device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
@@ -33,6 +35,37 @@ data_loader=data_loader_for_pretrain.DataLoader(args.corpus,args.batch_size,args
 tokenizer1=BertTokenizer.from_pretrained('bert-base-uncased')
 
 model=model_pretrain.BertPreTrain(args.dim,args.heads,args.max_len,args.n_seg).to(device)
+
+criterion1=nn.CrossEntropyLoss().to(device)
+criterion2=nn.CrossEntropyLoss().to(device)
+
+optimizer=transformers.AdamW(model.parameters(), lr=args.lr, betas=(args.beta1,args.beta2), weight_decay=args.decay)
+lr_scheduler=transformers.get_linear_schedule_with_warmup(optimizer, num_warmup_steps=args.warmup, num_training_steps=args.total_steps, last_epoch=- 1)
+
+def loss_func(model,batch):
+  input_ids, segment_ids, input_mask, masked_ids, masked_pos, masked_weights, is_next = batch
+  clsf,mlm=model(batch)
+  lossclf=criterion1(clsf,is_next)
+  losslm=criterion2(mlm.transpose(1,2),masked_ids)
+  return lossclf,losslm
+
+step=0
+
+for epoch in range(args.epochs):
+  for i,batch in enumerate(data_loader.__iter__()):
+    batch = [t.to(device) for t in batch]
+    optimizer.zero_grad()
+    lossclf+losslm=loss_func(model,batch)
+    loss=lossclf+losslm
+    loss.backward()
+    optimizer.step()
+    lr_scheduler.step()
+    step=step+1
+    
+    print("LOSS:%f LOSSCLF:%f LOSSLM:%f ",%(loss,lossclf,losslm),"epoch[%d/%d] step[%d/%d]"%(epoch+1,args.epochs,step,args.total_steps))
+ 
+ 
+  save_model(epoch,model,args.save_dir)
 
 
 
