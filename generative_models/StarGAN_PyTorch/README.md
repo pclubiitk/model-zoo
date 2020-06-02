@@ -75,9 +75,11 @@ There are three losses.
 ![adversarial](assets/adversarial.png)
 ### Domain Classification Loss
 **Real Domain Classification Loss**
+
 ![real domain](assets/realdomain.png)
 
 **Fake Domain Classification Loss**
+
 ![fake domain](assets/fakedomain.png)
 
 ### Image reconstruction loss
@@ -88,10 +90,12 @@ There are three losses.
 
 ## Training 
 Training has been elaborated in the following figures.
+
 ![training](assets/training.png)
 
 # Results
 I selected a random image from the dataset.
+
 ![original](assets/original.png)
  
 [Black Hair, Male]
