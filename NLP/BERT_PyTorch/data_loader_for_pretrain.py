@@ -2,6 +2,8 @@ import os
 from pytorch_pretrained_bert import BertTokenizer
 from preprocess_pretraining import PreProcess
 import torch
+from utils import seek_random_offset
+import random as rand
 
 
 class DataLoader():
