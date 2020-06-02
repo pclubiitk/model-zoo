@@ -1,5 +1,9 @@
 import argparse
 import torch.nn as nn
+import model_pretrain
+import preprocess_pretraining
+import data_loader_for_pretrain
+from pytorch_pretrained_bert.tokenization import BertTokenizer
 
 
 device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
@@ -25,10 +29,10 @@ parser.add_argument('--total_steps', type=int, default=1000000)
 
 args = parser.parse_args()
 
-data_loader=DataLoader(args.corpus,args.batch_size,args.max_len)
+data_loader=data_loader_for_pretrain.DataLoader(args.corpus,args.batch_size,args.max_len)
 tokenizer1=BertTokenizer.from_pretrained('bert-base-uncased')
 
-pretrain_model=model.BertPreTrain(args.dim,args.heads,args.max_len,args.n_seg).to(device)
+model=model_pretrain.BertPreTrain(args.dim,args.heads,args.max_len,args.n_seg).to(device)
 
 
 
