@@ -1,6 +1,7 @@
 from utils import truncate_token_pairs,get_random_word
 from pytorch_pretrained_bert import BertTokenizer
 from random import random as rand
+from random import randint,shuffle
 import random
 
 class Preprocess():
