@@ -5,8 +5,8 @@
 ### For Pretraining and Classification task in Colab
 
 ```python
-!pip install transformer (for pretrained weights)
-!pip install pytorch_pretrained_bert  (for BERT vocab)
+!pip install transformer  #(for pretrained weights)
+!pip install pytorch_pretrained_bert  #(for BERT vocab)
 !pip install wget
 !git clone link-to-repo
 %run pretrain.py --savedir 'path to directory where you want to save checkpoint' --corpus 'path to train corpus'
