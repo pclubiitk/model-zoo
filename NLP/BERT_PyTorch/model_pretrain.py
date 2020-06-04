@@ -2,7 +2,8 @@ import torch
 import torch.nn as nn
 import math
 from utils import gelu,LayerNorm
-
+from pytorch_pretrained_bert.tokenization import BertTokenizer
+tokenizer1=BertTokenizer.from_pretrained('bert-base-uncased')
 class embedding(nn.Module):
   def __init__(self,dim,vocab_size,max_len,n_segs):
     super().__init__()
