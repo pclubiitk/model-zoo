@@ -1,6 +1,6 @@
 import os
 from pytorch_pretrained_bert.tokenization import BertTokenizer
-from preprocess_pretraining import PreProcess
+import preprocess_pretraining 
 import torch
 from utils import seek_random_offset
 import random as rand
@@ -16,7 +16,7 @@ class DataLoader():
         self.max_len = max_len 
         self.short_sampling_prob = short_sampling_prob
         self.batch_size = batch_size
-        self.preproc= PreProcess(max_len*0.15,0.15,max_len)
+        self.preproc= preprocess_pretraining.PreProcess(max_len*0.15,0.15,max_len)
 
     def read_tokens(self, f, length, discard_last_and_restart=True):
         """ Read tokens from file pointer with limited length """
