@@ -53,7 +53,7 @@ def loss_func(model,batch):
 
 step=0
 for epoch in range(args.epochs):
-  for i,batch in enumerate(data_loader.__iter__()):
+  for i,batch in enumerate(data_loader):
     batch = [t.to(device) for t in batch]
     optimizer.zero_grad()
     lossclf,losslm=loss_func(model,batch)
