@@ -22,7 +22,7 @@ parser.add_argument('--heads', type=int, default=12)
 parser.add_argument('--n_segs', type=int, default=2)
 
 parser.add_argument('--pretrain_file', type=str, required=True)
-
+parser.add_argument('--dataset', type=str, required=True)       #COLA dataset in csv format
 parser.add_argument('--epochs', type=int, default=4)
 parser.add_argument('--batch_size', type=int, default=32)
 parser.add_argument('--lr', type=float, default=0.00002)
@@ -32,15 +32,7 @@ parser.add_argument('--decay', type=float, default=0.01)
 
 args = parser.parse_args()
 
-url = 'https://nyu-mll.github.io/CoLA/cola_public_1.1.zip'
-
-# Download the file (if we haven't already)
-if not os.path.exists('./cola_public_1.1.zip'):
-    wget.download(url, './cola_public_1.1.zip')
-if not os.path.exists('./cola_public/'):
-    !unzip cola_public_1.1.zip
-
-df = pd.read_csv("./cola_public/raw/in_domain_train.tsv", delimiter='\t', header=None, names=['sentence_source', 'label', 'label_notes', 'sentence'])
+df = pd.read_csv(args.dataset, delimiter='\t', header=None, names=['sentence_source', 'label', 'label_notes', 'sentence'])
 sentences = df.sentence.values
 labels = df.label.values
 
