@@ -8,7 +8,6 @@ import math
 import os
 import argparse
 import model_pretrain
-import wget
 import pandas as pd
 from utils import load
 
