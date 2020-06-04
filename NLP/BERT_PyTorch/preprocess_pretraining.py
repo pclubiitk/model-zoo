@@ -4,7 +4,7 @@ from random import random as rand
 from random import randint,shuffle
 import random
 
-class Preprocess():
+class PreProcess():
     """ Pre-processing steps for pretraining transformer """
     def __init__(self, max_pred, mask_prob, max_len):
         super().__init__()
