@@ -56,7 +56,7 @@ Let us define the following terms before going ahead with anything new.
 
 For our experiments, we use the CelebA dataset ([Liu. et. al](http://mmlab.ie.cuhk.edu.hk/projects/CelebA.html)). It contains more than 200K images with over 40 labelled attributes.
 
-The existing models were quite inefficient: for learning mappings among all **K** domains, <sup>K</sup>P<sub>2</sub> generators were required to learn every single mapping among all domains. Also in these models, generator could not make full use of data and couls only learn from 2 out of **K** domains at a single time.
+The existing models were quite inefficient: for learning mappings among all **K** domains, <sup>K</sup>P<sub>2</sub> generators were required to learn every single mapping among all domains. Also in these models, generator could not make full use of data and could only learn from 2 out of **K** domains at a single time.
 
 StarGAN solves that problem by introducing a single generator which learns mappings between all domains. Generator inputs two things, **image**, as well as the **inference labels**. 
 
