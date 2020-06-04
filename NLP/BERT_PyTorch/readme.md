@@ -21,6 +21,15 @@ $ git clone link-to-repo
 $ python3 pretrain.py --savedir 'path to directory where you want to save checkpoint' --corpus 'path to train corpus'
 $ python3 classify_cola.py --pretrain_file 'path of pretrain weights' --dataset 'path to COLA dataset in csv format'
 ```
+## Dataset for PreTraining
+
+To replicate the no longer publicly available Toronto BookCorpus Dataset follow the instructions in [this github repository](https://github.com/sgraaf/Replicate-Toronto-BookCorpus)
+
+To prepare the corpus from Wikipedia articles follow [this link](https://www.kdnuggets.com/2017/11/building-wikipedia-text-corpus-nlp.html)
+
+## Dataset for classification task
+
+Download the CoLA Dataset from [here](https://nyu-mll.github.io/CoLA/)
 
 ## Contributed by:
 * [Rishabh Dugaye](https://github.com/rishabhd786)
