@@ -1,4 +1,5 @@
 import argparse
+import torch
 import torch.nn as nn
 import model_pretrain
 import preprocess_pretraining
