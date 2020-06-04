@@ -32,10 +32,11 @@ parser.add_argument('--total_steps', type=int, default=1000000)
 
 args = parser.parse_args()
 
+
+model=model_pretrain.BertPreTrain(args.dim,args.heads,args.max_len,args.n_seg).to(device)
 data_loader=data_loader_for_pretrain.DataLoader(args.corpus,args.batch_size,args.max_len)
 tokenizer1=BertTokenizer.from_pretrained('bert-base-uncased')
 
-model=model_pretrain.BertPreTrain(args.dim,args.heads,args.max_len,args.n_seg).to(device)
 
 criterion1=nn.CrossEntropyLoss().to(device)
 criterion2=nn.CrossEntropyLoss().to(device)
