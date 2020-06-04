@@ -3,7 +3,8 @@ from pytorch_pretrained_bert.tokenization import BertTokenizer
 import preprocess_pretraining 
 import torch
 from utils import seek_random_offset
-import random as rand
+from random import random as rand
+from random import randint, shuffle
 
 
 class DataLoader():
