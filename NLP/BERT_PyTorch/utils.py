@@ -1,6 +1,8 @@
 from random import randint, shuffle
 from random import random as rand
 from pytorch_pretrained_bert.tokenization import BertTokenizer
+import torch
+import torch.nn as nn
 import random
 import math
 import os
