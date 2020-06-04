@@ -16,7 +16,7 @@ class DataLoader():
         self.max_len = max_len 
         self.short_sampling_prob = short_sampling_prob
         self.batch_size = batch_size
-        self.preproc= Preprocess(max_len*0.15,0.15,max_len)
+        self.preproc= PreProcess(max_len*0.15,0.15,max_len)
 
     def read_tokens(self, f, length, discard_last_and_restart=True):
         """ Read tokens from file pointer with limited length """
