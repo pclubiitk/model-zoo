@@ -1,4 +1,4 @@
-from utils import truncate_token_pairs,get_random_word
+from utils import truncate_token_pair,get_random_word
 from pytorch_pretrained_bert.tokenization import BertTokenizer
 from random import random as rand
 from random import randint,shuffle
