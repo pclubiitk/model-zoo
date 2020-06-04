@@ -25,6 +25,8 @@ $ python3 classify_cola.py --pretrain_file 'path of pretrain weights' --dataset 
 
 To replicate the no longer publicly available Toronto BookCorpus Dataset follow the instructions in [this github repository](https://github.com/sgraaf/Replicate-Toronto-BookCorpus)
 
+This relatively small [BookCorpus](https://web.eecs.umich.edu/~lahiri/gutenberg_dataset.html) can also be downloaded direclty as an alternative to the above dataset.
+
 To prepare the corpus from Wikipedia articles follow [this link](https://www.kdnuggets.com/2017/11/building-wikipedia-text-corpus-nlp.html)
 
 ## Dataset for classification task
