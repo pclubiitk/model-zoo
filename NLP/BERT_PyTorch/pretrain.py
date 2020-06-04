@@ -50,19 +50,18 @@ def loss_func(model,batch):
   return lossclf,losslm
 
 step=0
-
 for epoch in range(args.epochs):
   for i,batch in enumerate(data_loader.__iter__()):
     batch = [t.to(device) for t in batch]
     optimizer.zero_grad()
-    lossclf+losslm=loss_func(model,batch)
+    lossclf,losslm=loss_func(model,batch)
     loss=lossclf+losslm
     loss.backward()
     optimizer.step()
     lr_scheduler.step()
     step=step+1
     
-    print("LOSS:%f LOSSCLF:%f LOSSLM:%f ",%(loss,lossclf,losslm),"epoch[%d/%d] step[%d/%d]"%(epoch+1,args.epochs,step,args.total_steps))
+    print("LOSS:%f LOSSCLF:%f LOSSLM:%f "%(loss,lossclf,losslm),"epoch[%d/%d] step[%d/%d]"%(epoch+1,args.epochs,step,args.total_steps))
  
  
   save_model(epoch,model,args.save_dir)
