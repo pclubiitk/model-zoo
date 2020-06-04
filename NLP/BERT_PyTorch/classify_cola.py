@@ -96,7 +96,7 @@ class DataLoaderCola():
                     else int(self.max_len / 2)
 
 
-                tokens =tokenizer1.tokenize( self.sent[k])
+                tokens =self.tokenizer.tokenize( self.sent[k])
                 label=self.label[k]
                 k=k+1
                 data = (tokens,label)
