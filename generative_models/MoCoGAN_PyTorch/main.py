@@ -30,8 +30,6 @@ def main():
     parser.add_argument('--beta', type=int, default=0.5),
     parser.add_argument('--trained_path', type=str, default='trained_models')
 
-
-
     args = parser.parse_args()
     
     batch_size = args.batch_size
