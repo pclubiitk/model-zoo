@@ -48,6 +48,8 @@ def main():
       os.makedirs('./generated_videos')
     if not os.path.exists('./trained_models'):
       os.makedirs('./trained_models')
+    if not os.path.exists('./resized_data'):
+      os.makedirs('./resized_data')
 
     T = 16
     start_epoch = 1
