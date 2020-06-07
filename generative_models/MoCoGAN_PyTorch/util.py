@@ -6,11 +6,24 @@ import glob
 #skvideo.setFFmpegPath("C:\\ffmpeg") # you need this before the import
 import skvideo.io
 
+def crop():
+    current_path = os.path.dirname(__file__)
+    resized_path = os.path.join(current_path, 'resized_data')
+    dirs = glob.glob(os.path.join(current_path, 'data/*'))
+    files = [ glob.glob(dir+'/*') for dir in dirs ]
+    files = sum(files, []) # flatten
+
+    ''' script for cropping '''
+    for i, file in enumerate(files):
+        os.system("ffmpeg -i %s -pix_fmt yuv420p -vf crop=96:96:42:24 %s.mp4" %
+                 (file, os.path.join(resized_path, str(i))))
+
 def preprocess(args):
     """
     Apply normalisation
     Transpose each video to (channel, nframe, img_size, img_size)
     """
+    crop()
     curr_dir = os.path.dirname(__file__)
     data_dir = os.path.join(curr_dir, 'resized_data')
     vid_file = glob.glob(data_dir+'/*')
