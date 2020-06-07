@@ -20,11 +20,27 @@ def main():
     parser.add_argument('--epochs', type=int, default=60000,
                      help='set num of iterations')
     parser.add_argument('--pre-train', type=int, default=-1,
-                     help='set 1 when you use pre-trained models')
+                     help='set 1 when you use pre-trained models'),
+    parser.add_argument('--img_size', type=int, default=96),
+    parser.add_argument('--channel', type=int, default=3),
+    parser.add_argument('--hidden', type=int, default=100),
+    parser.add_argument('--dc', type=int, default=50),
+    parser.add_argument('--de', type=int, default=10),
+    parser.add_argument('--lr', type=int, default=0.0002),
+    parser.add_argument('--beta', type=int, default=0.5),
+    parser.add_argument('--trained_path', type=str, default='trained_models')
+
+
 
     args = parser.parse_args()
+    
     batch_size = args.batch_size
     pre_train  = args.pre_train
+    img_size = args.img_size
+    channel = args.channel
+    d_E = args.de
+    hidden_size = args.hidden  
+    d_C = args.dc
     os.environ['CUDA_VISIBLE_DEVICES'] = '0'
     args.device = torch.device('cuda:0') if torch.cuda.is_available() else 'cpu'
     cuda = 1 if torch.cuda.is_available() else -1
@@ -45,11 +61,6 @@ def main():
 
     videos, current_path = preprocess(args)
     num_vid = len(videos)
-    img_size = 96
-    channel = 3
-    d_E = 10
-    hidden_size = 100  
-    d_C = 50
     d_M = d_E
     nz = d_C + d_M
     criterion = nn.BCELoss()
@@ -62,12 +73,12 @@ def main():
     gru.initWeight()
     
     # setup optimizer #
-    lr = 0.0002
-    betas = (0.5, 0.999)
-    optim_Di = optim.Adam(dis_i.parameters(), lr=lr, betas=betas)
-    optim_Dv = optim.Adam(dis_v.parameters(), lr=lr, betas=betas)
-    optim_Gi = optim.Adam(gen_i.parameters(), lr=lr, betas=betas)
-    optim_GRU = optim.Adam(gru.parameters(), lr=lr, betas=betas)
+    lr = args.lr
+    beta = args.beta
+    optim_Di = optim.Adam(dis_i.parameters(), lr=lr, betas=(beta,0.999))
+    optim_Dv = optim.Adam(dis_v.parameters(), lr=lr, betas=(beta,0.999))
+    optim_Gi = optim.Adam(gen_i.parameters(), lr=lr, betas=(beta,0.999))
+    optim_GRU = optim.Adam(gru.parameters(), lr=lr, betas=(beta,0.999))
 
     if cuda == True:
         dis_i.cuda()
@@ -76,7 +87,7 @@ def main():
         gru.cuda()
         criterion.cuda()
 
-    trained_path = os.path.join(current_path, 'trained_models')
+    trained_path = os.path.join(current_path, args.trained_path)
     video_lengths = [video.shape[1] for video in videos]
 
     if pre_train == True:
@@ -167,7 +178,6 @@ def main():
         fake_lossi = criterion(f_outputs, f_label)
         fake_lossi.backward()
         di_loss = real_lossi + fake_lossi
-        #di_loss.backward()
         optim_Di.step()
 
         # Training Generator and GRU
@@ -212,7 +222,3 @@ def main():
 
 if __name__ == '__main__':
     main()
-
-
-
-
