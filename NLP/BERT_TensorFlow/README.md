@@ -147,10 +147,10 @@ We use the following default configuration:
 
 The results after training for 2 epochs on the IMDB dataset were:  
 1. Plot of losses:  
-![loss](https://github.com/AthaSSiN/model-zoo/NLP/BERT_TensorFlow/assets/loss.png)
+![loss](https://github.com/AthaSSiN/model-zoo/blob/master/NLP/BERT_TensorFlow/assets/loss.png)
 
 2. Plot of accuracy:  
-![acc](https://github.com/AthaSSiN/model-zoo/NLP/BERT_TensorFlow/assets/acc.png)
+![acc](https://github.com/AthaSSiN/model-zoo/blob/master/NLP/BERT_TensorFlow/assets/acc.png)
 
 # Sources
 
