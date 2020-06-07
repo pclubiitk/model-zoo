@@ -5,13 +5,11 @@
 We are using [this dataset](http://www.wisdom.weizmann.ac.il/%7Evision/SpaceTimeActions.html) which you need to extact and place all the files in a file named data. 
 
 ```bash
-$ python3 resize,py
 $ python3 main.py --epochs 40000
 ```
 > **_NOTE:_** on Colab Notebook use following command:
 ```python
 !git clone link-to-repo
-%run resize.py
 %run main.py --epochs 40000
 ```
 
