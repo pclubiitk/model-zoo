@@ -11,6 +11,7 @@ import torch.utils.data as loader
 # from torchsummary import summary
 import tqdm
 from models import Discriminator, Generator
+from utils import *
 
 device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
 
@@ -19,6 +20,7 @@ import time
 from collections import OrderedDict
 import logging
 import argparse
+import warnings
 
 
 parser=argparse.ArgumentParser()
@@ -84,8 +86,7 @@ if num_epochs>=10:
 
 g_losses=[]
 d_losses=[]
-import time
-import warnings
+
 warnings.filterwarnings("ignore")
 for epoch in range(args.epochs):
     
@@ -140,8 +141,6 @@ for epoch in range(args.epochs):
     if (epoch+1)>=10:
         schedulerD.step()
         schedulerG.step()
-
-from utils import *
 
 plotter(g_losses,d_losses)
 evaluate(args.eval_idx, [0,0,1,0,1])
