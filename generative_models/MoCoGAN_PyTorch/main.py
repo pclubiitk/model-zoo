@@ -35,7 +35,7 @@ def main():
                         help='set the beta for the optimizer'),
     parser.add_argument('--trained_path', type=str, default='trained_models', 
                         help='set the path were to trained models are saved'),
-    arser.add_argument('--T', type=int, default=16, 
+    parser.add_argument('--T', type=int, default=16, 
                         help='set the no. of frames to be selected')
 
     args = parser.parse_args()
