@@ -17,7 +17,7 @@ $ python3 main.py --epochs 40000
 usage: main.py [-h] [--batch-size BATCH_SIZE] [--epochs EPOCHS]
                [--pre-train PRE_TRAIN] [--img_size IMG_SIZE]
                [--channel CHANNEL] [--hidden HIDDEN] [--dc DC] [--de DE]
-               [--lr LR] [--beta BETA] [--trained_path TRAINED_PATH]
+               [--lr LR] [--beta BETA] [--trained_path TRAINED_PATH] [--T T]
 
 Start trainning MoCoGAN.....
 
@@ -28,14 +28,16 @@ optional arguments:
   --epochs EPOCHS       set num of iterations
   --pre-train PRE_TRAIN
                         set 1 when you use pre-trained models
-  --img_size IMG_SIZE
-  --channel CHANNEL
-  --hidden HIDDEN
-  --dc DC
-  --de DE
-  --lr LR
-  --beta BETA
+  --img_size IMG_SIZE   set the input image size of frame
+  --channel CHANNEL     set the no. of channel of the frame
+  --hidden HIDDEN       set the hidden layer size for gru
+  --dc DC               set the size of motion vector
+  --de DE               set the size of randomly generated epsilon
+  --lr LR               set the learning rate
+  --beta BETA           set the beta for the optimizer
   --trained_path TRAINED_PATH
+                        set the path were to trained models are saved
+  --T T                 set the no. of frames to be selected
 ```
 
 ## Contributed by:
