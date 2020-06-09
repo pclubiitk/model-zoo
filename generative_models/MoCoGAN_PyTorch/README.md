@@ -15,7 +15,9 @@ $ python3 main.py --epochs 40000
 
 ```
 usage: main.py [-h] [--batch-size BATCH_SIZE] [--epochs EPOCHS]
-               [--pre-train PRE_TRAIN]
+               [--pre-train PRE_TRAIN] [--img_size IMG_SIZE]
+               [--channel CHANNEL] [--hidden HIDDEN] [--dc DC] [--de DE]
+               [--lr LR] [--beta BETA] [--trained_path TRAINED_PATH]
 
 Start trainning MoCoGAN.....
 
@@ -26,6 +28,14 @@ optional arguments:
   --epochs EPOCHS       set num of iterations
   --pre-train PRE_TRAIN
                         set 1 when you use pre-trained models
+  --img_size IMG_SIZE
+  --channel CHANNEL
+  --hidden HIDDEN
+  --dc DC
+  --de DE
+  --lr LR
+  --beta BETA
+  --trained_path TRAINED_PATH
 ```
 
 ## Contributed by:
