@@ -1,21 +1,11 @@
-import numpy as np
-import pandas as pd
-import torch
-import torch.nn as nn
-import matplotlib.pyplot as plt
-from torch.utils.data import Dataset
 import glob
-import random
-from PIL import Image
-from torchvision import datasets, transforms
 import os
-import torch.nn.functional as F
-from torch.utils.data import DataLoader
-from torchsummary import summary
-from torch.utils.tensorboard import SummaryWriter
-from torchvision.utils import make_grid
-import zipfile
+import numpy as np
 
+from torch.utils.data import Dataset
+from torch.utils.data import DataLoader
+from PIL import Image
+import torchvision.transforms as transforms
 
 
 
@@ -40,7 +30,7 @@ class ImageDataset(Dataset):
 
     def apply_center_mask(self, img):
         """Mask center part of image"""
-        # Get upper-left pixel coordinate
+        # top left coordinate in image
         i = (self.img_size - self.mask_size) // 2
         masked_img = img.clone()
         masked_img[:, i : i + self.mask_size, i : i + self.mask_size] = 1
@@ -52,10 +42,10 @@ class ImageDataset(Dataset):
         img = Image.open(self.files[index % len(self.files)])
         img = self.transform(img)
         if self.mode == "train":
-            # For training data perform random mask
+            #use random crop in case of train
             masked_img, aux = self.apply_random_mask(img)
         else:
-            # For test data mask the center of the image
+           #crop center in case of test data
             masked_img, aux = self.apply_center_mask(img)
 
         return img, masked_img, aux
@@ -63,22 +53,23 @@ class ImageDataset(Dataset):
     def __len__(self):
         return len(self.files)
 
-def get_loader(train_batch_size,test_batch_size,dataset):
-transforms_ = [
+def get_loader(train_batch_size,test_batch_size,mask_size,dataset,num_workers):
+  transforms_ = [
     transforms.Resize((128,128), Image.BICUBIC),
     transforms.ToTensor(),
     transforms.Normalize((0.5, 0.5, 0.5), (0.5, 0.5, 0.5)),
-]
-PATH = "./data_faces/"  + dataset
-dataloader = DataLoader(
-    ImageDataset(PATH, transforms_=transforms_),
+  ]
+  PATH = "./data/"  + dataset
+  dataloader = DataLoader(
+    ImageDataset(PATH, transforms_=transforms_,mask_size=mask_size),
     batch_size=train_batch_size,
     shuffle=True,
-    num_workers=5,
-)
-test_dataloader = DataLoader(
+    num_workers=num_workers,
+  )
+  test_dataloader = DataLoader(
     ImageDataset(PATH, transforms_=transforms_, mode="val"),
     batch_size=test_batch_size,
     shuffle=True,
-    num_workers=5,
-)        
+    num_workers=num_workers,
+  )        
+  return dataloader,test_dataloader
