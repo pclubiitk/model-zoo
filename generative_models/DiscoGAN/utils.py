@@ -5,14 +5,13 @@ import pandas as pd
 from scipy.misc import imresize
 import scipy.io
 
-dataset_path = './datasets/'
-celebA_path = args.dataset_path
+celebA_path = './celeba/'
 
 def shuffle_data(da, db):
-    a_idx = range(len(da))
+    a_idx = list(range(len(da)))
     np.random.shuffle( a_idx )
 
-    b_idx = range(len(db))
+    b_idx = list(range(len(db)))
     np.random.shuffle(b_idx)
 
     shuffled_da = np.array(da)[ np.array(a_idx) ]
@@ -49,6 +48,7 @@ def read_attr_file( attr_path, image_dir ):
     f = open( attr_path )
     lines = f.readlines()
     lines = map(lambda line: line.strip(), lines)
+    lines=list(lines)
     columns = ['image_path'] + lines[1].split()
     lines = lines[2:]
 
