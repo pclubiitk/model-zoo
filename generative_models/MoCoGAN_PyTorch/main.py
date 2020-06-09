@@ -21,14 +21,22 @@ def main():
                      help='set num of iterations')
     parser.add_argument('--pre-train', type=int, default=-1,
                      help='set 1 when you use pre-trained models'),
-    parser.add_argument('--img_size', type=int, default=96),
-    parser.add_argument('--channel', type=int, default=3),
-    parser.add_argument('--hidden', type=int, default=100),
-    parser.add_argument('--dc', type=int, default=50),
-    parser.add_argument('--de', type=int, default=10),
-    parser.add_argument('--lr', type=int, default=0.0002),
-    parser.add_argument('--beta', type=int, default=0.5),
-    parser.add_argument('--trained_path', type=str, default='trained_models')
+    parser.add_argument('--img_size', type=int, default=96,
+                       help='set the input image size of frame'),
+    parser.add_argument('--channel', type=int, default=3,
+                       help='set the no. of channel of the frame'),
+    parser.add_argument('--hidden', type=int, default=100,
+                       help='set the hidden layer size for gru'),
+    parser.add_argument('--dc', type=int, default=50, help='set the size of motion vector'),
+    parser.add_argument('--de', type=int, default=10, help='set the size of randomly generated epsilon'),
+    parser.add_argument('--lr', type=int, default=0.0002, 
+                        help='set the learning rate'),
+    parser.add_argument('--beta', type=int, default=0.5, 
+                        help='set the beta for the optimizer'),
+    parser.add_argument('--trained_path', type=str, default='trained_models', 
+                        help='set the path were to trained models are saved'),
+    arser.add_argument('--T', type=int, default=16, 
+                        help='set the no. of frames to be selected')
 
     args = parser.parse_args()
     
@@ -51,10 +59,9 @@ def main():
     if not os.path.exists('./resized_data'):
       os.makedirs('./resized_data')
 
-    T = 16
+    T = args.T
     start_epoch = 1
     seed = 0
-    torch.manual_seed(seed)
     np.random.seed(seed)
     if cuda == True:
         torch.cuda.set_device(0)
