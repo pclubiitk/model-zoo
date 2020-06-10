@@ -126,14 +126,3 @@ class CelebA(VisionDataset):
   def extra_repr(self):
         lines = ["Target type: {target_type}", "Split: {split}"]
         return '\n'.join(lines).format(**self.__dict__)  
-
-      
-import torchvision.transforms as transforms
-transform=transforms.Compose([
-    transforms.RandomHorizontalFlip(p=0.5),
-    transforms.CenterCrop(178),
-    transforms.Resize(size=64),
-    transforms.ToTensor(),
-    transforms.Normalize((0.5, 0.5, 0.5),(0.5, 0.5, 0.5))
-])
-dataset=CelebA(root='./',attributes=['Blond_Hair','Black_Hair','Male'],transform=transform,download=True)
