@@ -60,7 +60,7 @@ Use -h,--help to show help message for arguments
 * key intuition is to constraint all images in one domain to be representable by images in the other domain. Hence , it learns the bidirectional mapping between two image domains, such as faces, cars, chairs, edges and photos, and successfully apply them in
 image translation. Translated images consistently change specified attributes such as hair color, gender and orientation while maintaining all other components.
 
-* BCE loss function for GAN loss :
+* BCE loss function for GAN loss : 
 
 ![gan_loss](assets/gan_loss.png)
 
