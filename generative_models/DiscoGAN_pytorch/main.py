@@ -8,6 +8,7 @@ import torch.optim as optim
 from torch.autograd import Variable
 from utils import *
 from model import *
+from download import CelebA
 import scipy
 from progressbar import ETA, Bar, Percentage, ProgressBar
 
@@ -31,13 +32,29 @@ parser.add_argument('--update_interval', type=int, default=3, help='')
 parser.add_argument('--log_interval', type=int, default=50, help='Print loss values every log_interval iterations.')
 parser.add_argument('--image_save_interval', type=int, default=1000, help='Save test results every image_save_interval iterations.')
 parser.add_argument('--model_save_interval', type=int, default=10000, help='Save models every model_save_interval iterations.')
+parser.add_argument('--attrs', '--list', nargs='+', help='selected attributes for the CelebA dataset', 
+                        default=['Black_Hair', 'Blond_Hair', 'Male'])
+
+args = parser.parse_args()
+
+import torchvision.transforms as transforms
+from torchvision.datasets.vision import VisionDataset
+transform=transforms.Compose([
+    transforms.RandomHorizontalFlip(p=0.5),
+    transforms.CenterCrop(178),
+    transforms.Resize(size=64),
+    transforms.ToTensor(),
+    transforms.Normalize((0.5, 0.5, 0.5),(0.5, 0.5, 0.5))
+])
+dataset=CelebA(root='./',attributes=args.selected_attrs,transform=transform,download=True)
+
+data_A, data_B = get_celebA_files(style_A=args.style_A, style_B=args.style_B, constraint=args.constraint, constraint_type=args.constraint_type, test=False, n_test=args.n_test)
+test_A, test_B = get_celebA_files(style_A=args.style_A, style_B=args.style_B, constraint=args.constraint, constraint_type=args.constraint_type, test=True, n_test=args.n_test)
+
 
 def as_np(data):
     return data.cpu().data.numpy()
-   
-    data_A, data_B = get_celebA_files(style_A=args.style_A, style_B=args.style_B, constraint=args.constraint, constraint_type=args.constraint_type, test=False, n_test=args.n_test)
-    test_A, test_B = get_celebA_files(style_A=args.style_A, style_B=args.style_B, constraint=args.constraint, constraint_type=args.constraint_type, test=True, n_test=args.n_test)
-
+    
 def get_fm_loss(real_feats, fake_feats, criterion):
     losses = 0
     for real_feat, fake_feat in zip(real_feats, fake_feats):
@@ -63,204 +80,196 @@ def get_gan_loss(dis_real, dis_fake, criterion, cuda):
     return dis_loss, gen_loss
 
 
-def main():
+cuda = args.cuda
+if cuda == 'true':
+    cuda = True
+else:
+    cuda = False
 
-    global args
-    args = parser.parse_args()
+epoch_size = args.epoch_size
+batch_size = args.batch_size
 
-    cuda = args.cuda
-    if cuda == 'true':
-        cuda = True
-    else:
-        cuda = False
+result_path = args.result_path
+if args.style_A:
+    result_path = os.path.join( result_path, args.style_A )
 
-    epoch_size = args.epoch_size
-    batch_size = args.batch_size
+model_path = args.model_path
+if args.style_A:
+    model_path = os.path.join( model_path, args.style_A )
 
-    result_path = args.result_path
-    if args.style_A:
-        result_path = os.path.join( result_path, args.style_A )
+data_style_A, data_style_B, test_style_A, test_style_B = data_A, data_B, test_A, test_B
 
-    model_path = args.model_path
-    if args.style_A:
-        model_path = os.path.join( model_path, args.style_A )
+test_A = read_images( test_style_A, None, args.image_size )
+test_B = read_images( test_style_B, None, args.image_size )
 
-    data_style_A, data_style_B, test_style_A, test_style_B = data_A, data_B, test_A, test_B
+test_A = Variable( torch.FloatTensor( test_A ), volatile=True )
+test_B = Variable( torch.FloatTensor( test_B ), volatile=True )
 
-    test_A = read_images( test_style_A, None, args.image_size )
-    test_B = read_images( test_style_B, None, args.image_size )
+if not os.path.exists(result_path):
+    os.makedirs(result_path)
+if not os.path.exists(model_path):
+    os.makedirs(model_path)
 
-    test_A = Variable( torch.FloatTensor( test_A ), volatile=True )
-    test_B = Variable( torch.FloatTensor( test_B ), volatile=True )
+generator_A = Generator()
+generator_B = Generator()
+discriminator_A = Discriminator()
+discriminator_B = Discriminator()
 
-    if not os.path.exists(result_path):
-        os.makedirs(result_path)
-    if not os.path.exists(model_path):
-        os.makedirs(model_path)
+if cuda:
+    test_A = test_A.cuda()
+    test_B = test_B.cuda()
+    generator_A = generator_A.cuda()
+    generator_B = generator_B.cuda()
+    discriminator_A = discriminator_A.cuda()
+    discriminator_B = discriminator_B.cuda()
 
-    generator_A = Generator()
-    generator_B = Generator()
-    discriminator_A = Discriminator()
-    discriminator_B = Discriminator()
+data_size = min( len(data_style_A), len(data_style_B) )
+n_batches = ( data_size // batch_size )
 
-    if cuda:
-        test_A = test_A.cuda()
-        test_B = test_B.cuda()
-        generator_A = generator_A.cuda()
-        generator_B = generator_B.cuda()
-        discriminator_A = discriminator_A.cuda()
-        discriminator_B = discriminator_B.cuda()
+recon_criterion = nn.MSELoss()
+gan_criterion = nn.BCELoss()
+feat_criterion = nn.HingeEmbeddingLoss()
 
-    data_size = min( len(data_style_A), len(data_style_B) )
-    n_batches = ( data_size // batch_size )
+gen_params = chain(generator_A.parameters(), generator_B.parameters())
+dis_params = chain(discriminator_A.parameters(), discriminator_B.parameters())
 
-    recon_criterion = nn.MSELoss()
-    gan_criterion = nn.BCELoss()
-    feat_criterion = nn.HingeEmbeddingLoss()
+optim_gen = optim.Adam( gen_params, lr=args.learning_rate, betas=(0.5,0.999), weight_decay=0.00001)
+optim_dis = optim.Adam( dis_params, lr=args.learning_rate, betas=(0.5,0.999), weight_decay=0.00001)
 
-    gen_params = chain(generator_A.parameters(), generator_B.parameters())
-    dis_params = chain(discriminator_A.parameters(), discriminator_B.parameters())
+iters = 0
 
-    optim_gen = optim.Adam( gen_params, lr=args.learning_rate, betas=(0.5,0.999), weight_decay=0.00001)
-    optim_dis = optim.Adam( dis_params, lr=args.learning_rate, betas=(0.5,0.999), weight_decay=0.00001)
+gen_loss_total = []
+dis_loss_total = []
 
-    iters = 0
+for epoch in range(epoch_size):
+    data_style_A, data_style_B = shuffle_data( data_style_A, data_style_B)
 
-    gen_loss_total = []
-    dis_loss_total = []
+    widgets = ['epoch #%d|' % epoch, Percentage(), Bar(), ETA()]
+    pbar = ProgressBar(maxval=n_batches, widgets=widgets)
+    pbar.start()
 
-    for epoch in range(epoch_size):
-        data_style_A, data_style_B = shuffle_data( data_style_A, data_style_B)
+    for i in range(n_batches):
 
-        widgets = ['epoch #%d|' % epoch, Percentage(), Bar(), ETA()]
-        pbar = ProgressBar(maxval=n_batches, widgets=widgets)
-        pbar.start()
+        pbar.update(i)
 
-        for i in range(n_batches):
+        generator_A.zero_grad()
+        generator_B.zero_grad()
+        discriminator_A.zero_grad()
+        discriminator_B.zero_grad()
 
-            pbar.update(i)
+        A_path = data_style_A[ i * batch_size: (i+1) * batch_size ]
+        B_path = data_style_B[ i * batch_size: (i+1) * batch_size ]
 
-            generator_A.zero_grad()
-            generator_B.zero_grad()
-            discriminator_A.zero_grad()
-            discriminator_B.zero_grad()
+        if args.task_name.startswith( 'edges2' ):
+            A = read_images( A_path, 'A', args.image_size )
+            B = read_images( B_path, 'B', args.image_size )
+        elif args.task_name =='handbags2shoes' or args.task_name == 'shoes2handbags':
+            A = read_images( A_path, 'B', args.image_size )
+            B = read_images( B_path, 'B', args.image_size )
+        else:
+            A = read_images( A_path, None, args.image_size )
+            B = read_images( B_path, None, args.image_size )
 
-            A_path = data_style_A[ i * batch_size: (i+1) * batch_size ]
-            B_path = data_style_B[ i * batch_size: (i+1) * batch_size ]
+        A = Variable( torch.FloatTensor( A ) )
+        B = Variable( torch.FloatTensor( B ) )
 
-            if args.task_name.startswith( 'edges2' ):
-                A = read_images( A_path, 'A', args.image_size )
-                B = read_images( B_path, 'B', args.image_size )
-            elif args.task_name =='handbags2shoes' or args.task_name == 'shoes2handbags':
-                A = read_images( A_path, 'B', args.image_size )
-                B = read_images( B_path, 'B', args.image_size )
+        if cuda:
+            A = A.cuda()
+            B = B.cuda()
+
+        AB = generator_B(A)
+        BA = generator_A(B)
+
+        ABA = generator_A(AB)
+        BAB = generator_B(BA)
+
+        # Reconstruction Loss
+        recon_loss_A = recon_criterion( ABA, A )
+        recon_loss_B = recon_criterion( BAB, B )
+
+        # Real/Fake GAN Loss (A)
+        A_dis_real, A_feats_real = discriminator_A( A )
+        A_dis_fake, A_feats_fake = discriminator_A( BA )
+
+        dis_loss_A, gen_loss_A = get_gan_loss( A_dis_real, A_dis_fake, gan_criterion, cuda )
+        fm_loss_A = get_fm_loss(A_feats_real, A_feats_fake, feat_criterion)
+
+        # Real/Fake GAN Loss (B)
+        B_dis_real, B_feats_real = discriminator_B( B )
+        B_dis_fake, B_feats_fake = discriminator_B( AB )
+
+        dis_loss_B, gen_loss_B = get_gan_loss( B_dis_real, B_dis_fake, gan_criterion, cuda )
+        fm_loss_B = get_fm_loss( B_feats_real, B_feats_fake, feat_criterion )
+
+        # Total Loss
+
+        if iters < args.gan_curriculum:
+            rate = args.starting_rate
+        else:
+            rate = args.default_rate
+
+        gen_loss_A_total = (gen_loss_B*0.1 + fm_loss_B*0.9) * (1.-rate) + recon_loss_A * rate
+        gen_loss_B_total = (gen_loss_A*0.1 + fm_loss_A*0.9) * (1.-rate) + recon_loss_B * rate
+
+        if args.model_arch == 'discogan':
+            gen_loss = gen_loss_A_total + gen_loss_B_total
+            dis_loss = dis_loss_A + dis_loss_B
+        elif args.model_arch == 'recongan':
+            gen_loss = gen_loss_A_total
+            dis_loss = dis_loss_B
+        elif args.model_arch == 'gan':
+            gen_loss = (gen_loss_B*0.1 + fm_loss_B*0.9)
+            dis_loss = dis_loss_B
+
+        if iters % args.update_interval == 0:
+            dis_loss.backward()
+            optim_dis.step()
+        else:
+            gen_loss.backward()
+            optim_gen.step()
+
+        if iters % args.log_interval == 0:
+            print ("---------------------")
+            print ("GEN Loss:", as_np(gen_loss_A.mean()), as_np(gen_loss_B.mean()))
+            print ("Feature Matching Loss:", as_np(fm_loss_A.mean()), as_np(fm_loss_B.mean()))
+            print ("RECON Loss:", as_np(recon_loss_A.mean()), as_np(recon_loss_B.mean()))
+            print ("DIS Loss:", as_np(dis_loss_A.mean()), as_np(dis_loss_B.mean()))
+
+        if iters % args.image_save_interval == 0:
+            AB = generator_B( test_A )
+            BA = generator_A( test_B )
+            ABA = generator_A( AB )
+            BAB = generator_B( BA )
+
+            n_testset = min( test_A.size()[0], test_B.size()[0] )
+
+            subdir_path = os.path.join( result_path, str(iters / args.image_save_interval) )
+
+            if os.path.exists( subdir_path ):
+                pass
             else:
-                A = read_images( A_path, None, args.image_size )
-                B = read_images( B_path, None, args.image_size )
+                os.makedirs( subdir_path )
 
-            A = Variable( torch.FloatTensor( A ) )
-            B = Variable( torch.FloatTensor( B ) )
+            for im_idx in range( n_testset ):
+                A_val = test_A[im_idx].cpu().data.numpy().transpose(1,2,0) * 255.
+                B_val = test_B[im_idx].cpu().data.numpy().transpose(1,2,0) * 255.
+                BA_val = BA[im_idx].cpu().data.numpy().transpose(1,2,0)* 255.
+                ABA_val = ABA[im_idx].cpu().data.numpy().transpose(1,2,0)* 255.
+                AB_val = AB[im_idx].cpu().data.numpy().transpose(1,2,0)* 255.
+                BAB_val = BAB[im_idx].cpu().data.numpy().transpose(1,2,0)* 255.
 
-            if cuda:
-                A = A.cuda()
-                B = B.cuda()
+                filename_prefix = os.path.join (subdir_path, str(im_idx))
+                scipy.misc.imsave( filename_prefix + '.A.jpg', A_val.astype(np.uint8)[:,:,::-1])
+                scipy.misc.imsave( filename_prefix + '.B.jpg', B_val.astype(np.uint8)[:,:,::-1])
+                scipy.misc.imsave( filename_prefix + '.BA.jpg', BA_val.astype(np.uint8)[:,:,::-1])
+                scipy.misc.imsave( filename_prefix + '.AB.jpg', AB_val.astype(np.uint8)[:,:,::-1])
+                scipy.misc.imsave( filename_prefix + '.ABA.jpg', ABA_val.astype(np.uint8)[:,:,::-1])
+                scipy.misc.imsave( filename_prefix + '.BAB.jpg', BAB_val.astype(np.uint8)[:,:,::-1])
 
-            AB = generator_B(A)
-            BA = generator_A(B)
+        if iters % args.model_save_interval == 0:
+            torch.save( generator_A, os.path.join(model_path, 'model_gen_A-' + str( iters / args.model_save_interval )))
+            torch.save( generator_B, os.path.join(model_path, 'model_gen_B-' + str( iters / args.model_save_interval )))
+            torch.save( discriminator_A, os.path.join(model_path, 'model_dis_A-' + str( iters / args.model_save_interval )))
+            torch.save( discriminator_B, os.path.join(model_path, 'model_dis_B-' + str( iters / args.model_save_interval )))
 
-            ABA = generator_A(AB)
-            BAB = generator_B(BA)
-
-            # Reconstruction Loss
-            recon_loss_A = recon_criterion( ABA, A )
-            recon_loss_B = recon_criterion( BAB, B )
-
-            # Real/Fake GAN Loss (A)
-            A_dis_real, A_feats_real = discriminator_A( A )
-            A_dis_fake, A_feats_fake = discriminator_A( BA )
-
-            dis_loss_A, gen_loss_A = get_gan_loss( A_dis_real, A_dis_fake, gan_criterion, cuda )
-            fm_loss_A = get_fm_loss(A_feats_real, A_feats_fake, feat_criterion)
-
-            # Real/Fake GAN Loss (B)
-            B_dis_real, B_feats_real = discriminator_B( B )
-            B_dis_fake, B_feats_fake = discriminator_B( AB )
-
-            dis_loss_B, gen_loss_B = get_gan_loss( B_dis_real, B_dis_fake, gan_criterion, cuda )
-            fm_loss_B = get_fm_loss( B_feats_real, B_feats_fake, feat_criterion )
-
-            # Total Loss
-
-            if iters < args.gan_curriculum:
-                rate = args.starting_rate
-            else:
-                rate = args.default_rate
-
-            gen_loss_A_total = (gen_loss_B*0.1 + fm_loss_B*0.9) * (1.-rate) + recon_loss_A * rate
-            gen_loss_B_total = (gen_loss_A*0.1 + fm_loss_A*0.9) * (1.-rate) + recon_loss_B * rate
-
-            if args.model_arch == 'discogan':
-                gen_loss = gen_loss_A_total + gen_loss_B_total
-                dis_loss = dis_loss_A + dis_loss_B
-            elif args.model_arch == 'recongan':
-                gen_loss = gen_loss_A_total
-                dis_loss = dis_loss_B
-            elif args.model_arch == 'gan':
-                gen_loss = (gen_loss_B*0.1 + fm_loss_B*0.9)
-                dis_loss = dis_loss_B
-
-            if iters % args.update_interval == 0:
-                dis_loss.backward()
-                optim_dis.step()
-            else:
-                gen_loss.backward()
-                optim_gen.step()
-
-            if iters % args.log_interval == 0:
-                print ("---------------------")
-                print ("GEN Loss:", as_np(gen_loss_A.mean()), as_np(gen_loss_B.mean()))
-                print ("Feature Matching Loss:", as_np(fm_loss_A.mean()), as_np(fm_loss_B.mean()))
-                print ("RECON Loss:", as_np(recon_loss_A.mean()), as_np(recon_loss_B.mean()))
-                print ("DIS Loss:", as_np(dis_loss_A.mean()), as_np(dis_loss_B.mean()))
-
-            if iters % args.image_save_interval == 0:
-                AB = generator_B( test_A )
-                BA = generator_A( test_B )
-                ABA = generator_A( AB )
-                BAB = generator_B( BA )
-
-                n_testset = min( test_A.size()[0], test_B.size()[0] )
-
-                subdir_path = os.path.join( result_path, str(iters / args.image_save_interval) )
-
-                if os.path.exists( subdir_path ):
-                    pass
-                else:
-                    os.makedirs( subdir_path )
-
-                for im_idx in range( n_testset ):
-                    A_val = test_A[im_idx].cpu().data.numpy().transpose(1,2,0) * 255.
-                    B_val = test_B[im_idx].cpu().data.numpy().transpose(1,2,0) * 255.
-                    BA_val = BA[im_idx].cpu().data.numpy().transpose(1,2,0)* 255.
-                    ABA_val = ABA[im_idx].cpu().data.numpy().transpose(1,2,0)* 255.
-                    AB_val = AB[im_idx].cpu().data.numpy().transpose(1,2,0)* 255.
-                    BAB_val = BAB[im_idx].cpu().data.numpy().transpose(1,2,0)* 255.
-
-                    filename_prefix = os.path.join (subdir_path, str(im_idx))
-                    scipy.misc.imsave( filename_prefix + '.A.jpg', A_val.astype(np.uint8)[:,:,::-1])
-                    scipy.misc.imsave( filename_prefix + '.B.jpg', B_val.astype(np.uint8)[:,:,::-1])
-                    scipy.misc.imsave( filename_prefix + '.BA.jpg', BA_val.astype(np.uint8)[:,:,::-1])
-                    scipy.misc.imsave( filename_prefix + '.AB.jpg', AB_val.astype(np.uint8)[:,:,::-1])
-                    scipy.misc.imsave( filename_prefix + '.ABA.jpg', ABA_val.astype(np.uint8)[:,:,::-1])
-                    scipy.misc.imsave( filename_prefix + '.BAB.jpg', BAB_val.astype(np.uint8)[:,:,::-1])
-
-            if iters % args.model_save_interval == 0:
-                torch.save( generator_A, os.path.join(model_path, 'model_gen_A-' + str( iters / args.model_save_interval )))
-                torch.save( generator_B, os.path.join(model_path, 'model_gen_B-' + str( iters / args.model_save_interval )))
-                torch.save( discriminator_A, os.path.join(model_path, 'model_dis_A-' + str( iters / args.model_save_interval )))
-                torch.save( discriminator_B, os.path.join(model_path, 'model_dis_B-' + str( iters / args.model_save_interval )))
-
-            iters += 1
-
-if __name__=="__main__":
-    main()
+        iters += 1
