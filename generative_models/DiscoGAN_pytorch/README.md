@@ -66,13 +66,13 @@ image translation. Translated images consistently change specified attributes su
 
 * MSE loss function for recontruction loss :
 
-![recon_loss](assets/recon_loss.png)
+![recon_loss](assets/recon_loss.jpg)
 
 ## Model Architecture
 
 ### Generator 
 
-![Generator](assets/Generator.jpg)
+![Generator](assets/Generator.png)
 
 - DiscoGAN's generator is a gan with a GAN adversarial loss and reconstruction loss to ensure the consistency.
 - Each generator takes an image and feeds it through an encoder-decoder pair .
