@@ -1,6 +1,7 @@
 import os
 from argparse import ArgumentParser
 import model as md
+from model import *
 from utils import create_link
 import torch
 import torch.nn as nn
