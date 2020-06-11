@@ -87,7 +87,7 @@ Each CycleGAN generator has three sections: an encoder, a transformer, and a dec
 Finding the discriminator and the generator losses are key to getting a CycleGAN to train.
 * The CycleGAN contains two mapping functions  G:X→Y  and  F:Y→X , and associated adversarial discriminators  DY  and  DX . (a)  DY  encourages  G  to translate  X  into outputs indistinguishable from domain  Y , and vice versa for  DX  and  F .
 * To further regularize the mappings, we introduce two cycle consistency losses that capture the intuition that if we translate from one domain to the other and back again we should arrive at where we started. (b) Forward cycle-consistency loss and (c) backward cycle-consistency loss.
-![4](./assets/CycleGAN_loss.png)
+![4](./assets/CYCLEGAN_loss.png)
 ### **Discriminator Losses**
 The discriminator losses will be mean squared errors between the output of the discriminator, given an image, and the target value, 0 or 1, depending on whether it should classify that image as fake or real. For example, for a real image, x, we can train  DX  by looking at how close it is to recognizing and image x as real using the mean squared error:
 

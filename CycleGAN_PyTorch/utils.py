@@ -107,4 +107,3 @@ def print_networks(nets, names):
         print('[Network %s] Total number of parameters : %.3f M' % (names[i], num_params / 1e6))
         i=i+1
     print('-----------------------------------------------')
-    
