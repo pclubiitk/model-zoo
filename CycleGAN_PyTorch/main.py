@@ -1,8 +1,18 @@
 import os
 from argparse import ArgumentParser
 import model as md
-from utils import *
 from utils import create_link
+import torch
+import torch.nn as nn
+from torch.nn import init
+from torch.autograd import Variable
+import torch.nn.functional as F
+import torchvision.datasets as dsets
+import torchvision.transforms as transforms
+import utils
+from torch.optim import lr_scheduler
+import itertools
+import functools
 
 # To get arguments from commandline
 def get_args():
