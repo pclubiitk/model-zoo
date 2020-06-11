@@ -216,7 +216,7 @@ def test(args):
 
     try:
             ckpt = utils.load_checkpoint('%s/latest.ckpt' % (args.checkpoint_dir))
-        Gab.load_state_dict(ckpt['Gab'])
+            Gab.load_state_dict(ckpt['Gab'])
             Gba.load_state_dict(ckpt['Gba'])
     except:
             print(' [*] No checkpoint!')
