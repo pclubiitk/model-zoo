@@ -53,6 +53,23 @@ Leveraging the information in both the labeled and unlabeled data to eventually 
 
 The unlabeled data will be used to merely tell fake from real. The labeled data would be used to optimize the classification performance.
 
+## Implementation
+Basically, we take very few samples per class and concatenate the resulting arrays as being our actual supervised subset. The unlabeled dataset consists of all train data (it also includes the labeled data, since we might as well use it anyway). As is customary for training GANs now, the output of the generator uses a hyperbolic tangent function.
+
+Let's do the forward computations now so that we see how all of the above comes together. This consists of setting up the input pipeline, noise vector, generator and discriminator. 
+
+The generator will take :
+- A vector in its latent space and output a fake data sample
+
+The discriminator will do a lot more. It will take 
+- the 'fake' images coming from the generator
+- a batch of unlabeled images and finally 
+-  a batch of labeled images (both with and without dropout to also report the train accuracy).
+
+There are three kind of loss functions :
+i) sparse_categorical_crossentropy for supervised learning data with softmax activation for Discriminator
+ii) binary_crossentropy for unlabelled data with a custom activation for Discriminator
+iii) binary_crossentropy for generator
 
 ### Model Summary
 General architecture of SS-GAN
