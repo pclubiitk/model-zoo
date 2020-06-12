@@ -15,7 +15,7 @@ $ python3 main.py --mode "get_ClosestWords" --word "big"
 ```
 ### To use analogy and get word in :- word1 : word2 :: word : ?
 ```bash
-$ python3 main.py --mode "analogy" --word1 "big" --word2 "long" --word3 "small"
+$ python3 main.py --mode "analogy" --word1 "big" --word2 "long" --word "small"
 ```
 ### To plot the embeddings
 ```bash
