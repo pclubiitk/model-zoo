@@ -18,12 +18,6 @@ nltk.download('stopwords')
 # !kaggle datasets download -d harmanpreet93/hotelreviews
 # unzip the dataset and keep it in a folder named hotelreviews
 
-nltk.download('stopwords')
-
-# Downloading the dataset
-# !kaggle datasets download -d harmanpreet93/hotelreviews
-# unzip the dataset and keep it in a folder named hotelreviews
-
 def tokenizeData(indv_lines):
   review_data_list = list()
   for line in indv_lines:
