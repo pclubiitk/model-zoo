@@ -55,8 +55,6 @@ Comparison with state of art methods:
 
 <img src="https://d3i71xaburhd42.cloudfront.net/f5ce640bbb9d6417fd0853ed88a9e7b93d72910d/6-Table4-1.png" alt="drawing">
 
-<img src="https://d3i71xaburhd42.cloudfront.net/f5ce640bbb9d6417fd0853ed88a9e7b93d72910d/6-Table4-1.png" alt="drawing">
-
 ## Conclusion:
 The model clearly shows the benefit of exploiting temporal depths over shorter and longer time ranges
 over fixed 3D homogeneous kernel depth architectures. In
