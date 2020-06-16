@@ -23,7 +23,7 @@ its new temporal layer ‘Temporal Transition Layer’ (TTL).
 
 ## Model:
 
-<img src="https://d3i71xaburhd42.cloudfront.net/f5ce640bbb9d6417fd0853ed88a9e7b93d72910d/3-Figure1-1.png" alt="drawing">
+<img src="https://github.com/vanshbansal1505/model-zoo/blob/master/Video_Classification/T3D_tensorflow/assets/model.png?raw=true" alt="drawing">
 
 
 
@@ -41,7 +41,7 @@ of 10e−4
 and batch size of 64. The initial learning rate is
 set to 0.1
 
-<img src ="https://d3i71xaburhd42.cloudfront.net/f5ce640bbb9d6417fd0853ed88a9e7b93d72910d/5-Table1-1.png" alt="drawing">
+<img src ="https://github.com/vanshbansal1505/model-zoo/blob/master/Video_Classification/T3D_tensorflow/assets/architecture.png?raw=true">
 
 
 All the proposed architectures incorporate 3D filters and pooling
@@ -53,7 +53,7 @@ numbers shown in the TTL layer, denotes to the variable temporal convolution ker
 
 Comparison with state of art methods:
 
-<img src="https://d3i71xaburhd42.cloudfront.net/f5ce640bbb9d6417fd0853ed88a9e7b93d72910d/6-Table4-1.png" alt="drawing">
+<img src="https://github.com/vanshbansal1505/model-zoo/blob/master/Video_Classification/T3D_tensorflow/assets/comparison.png?raw=true" alt="drawing">
 
 ## Conclusion:
 The model clearly shows the benefit of exploiting temporal depths over shorter and longer time ranges
