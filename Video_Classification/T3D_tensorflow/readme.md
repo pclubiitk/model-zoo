@@ -52,6 +52,9 @@ numbers shown in the TTL layer, denotes to the variable temporal convolution ker
 ## Comparisons:
 
 Comparison with state of art methods:
+
+<img src="https://d3i71xaburhd42.cloudfront.net/f5ce640bbb9d6417fd0853ed88a9e7b93d72910d/6-Table4-1.png" alt="drawing">
+
 <img src="https://d3i71xaburhd42.cloudfront.net/f5ce640bbb9d6417fd0853ed88a9e7b93d72910d/6-Table4-1.png" alt="drawing">
 
 ## Conclusion:
