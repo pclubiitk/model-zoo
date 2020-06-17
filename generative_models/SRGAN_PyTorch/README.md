@@ -78,13 +78,23 @@ On pre-training the Generator for 100 epochs followed by adversarial training fo
 
 >***NOTE*** : Go to the assets folder to view full sized images. They have been resized for better readability.
 
-**Low Resolution (Original), x4 Bicubic Interpolation, x4 *Online Image Enhancer*, x4 SRGAN and High Resolution Original** respectively
+>*x4 refers to image upscaled four times*.
+
+**Low Resolution (Original)** 
 <p float="left">
-<img src="assets/lr.png" width=150>
-<img src="assets/lr_bicubic.png" width=150>
-<img src="assets/lr_letsenhance.png" width=150>
-<img src="assets/sr.png" width=150>
-<img src="assets/hr.png" width=150>
+<img src="assets/lr.png" width="280" style="margin:10px">
+</p>
+
+**x4 Bicubic Interpolation, High Resolution (Original)**
+<p float="left">
+<img src="assets/lr_bicubic.png" width="400" style="margin:10px">
+<img src="assets/hr.png" width="400" style="margin:10px">
+</p>
+
+**x4 *Online Image Enhancer*, x4 SRGAN**
+<p>
+<img src="assets/lr_letsenhance.png" width="400" style="margin:10px">
+<img src="assets/sr.png" width="400" style="margin:10px">
 </p>
 
 >I used [letsenhance.io](https://letsenhance.io/) for the third image which claims to use a "*Powerful AI to increase image resolution without quality loss*".
