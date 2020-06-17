@@ -97,7 +97,7 @@ On pre-training the Generator for 100 epochs followed by adversarial training fo
 <img src="assets/sr.png" width="400" style="margin:10px">
 </p>
 
->I used [letsenhance.io](https://letsenhance.io/) for the third image which claims to use a "*Powerful AI to increase image resolution without quality loss*".
+>I used [letsenhance.io](https://letsenhance.io/) which claims to use a "*Powerful AI to increase image resolution without quality loss*".
 
 The SRGAN generated image clearly retains more features, and produces better images.
 
