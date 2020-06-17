@@ -2,6 +2,7 @@ from srgan.model import generator, discriminator
 from srgan.dataset import DIV2K
 from srgan.pre_train import pre_train
 from srgan.train import train
+import tensorflow as tf
 import cv2
 import argparse
 import datetime

@@ -53,44 +53,44 @@ combined with a discriminator that encourages solutions
 perceptually hard to distinguish from the HR reference
 images.
 ### Archetecture of the network
-![model](resources/model.jpg)
+![model](assets/model.jpg)
 ### Loss Functions
 we have the following loss functions:\
 **Perceptual Loss**\
-![perceptual loss](resources/perceptual_loss.png)\
+![perceptual loss](assets/perceptual_loss.png)\
 **PixelWise MSE Loss**\
-![MSE loss](resources/MSE_loss.png)\
+![MSE loss](assets/MSE_loss.png)\
 **Content Loss**\
-![content loss](resources/content_loss.png)\
+![content loss](assets/content_loss.png)\
 **Adversarial Loss**\
-![adversarial loss](resources/adversarial_loss.png)\
+![adversarial loss](assets/adversarial_loss.png)\
 ### Training Details
 Paper uses a generator trained with a SRResNet setup. We pre-train the generator using MSE Loss to replicate that.
-After that we use the content loss, Perceptual Loss, and Adersarial Loss to train the GAN. A video showing the training process is provided [here](resources/train_video.avi) or [here is a youtube link](https://youtu.be/q9-AX0yMbzw).
+After that we use the content loss, Perceptual Loss, and Adersarial Loss to train the GAN. A video showing the training process is provided [here](assets/train_video.avi) or [here is a youtube link](https://youtu.be/q9-AX0yMbzw).
 We used DIV2K dataset taking 96x96 sized patchs as high resolution image with 4x scale, taking a batch of 128 patchs.
 ### Results
 A random image was selected from the dataset and was monitered over the process of training.\
 __Final Results__:\
 **Bicubic Interpolation**:\
-![bicubic](resources/bicubicubic_low_resolution.jpg)\
+![bicubic](assets/bicubicubic_low_resolution.jpg)\
 **SRGAN Generated**:\
-![generated](resources/generated.jpg)\
+![generated](assets/generated.jpg)\
 **High Resolution Image**:\
-![original](resources/original.jpg)
+![original](assets/original.jpg)
 ### Losses over the training.
 **Pre-Training**\
 
 The model was pre-trained over the training part of DIV2K dataset for 1000 iterations.(only 600 were recorded properly)
 
 PSNR:\
-![PSNR](resources/PSNR.svg)\
+![PSNR](assets/PSNR.svg)\
 MSE Loss:\
-![PSNR](resources/loss.svg)\
+![PSNR](assets/loss.svg)\
 **GAN Training**\
 
 The GAN was trained for 1760 steps over the DIV2K dataset.
 
 Perceptual Loss:\
-![Perceptual Loss](resources/Percetual_Loss.svg)\
+![Perceptual Loss](assets/Percetual_Loss.svg)\
 Discriminator Loss:\
-![Discriminator Loss](resources/Discriminator_Loss.svg)
+![Discriminator Loss](assets/Discriminator_Loss.svg)
