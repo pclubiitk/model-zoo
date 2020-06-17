@@ -5,7 +5,7 @@
 $ python3 main.py
 ```
 following are the arguments:
-```bash
+```
 usage: main.py [-h] [--root_dir ROOT_DIR] [--num_workers NUM_WORKERS] [--batch_size BATCH_SIZE] [--num_epochs NUM_EPOCHS] [--lr LR]
                [--pre_num_epochs PRE_NUM_EPOCHS] [--outdir OUTDIR] [--load_checkpoint LOAD_CHECKPOINT] [--b B]
 
