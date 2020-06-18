@@ -8,7 +8,7 @@ from tensorflow.keras.optimizers.schedules import PiecewiseConstantDecay
 from tensorflow.keras.applications.vgg19 import preprocess_input
 import tensorflow as tf
 import datetime,time
-from srgan.model import vgg
+from model import vgg
 
 # Used in content_loss
 mean_squared_error = tf.keras.losses.MeanSquaredError()
