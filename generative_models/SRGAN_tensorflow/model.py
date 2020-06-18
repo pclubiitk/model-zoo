@@ -1,7 +1,7 @@
 from tensorflow.python.keras.layers import Add, BatchNormalization, Conv2D, Dense, Flatten, Input, LeakyReLU, PReLU, Lambda
 from tensorflow.python.keras.models import Model
 from tensorflow.python.keras.applications.vgg19 import VGG19
-from srgan.utils import subpixel_conv2d,normalize_01,normalize_m11,normalize,denormalize,denormalize_m11
+from utils import subpixel_conv2d,normalize_01,normalize_m11,normalize,denormalize,denormalize_m11
 
 LR_SIZE = 24
 HR_SIZE = 96
