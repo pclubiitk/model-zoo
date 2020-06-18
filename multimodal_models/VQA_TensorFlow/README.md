@@ -92,7 +92,7 @@ frequency).
 
 This figure shows P(answer | model is correct) for 50 most frequently predicted answers on the VQA validation set (plot is sorted by prediction
 frequency, not accuracy).  
-![anssys](./assets/ans_give_sys.png)
+![anssys](./assets/ans_giv_sys.png)
 
 # Sources
 
