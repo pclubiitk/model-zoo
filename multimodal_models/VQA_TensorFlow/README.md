@@ -82,6 +82,18 @@ We use the following default configuration:
 - 2 Layers of LSTMs which follows pretrained GloVe word embeddings of input texts
 - Concatenation of the outputs of the NLP and Vision parts into a single dense layer.
 
+## Results
+
+Here are the results for the above specified SOTA model.  
+
+This figure shows P(model is correct | answer) for 50 most frequent ground truth answers on the VQA validation set (plot is sorted by accuracy, not
+frequency).  
+![sysans](./assets/sys_give_ans.png)  
+
+This figure shows P(answer | model is correct) for 50 most frequently predicted answers on the VQA validation set (plot is sorted by prediction
+frequency, not accuracy).  
+![anssys](./assets/ans_give_sys.png)
+
 # Sources
 
 - [Vanilla VQA](https://medium.com/ai2-blog/vanilla-vqa-adcaaaa94336)  
