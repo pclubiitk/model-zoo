@@ -4,6 +4,8 @@ from keras.models import Sequential, Model
 from keras.layers import Dense, Activation, Dropout, LSTM, Flatten, Embedding, Concatenate, Input
 import h5py
 
+#############################################
+
 def Word2Vec(embedding_matrix, num_words, embedding_dim, seq_length, dropout_rate):
     
     # Text model
@@ -20,6 +22,8 @@ def Word2Vec(embedding_matrix, num_words, embedding_dim, seq_length, dropout_rat
     model = Model(w2v_input, w2v_dense)
     return model
 
+#############################################
+
 def FromVGG(dropout_rate):
 
     #Image model
@@ -28,6 +32,8 @@ def FromVGG(dropout_rate):
 
     model = Model(vgg_input, vgg_dense)
     return model
+
+##############################################
 
 def VQA(embedding_matrix, num_words, embedding_dim, seq_length, dropout_rate, num_classes):
     

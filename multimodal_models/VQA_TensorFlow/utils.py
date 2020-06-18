@@ -2,6 +2,8 @@ import os
 import requests
 import zipfile
 
+########################################
+
 def extract(url, base, path, name):
     if not os.path.exists(base + "/zips/" + name + ".zip"):
         
@@ -18,6 +20,8 @@ def extract(url, base, path, name):
         
         print("Saved extracted files at " + base + path)
 
+
+#########################################
 
 def get_data(path):
     base = path + "/data"

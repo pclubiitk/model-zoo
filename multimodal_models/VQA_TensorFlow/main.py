@@ -9,6 +9,8 @@ from model import VQA
 from dataloader import read_data, get_val_data, get_metadata, prepare_embeddings
 from utils import get_data
 
+############# Parsing Arguments ##################
+
 parser = argparse.ArgumentParser()
 
 parser.add_argument('--type', type=str, default='train', help = "Whether you want to train or validate, default train")
@@ -21,6 +23,7 @@ parser.add_argument('--weight_path', help = "Relative path to location of saved 
 
 args = parser.parse_args()
 
+##### Setting global variables and file paths #######
 seq_length = 26
 embedding_dim = 300
 
@@ -34,6 +37,8 @@ data_prepro_meta = args.base_path + "/data/image_data/data_prepro.json"
 embedding_matrix_filename = args.base_path + "/data/ckpts/embeddings_%s.h5"%embedding_dim
 save_dest = args.base_path + "/data/model/saved_model.h5"
 
+
+#####################################################
 def get_model(dropout_rate, model_weights_filename, weights_load):
 
     print("Creating Model...")
@@ -49,6 +54,8 @@ def get_model(dropout_rate, model_weights_filename, weights_load):
     
     return model
 
+##################################################
+
 def train(args):
     dropout_rate = 0.5
     train_X, train_y = read_data(data_img, data_prepro, args.data_limit)    
@@ -59,6 +66,8 @@ def train(args):
         os.makedirs(args.base_path + "/data/model")
         
     model.save_weights(save_dest, overwrite=True)
+
+##################################################
 
 def val():
     val_X, val_y, multi_val_y = get_val_data(val_annotations_path, data_img, data_prepro, data_prepro_meta) 
@@ -77,6 +86,8 @@ def val():
         if _ in multi_val_y[i]:
             true_positive += 1
     print("true positive rate: ", np.float(true_positive)/len(pred_classes))
+
+##################################################
 
 if __name__ == "__main__":
 

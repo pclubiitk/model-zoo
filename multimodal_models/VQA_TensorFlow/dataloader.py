@@ -6,12 +6,17 @@ import json
 import h5py
 import os
 
+############################################
+
 def right_align(seq,lengths):
+	# Align the input questions to the right side (pad on left with zeros)
     v = np.zeros(np.shape(seq))
     N = np.shape(seq)[1]
     for i in range(np.shape(seq)[0]):
         v[i][N-lengths[i]:N]=seq[i][0:lengths[i]]
     return v
+
+#############################################
 
 def read_data(data_img, data_prepro, data_limit):
     print("Reading Data...")
@@ -38,6 +43,8 @@ def read_data(data_img, data_prepro, data_limit):
     train_y = to_categorical(ques_data['answers'])[:data_limit, :]
 
     return train_X, train_y
+
+########################################
 
 def get_val_data(val_annotations_path, data_img, data_prepro, data_prepro_meta):
     img_data = h5py.File(data_img, 'r')
@@ -79,11 +86,14 @@ def get_val_data(val_annotations_path, data_img, data_prepro, data_prepro_meta):
 
     return val_X, abs_val_y, multi_val_y
 
+###############################################
 
 def get_metadata(data_prepro_meta):
     meta_data = json.load(open(data_prepro_meta, 'r'))
     meta_data['ix_to_word'] = {str(word):int(i) for i,word in meta_data['ix_to_word'].items()}
     return meta_data
+
+###############################################
 
 def prepare_embeddings(num_words, embedding_dim, metadata, glove_path, train_questions_path, embedding_matrix_filename):
     if os.path.exists(embedding_matrix_filename):
