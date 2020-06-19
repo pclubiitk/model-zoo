@@ -33,13 +33,13 @@ usage: main.py [-h] [--batchSize BATCHSIZE] [--Epochs EPOCHS] [--lr LR]
 optional arguments:
   -h, --help            show this help message and exit
   --batchSize BATCHSIZE
-                        Training batch size
+                        Training batch size, Default=128
   --Epochs EPOCHS       Number of epochs to train for
   --lr LR               Learning Rate. Default=0.1
   --step STEP           Sets the learning rate to the initial LR decayed by
                         momentum every n epochs, Default: n=10
   --start-epoch START_EPOCH
-                        Manual epoch number (useful on restarts)
+                        Manual epoch number
   --cuda                Use cuda?
   --clip CLIP           Clipping Gradients. Default=0.4
   --threads THREADS     Number of threads for data loader to use, Default: 1
