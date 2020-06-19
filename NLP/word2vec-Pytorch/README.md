@@ -2,7 +2,7 @@
 
 ## Usage
 ```
-$ python3 main.py --mode --train
+$ python3 main.py --mode train
 ```
 
 ## Get N Similar Words

@@ -25,10 +25,7 @@ parser.add_argument('--word3', type = str, default = "female", help = "3rd word,
 args = parser.parse_args()
 
 
-with open('text8') as f:
-    text = f.read().split()
-
-tokenize_data = loadData("text8")
+tokenize_data = loadData()
 int_text, word2idx, idx2word, freq, vocab = prepareData(tokenize_data, args.min_freq)
 
 

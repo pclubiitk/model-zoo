@@ -1,10 +1,18 @@
 from collections import Counter
+import zipfile
+import tensorflow as tf
+from six.moves.urllib.request import urlretrieve
 
 def loadData(name):
 
-	with open(name) as f:
-        	text = f.read().split()
-	return text
+	url = 'http://mattmahoney.net/dc/'
+
+	filename, _ = urlretrieve(url + "text8", "text8")
+
+	with zipfile.ZipFile(filename) as f:
+	    data = tf.compat.as_str(f.read(f.namelist()[0])).split()
+  
+	return data
 
 def prepareData(text, min_freq):
 
