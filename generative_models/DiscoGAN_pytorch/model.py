@@ -80,10 +80,10 @@ class Generator(nn.Module):
                 nn.ConvTranspose2d(64 * 4, 64 * 2, 4, 2, 1, bias=False),
                 nn.BatchNorm2d(64 * 2),
                 nn.ReLU(True),
-                nn.ConvTranspose2d(64 * 2,     64, 4, 2, 1, bias=False),
+                nn.ConvTranspose2d(64 * 2, 64, 4, 2, 1, bias=False),
                 nn.BatchNorm2d(64),
                 nn.ReLU(True),
-                nn.ConvTranspose2d(    64,      3, 4, 2, 1, bias=False),
+                nn.ConvTranspose2d(64, 3, 4, 2, 1, bias=False),
                 nn.Sigmoid()
             )
 
