@@ -40,12 +40,6 @@ def main():
         if not torch.cuda.is_available():
             raise Exception("No GPU found or Wrong gpu id, please run without --cuda")
 
-    args.seed = random.randint(1, 10000)
-    print("Random Seed: ", args.seed)
-    torch.manual_seed(args.seed)
-    if cuda:
-        torch.cuda.manual_seed(args.seed)
-
     cudnn.benchmark = True
 
     train_set = prepareDataset("data/train.h5")
