@@ -3,10 +3,6 @@ from tensorflow.python.keras.models import Model
 from tensorflow.python.keras.applications.vgg19 import VGG19
 from utils import subpixel_conv2d,normalize_01,normalize_m11,normalize,denormalize,denormalize_m11
 
-LR_SIZE = 24
-HR_SIZE = 96
-
-
 def upsample(x_in, num_filters):
     x = Conv2D(num_filters, kernel_size=3, padding='same')(x_in)
     x = Lambda(subpixel_conv2d(scale=2))(x)
@@ -49,7 +45,7 @@ def discriminator_block(x_in, num_filters, strides=1, batchnorm=True, momentum=0
         x = BatchNormalization(momentum=momentum)(x)
     return LeakyReLU(alpha=0.2)(x)
 
-def discriminator(num_filters=64):
+def discriminator(num_filters=64,HR_SIZE=96):
     x_in = Input(shape=(HR_SIZE, HR_SIZE, 3))
     x = Lambda(normalize_m11)(x_in)
 
