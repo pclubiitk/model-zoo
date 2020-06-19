@@ -11,6 +11,10 @@ parser = argparse.ArgumentParser()
 
 parser.add_argument('--STEPS', type=int, default=2000,
                     help="No of steps for training: default 2000 ")
+parser.add_argument('--HR_PATCH_SIZE', type=int, default=96,
+                    help="Size of the high resolution patch to use in training. Default: 96")
+parser.add_argument('--UPSCALING', type=int, default=4,
+                    help="How many times do you need to upscale the image. Default: 4")
 parser.add_argument('--PREGENSTEPS', type=int, default=1000,
                     help="No of steps for generator pre training: default 1000 ")
 parser.add_argument('--BATCH_SIZE', type=int, default=128,
@@ -35,13 +39,13 @@ if args.pretrained:
 else:
     train_loader = DIV2K(scale=4, subset='train')
     train_ds = train_loader.dataset(
-        batch_size=args.BATCH_SIZE, random_transform=True, repeat_count=None)
+        batch_size=args.BATCH_SIZE, random_transform=True, repeat_count=None,HR_SIZE=args.HR_PATCH_SIZE,upscale=args.UPSCALING)
     valid_loader = DIV2K(scale=4, subset='valid')
     valid_ds = valid_loader.dataset(
-        batch_size=1, random_transform=False, repeat_count=1)
+        batch_size=1, random_transform=False, repeat_count=1,HR_SIZE=args.HR_PATCH_SIZE,upscale=args.UPSCALING)
 
     generator = generator()
-    discriminator = discriminator()
+    discriminator = discriminator(HR_SIZE=args.HR_PATCH_SIZE)
 
     pre_train(train_ds, valid_ds, steps=args.PREGENSTEPS,
               evaluate_every=1, lr_rate=args.le_pre_gen)
