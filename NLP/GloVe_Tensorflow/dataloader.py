@@ -39,5 +39,5 @@ def tokenized_dataLoader():
     hotel_data = hotel_data[0:100]#you can increase the upper limit depending on your ram size
 
     indv_lines = hotel_data
-    
+
     return tokenizeData(indv_lines)
