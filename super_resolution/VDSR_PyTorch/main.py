@@ -17,12 +17,12 @@ def main():
 
     parser = argparse.ArgumentParser()
 
-    parser.add_argument("--batchSize", type=int, default=128, help="Training batch size")
+    parser.add_argument("--batchSize", type=int, default=128, help="Training batch size. Default 128")
     parser.add_argument("--Epochs", type=int, default=50, help="Number of epochs to train for")
     parser.add_argument("--lr", type=float, default=0.1, help="Learning Rate. Default=0.1")
     parser.add_argument("--step", type=int, default=10,
                         help="Sets the learning rate to the initial LR decayed by momentum every n epochs, Default: n=10")
-    parser.add_argument("--start-epoch", default=1, type=int, help="Manual epoch number (useful on restarts)")
+    parser.add_argument("--start-epoch", default=1, type=int, help="Manual epoch number")
     parser.add_argument("--cuda", action="store_true", help="Use cuda?")
     parser.add_argument("--clip", type=float, default=0.4, help="Clipping Gradients. Default=0.4")
     parser.add_argument("--threads", type=int, default=1, help="Number of threads for data loader to use, Default: 1")
