@@ -10,7 +10,6 @@ $ python3 main.py --style_A
 %run main.py --style_A
 ```
 
-## Help log
 ```bash
 usage: main.py [-h] [--cuda CUDA] [--epoch_size EPOCH_SIZE]
                              [--batch_size BATCH_SIZE]
