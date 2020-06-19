@@ -12,6 +12,7 @@ class DIV2K:
                  caches_dir='.div2k/caches'):
 
         _scales = [2, 4, 8]
+        self.HR_SIZE = HR_SIZE
 
         if scale in _scales:
             self.scale = scale
@@ -39,7 +40,7 @@ class DIV2K:
         ds = tf.data.Dataset.zip((self.lr_dataset(), self.hr_dataset()))
         if random_transform:
             ds = ds.map(lambda lr, hr: random_crop(
-                lr, hr, scale=self.scale), num_parallel_calls=AUTOTUNE)
+                lr, hr, scale=self.scale, hr_crop_size=self.HR_SIZE), num_parallel_calls=AUTOTUNE)
             ds = ds.map(random_rotate, num_parallel_calls=AUTOTUNE)
             ds = ds.map(random_flip, num_parallel_calls=AUTOTUNE)
         ds = ds.batch(batch_size)
@@ -129,7 +130,7 @@ class DIV2K:
 # -----------------------------------------------------------
 
 
-def random_crop(lr_img, hr_img, hr_crop_size=HR_SIZE, scale=2):
+def random_crop(lr_img, hr_img, hr_crop_size=96, scale=2):
     lr_crop_size = hr_crop_size // scale
     lr_img_shape = tf.shape(lr_img)[:2]
 
