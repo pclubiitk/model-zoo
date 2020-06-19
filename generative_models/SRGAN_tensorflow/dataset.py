@@ -7,6 +7,7 @@ class DIV2K:
     def __init__(self,
                  scale=4,
                  subset='train',
+                 HR_SIZE = 96,
                  images_dir='.div2k/images',
                  caches_dir='.div2k/caches'):
 
@@ -128,7 +129,7 @@ class DIV2K:
 # -----------------------------------------------------------
 
 
-def random_crop(lr_img, hr_img, hr_crop_size=96, scale=2):
+def random_crop(lr_img, hr_img, hr_crop_size=HR_SIZE, scale=2):
     lr_crop_size = hr_crop_size // scale
     lr_img_shape = tf.shape(lr_img)[:2]
 
