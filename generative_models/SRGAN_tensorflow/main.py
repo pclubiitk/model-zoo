@@ -37,12 +37,12 @@ if args.pretrained:
     cv2.imwrite('output.jpg', img[0])
 
 else:
-    train_loader = DIV2K(scale=4, subset='train')
+    train_loader = DIV2K(scale=args.UPSCALING, subset='train',HR_SIZE=args.HR_PATCH_SIZE)
     train_ds = train_loader.dataset(
-        batch_size=args.BATCH_SIZE, random_transform=True, repeat_count=None,HR_SIZE=args.HR_PATCH_SIZE,upscale=args.UPSCALING)
-    valid_loader = DIV2K(scale=4, subset='valid')
+        batch_size=args.BATCH_SIZE, random_transform=True, repeat_count=None)
+    valid_loader = DIV2K(scale=args.UPSCALING, subset='valid',HR_SIZE=args.HR_PATCH_SIZE)
     valid_ds = valid_loader.dataset(
-        batch_size=1, random_transform=False, repeat_count=1,HR_SIZE=args.HR_PATCH_SIZE,upscale=args.UPSCALING)
+        batch_size=1, random_transform=False, repeat_count=1)
 
     generator = generator()
     discriminator = discriminator(HR_SIZE=args.HR_PATCH_SIZE)
