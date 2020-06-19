@@ -52,7 +52,7 @@ optional arguments:
 ## Introduction:
 
 <strong>Generative adversarial network</strong> contains the two components: generator and discriminator. The training process is just like zero-sum game, and it can be simply shown in Figure below. 
-<img src="/assets/gan.png"/>
+<img src="./assets/gan.png"/>
 
 For generator, it should generate the image which is just like the real one. On the contrary, the discriminator should distinguish the image is fake or not. During the training, the generator should make itself have more capability to generate image which is more and more like the actual one, and the discriminator should make itself realize the difference with more and more accuracy.
 
@@ -62,17 +62,17 @@ The problem this paper is concerned with is that of unsupervised learning.Author
 
 Let X be a compact metric set (such as the space of images [0, 1]<sup>d</sup>) and let Σ denote the set of all the Borel subsets of X . Let Prob(X) denote the space of probability measures defined on X . We can now define elementary distances and divergences between two distributions P<sub>r</sub>, P<sub>g</sub> ∈ Prob(X ):
 
-<img src="/assets/dis.png"/>
+<img src="./assets/dis.png"/>
 
 For the distance measure of probability distribution, there are a lot of metric can be the choice which are shown in Figure above. The most left one is total variation distance (TV-divergence); the second one is KL-divergence which has been well known in VAE; the third one is JS-divergence.
 <br>The following figure illustrates how apparently simple sequences of probability distributions converge under the<strong>EM distance </strong>but do not converge under the other distances and divergences defined above.
 
-<img src="/assets/example.png"/>
+<img src="./assets/example.png"/>
 
 Example above gives us a case where we can learn a probability distribution over a low dimensional manifold by doing gradient descent on the EM distance. This cannot be done with the other distances and divergences because the resulting loss function is not even continuous.<br>
 The Figure below illustrates this example. The green region is the data distribution of P<sub>0</sub>, and the orange region is the data distribution of P<sub>θ</sub>. In the general case, the two distribution are separated.
 
-<img src="/assets/illustration.png"/>
+<img src="./assets/illustration.png"/>
 
 
 ## Wassertian GAN :
@@ -83,15 +83,15 @@ Neither KL-divergence nor JS-divergence can give the right direction to learn th
 
 *( For proof refer to <a href="https://arxiv.org/abs/1701.07875">Paper</a>)
 
-<img src="/assets/dual form.png"/>
+<img src="./assets/dual form.png"/>
 
 However, During finding the infimum, it’s hard to exhaust the whole possible sample in the joint distribution. By Kantorovich-Rubinstein duality method, we can approximate the problem into the dual format, and just find the supremum. The relation between the two form is shown in Figure above. The only constraint is that the function should be the <em>Lipschitz-1 continuous function</em>.
 
-<img src="/assets/object-wgan.png"/>
+<img src="./assets/object-wgan.png"/>
 
 In the usual GAN, we want to maximize the score of classification. If the image is fake, the discriminator should give it as 0 score; if the image is real one, the 1 score should be gotten. In WGAN, it changes the task of discriminator as regression problem, and Martin renamed it as <strong>critics</strong>. The critics should measure the EM-distance that how many work should spend, and find the maximum case
 
-<img src="/assets/algorithm-wgan.png"/>
+<img src="./assets/algorithm-wgan.png"/>
 
 The training process of WGAN is shown above which is very similar like usual GAN. There are only 4 difference:
 <br>1. The critics will update for multiple times
@@ -99,7 +99,7 @@ The training process of WGAN is shown above which is very similar like usual GAN
 <br>3. We should do weight clipping to satisfy the constraint of Lipschitz continuity
 <br>4. Don’t use momentum-based optimizer (for example, Adam optimizer)
 
-<img src="/assets/loss-dis.png"/>
+<img src="./assets/loss-dis.png"/>
 
 After the experiment by Martin, the WGAN can avoid the problem of <em>gradient vanishment</em>. As you can see in the Figure , the gradient of usual GAN drops to zero and becomes saturate phenomenon. However, <em>EM-distance provides meaningful loss and the model can still learn gradually</em>.
 
@@ -116,13 +116,13 @@ I train model having architecture of DCGAN with default values as follows:
 
 <strong><ins>Generated after 60 epochs on MNIST Dataset</ins></strong>
 
-<img src="/assets/image_gen.png"/>
+<img src="./assets/image_gen.png"/>
 
 <strong><ins>Generator Loss</ins></strong>
-<img src="/assets/gloss.png"/>
+<img src="./assets/gloss.png"/>
 
 <strong><ins>Discriminator Loss</ins></strong>
-<img src="/assets/dloss.png"/>
+<img src="./assets/dloss.png"/>
 
 ## Conclusion:
 
