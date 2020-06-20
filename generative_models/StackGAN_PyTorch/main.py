@@ -130,7 +130,7 @@ STAGE 2
 gen_img64=[]
 for i,data in enumerate(dataloader):
   data[2]=data[2].to(device)
-   z=torch.randn(args.batch_size,args.z_dim).to(device)
+  z=torch.randn(args.batch_size,args.z_dim).to(device)
   gen_img,mean,logvar=netG1(data[2],z) 
   gen_img=gen_img.detach()
   gen_img64.append(gen_img)
