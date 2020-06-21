@@ -61,9 +61,31 @@ SRCNN network is actually not much deep. It uses a standard CNN architecture. We
 *	The low-resolution input is then first upscaled to the desired size using inter-cubic interpolation before inputting it to the SRCNN     network.
 *	We take patches of a particular size from the image and pass them through the network.
 *	Then, standard convolution layers using an activation function are applied which predict the HR version of that patch.
+     ![alt text](https://github.com/shvmshri/model-zoo/blob/master/super_resolution/SRCNN_tensorflow/assets/srcnn.png)
+     
+#### Hyper-Parameters
+* Image_patch _size =33 
+* Learning  rate = 0.0001
+* Scale = 3 
+* Batch_size = 128
+* Epochs = 1500
+* Stride = 14 
+
+#### Loss 
+For super resolution ,the loss function L is the average of mean square error (MSE),taken pixel-wise,for the n training examples.   
+   ![alt text](https://github.com/shvmshri/model-zoo/blob/master/super_resolution/SRCNN_tensorflow/assets/loss_eq.png)  
+where yi is the actual pixel while yi^ is the predicted pixel of an image.
+ 
+#### Result
+The following shows the LR images (input) ,HR images predicted by the network and the original HR images:
 
 
 
 
+#### Plot of loss during training
 
+   ![alt text](https://github.com/shvmshri/model-zoo/blob/master/super_resolution/SRCNN_tensorflow/assets/loss_graph.png)
+   
+### Sources
+ 1. [Review: SRCNN (Super Resolution)](https://medium.com/coinmonks/review-srcnn-super-resolution-3cb3a4f67a7c)
  
