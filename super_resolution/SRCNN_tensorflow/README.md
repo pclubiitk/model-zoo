@@ -22,11 +22,14 @@ optional arguments:
   --Epochs Epochs                                    No of epochs: default 1500
   --Image_patch_size Image_patch_size                size of the patch to be used for training: default 33  
   --BATCH_SIZE BATCH_SIZE                            Batch size, default 128 
-  --Stride stride                                    Stride used when selecting patches of image_patch_size from                                                                              a image:default 14                                                    
+  --Stride stride                                    Stride used when selecting patches of image_patch_size from
+                                                     a image:default 14                                                    
   --lr learning_rate                                 learning rate of the optimizer: default 0.0001 
-  --Scale scale                                      Scale by which a HR image is downscaled to low spatial                                                                                  resolution image and then by  the same scale it is upscaled
+  --Scale scale                                      Scale by which a HR image is downscaled to low spatial 
+                                                     resolution image and then by  the same scale it is upscaled
                                                      using inter-cubic interpolation: default 3                                  
-  --is_training is_training                          decide whether to train the model on a dataset or test the                                                                              pre-trained model: default True
+  --is_training is_training                          decide whether to train the model on a dataset or test the
+                                                     pre-trained model: default True
   --dirname_train dirname_train                      name of the directory where training dataset is stored 
   --dirname_test dirname_test                        name of the directory where testing dataset is stored 
    ```
