@@ -3,7 +3,7 @@ import cv2
 import numpy as np
 import tensorflow as tf
 import argparse
-from utils import load_train
+from utils import load_train,draw_loss_plot
 from model import SRCNN
 from tensorflow.keras.models import  model_from_json
 
