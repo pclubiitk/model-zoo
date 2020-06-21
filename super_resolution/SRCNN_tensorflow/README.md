@@ -77,10 +77,15 @@ For super resolution ,the loss function L is the average of mean square error (M
 where yi is the actual pixel while yi^ is the predicted pixel of an image.
  
 #### Result
-The following shows the LR images (input) ,HR images predicted by the network and the original HR images:
+All the test results are present in the results folder.
+The following shows some of the LR images (input) ,HR images predicted by the network and the original HR images:
 
-
-
+#####  HR image(original)  ,    LR image(input)   ,     HR image(predicted)
+ ![alt text](https://github.com/shvmshri/model-zoo/blob/master/super_resolution/SRCNN_tensorflow/dataset/results/b_a.png)    ![alt text](https://github.com/shvmshri/model-zoo/blob/master/super_resolution/SRCNN_tensorflow/dataset/results/b_blur.png)   ![alt text](https://github.com/shvmshri/model-zoo/blob/master/super_resolution/SRCNN_tensorflow/dataset/results/b_p.png) 
+ 
+#####   HR image(original)  ,    LR image(input)   ,     HR image(predicted)
+ ![alt text](https://github.com/shvmshri/model-zoo/blob/master/super_resolution/SRCNN_tensorflow/dataset/results/w_act.png)  ![alt text](https://github.com/shvmshri/model-zoo/blob/master/super_resolution/SRCNN_tensorflow/dataset/results/w%20_blur.png)  ![alt text](https://github.com/shvmshri/model-zoo/blob/master/super_resolution/SRCNN_tensorflow/dataset/results/w_pred.png) 
+ 
 
 #### Plot of loss during training
 
