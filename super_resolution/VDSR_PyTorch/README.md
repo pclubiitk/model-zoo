@@ -121,12 +121,12 @@ We train our model using  MSE Loss for 50 epochs and appling gradient clipping a
 
 **Ground Truth Image**
 
-![gt](/assets/GT.png)
+![gt](./assets/GT.png)
 
 **4x scaled Input Image**
 
-![input](/assets/Input.png)
+![input](./assets/Input.png)
 
 **Super Resolution Output Image**
 
-![out](/assets/Output.png)
+![out](./assets/Output.png)
