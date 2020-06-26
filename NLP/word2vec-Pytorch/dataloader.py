@@ -3,7 +3,7 @@ import zipfile
 import tensorflow as tf
 from six.moves.urllib.request import urlretrieve
 
-def loadData(name):
+def loadData():
 
 	url = 'http://mattmahoney.net/dc/'
 
