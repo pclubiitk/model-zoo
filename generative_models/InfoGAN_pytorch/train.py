@@ -41,7 +41,7 @@ if __name__ == '__main__':
     # misc
     parser.add_argument('--model_path', type=str,
                         default='trained_model')  # Model Save
-    parser.add_argument('-save_epoch', type=int,
+    parser.add_argument('--save_epoch', type=int,
                         default=5)  # Saving epochs after
 
     args = parser.parse_args()
