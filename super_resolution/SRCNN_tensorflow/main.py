@@ -81,7 +81,3 @@ else:
        cv2.imshow(X_test)
        cv2.imshow(Y_test)
        cv2.imshow(Y_pred)
-     
-
-
- 
