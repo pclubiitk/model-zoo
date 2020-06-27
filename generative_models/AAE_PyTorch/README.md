@@ -57,15 +57,27 @@ I then randomly generated characters from the given posterior, and then linearly
 
 Here are the results of the interpolation-
 
+**0-4**
+
 ![0-4](assets/lin_intpolate%200-4.png)
+
+**0-6**
 
 ![0-6](assets/lin_intpolate%200-6.png)
 
+**1-4**
+
 ![1-4](assets/lin_intpolate%201-4.png)
+
+**1-5**
 
 ![1-5](assets/lin_intpolate%201-5%20(better).png)
 
+**1-7**
+
 ![1-7](assets/lin_intpolate%207-1.png)
+
+**7-8**
 
 ![7-8](assets/lin_intpolate%207-8.png)
 
