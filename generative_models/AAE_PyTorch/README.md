@@ -83,6 +83,18 @@ Here are the results of the interpolation-
 
 (Sorry for the axes, I did not know how to disable them, this was the first image I took)
 
+**7-7 stroke change**
+
+![8-8 stroke](assets/7-7_stroke.png)
+
+**7-5**
+
+![7-5](assets/7-5_stroke.png)
+
+**7-9**
+
+![7-9](assets/7-9_stroke.png)
+
 If you want the weights, they are stored in the same directory. Just load them and utilize the functions in **utils**.
 
 Peace :v:
