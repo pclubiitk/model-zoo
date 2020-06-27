@@ -1,12 +1,14 @@
 import matplotlib.pyplot as plt
 from models import *
+device="cuda:0" if torch.cuda.is_available() else "cpu"
+
 
 def plot_random():
     """
     Plots a random character from the Normal Distribution N[0,5).
     No arguments
     """
-    dec.eval()
+    # dec.eval()
     samp=(torch.randn(1,8)*5).float().to(device)
     plt.imshow(dec(samp).reshape(28,28).squeeze().detach().cpu().numpy())
     return plt.show()
@@ -36,7 +38,7 @@ def interpolate_characters(n,s1,s2,filename=None,cmap=None):
         cmap (String): Custom matplotlib cmap. Defaults to 'Greens'.
     """
     f, axarr = plt.subplots(ncols=n)
-    dec.eval()
+    # dec.eval()
     if cmap is not None:
         plt.set_cmap(cmap)
     else:
