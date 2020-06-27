@@ -1,5 +1,4 @@
 import matplotlib.pyplot as plt
-from main import *
 from models import *
 
 def plot_random():
