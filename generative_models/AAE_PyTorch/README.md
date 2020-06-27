@@ -38,7 +38,7 @@ Adversarial Autoencoders help us in mapping the hidden latent space vector to a 
 
 There can be several choices for the encoder we take, like-
 - **Deterministic** - This is the normal encoder used in a standard autoencoder setup. The only stocasticity lies in the given dataset distribution.
-- **Gaussian Posterior** - This is the one taken from the VAE setup, where the encoder network predicts the mean and variance. A sample is then sampled from ~$\N$($\mu$ , $\sigma$). Thus the stochasticity lies in the randomness of the gaussian distribution and the data distribution here.
+- **Gaussian Posterior** - This is the one taken from the VAE setup, where the encoder network predicts the mean and variance. A sample is then sampled from ![normal distribution](https://render.githubusercontent.com/render/math?math=\N(\mu%20,%20\sigma)). Thus the stochasticity lies in the randomness of the gaussian distribution and the data distribution here.
 
 I have simply used the standard **Deterministic** network, as suggested by the experiments they carried on the MNIST dataset.
 
@@ -51,7 +51,7 @@ There are 3 objectives that should come into picture in the Adversarial Autoenco
 - **Generator loss**, we use this to update the generator network (encoder network here), by making sure generated output lies in the given prior distribution.
 
 # Results
-I trained for a 100 epochs. I set the prior distribution to ~$\N$($0$ , $5$).
+I trained for a 100 epochs. I set the prior distribution to ![](https://render.githubusercontent.com/render/math?math=\N(\0%20,%20\5)).
 
 I then randomly generated characters from the given posterior, and then linearly interpolated them to find the results.
 
