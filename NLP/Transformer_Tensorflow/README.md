@@ -75,8 +75,10 @@ optional arguments:
 * **Model Architecture**:
 
   Transformer consists of the encoder, decoder and a final linear layer. The output of the decoder is the input to the linear layer and its output is returned.
-  
-  ![Transformer](https://github.com/ashishmurali/model-zoo/blob/master/NLP/Transformer_Tensorflow/assets/transformer.png)
+
+<p align="center">
+  <img src="https://github.com/ashishmurali/model-zoo/blob/master/NLP/Transformer_Tensorflow/assets/transformer.png">
+</p>   
   
 * **Encoder**:
 
