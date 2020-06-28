@@ -126,21 +126,31 @@ optional arguments:
 ## Results of our implementation :
 
 * After training we translated the following Portuguese sentence to English and plotted the attention weight of all heads in the 2nd attention block of 4th decoder layer.
-INPUT PORTUGUESE SENTENCE : este é o primeiro livro que eu fiz.
-REAL ENGLISH TRANSLATION : this is the first book i've ever done.
-PREDICTED ENGLISH TRANSLATION : this is the first book that i did .
+
+* **INPUT PORTUGUESE SENTENCE** : este é o primeiro livro que eu fiz.
+* **REAL ENGLISH TRANSLATION** : this is the first book i've ever done.
+* **PREDICTED ENGLISH TRANSLATION** : this is the first book that i did .
 
 ![plot_attention](https://github.com/ashishmurali/model-zoo/blob/master/NLP/Transformer_Tensorflow/assets/plot_attention.png)
 
 * The results after training for 20 epochs :
+
 1. Train Accuracy 
-![](https://github.com/ashishmurali/model-zoo/blob/master/NLP/Transformer_Tensorflow/assets/train_accuracy.png)
+
+![train_accuracy](https://github.com/ashishmurali/model-zoo/blob/master/NLP/Transformer_Tensorflow/assets/train_accuracy.png)
+
 2. Test Accuracy
-![](https://github.com/ashishmurali/model-zoo/blob/master/NLP/Transformer_Tensorflow/assets/test_accuracy.png)
+
+![test_accuracy](https://github.com/ashishmurali/model-zoo/blob/master/NLP/Transformer_Tensorflow/assets/test_accuracy.png)
+
 3. Train Loss
-![](https://github.com/ashishmurali/model-zoo/blob/master/NLP/Transformer_Tensorflow/assets/train_loss.png)
+
+![train_loss](https://github.com/ashishmurali/model-zoo/blob/master/NLP/Transformer_Tensorflow/assets/train_loss.png)
+
 4. Test Loss
-![](https://github.com/ashishmurali/model-zoo/blob/master/NLP/Transformer_Tensorflow/assets/test_loss.png)
+
+![test_loss](https://github.com/ashishmurali/model-zoo/blob/master/NLP/Transformer_Tensorflow/assets/test_loss.png)
+
 
 > **_NOTE:_** The above graphs were plotted using tensorboard
 
