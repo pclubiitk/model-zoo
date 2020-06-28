@@ -100,15 +100,19 @@ optional arguments:
 
 * **Scaled Dot Product Attention**
 
-  ![Scaled Attention](https://github.com/ashishmurali/model-zoo/blob/master/NLP/Transformer_Tensorflow/assets/scaled_attention.png)
-  
+  <p align="center">
+  <img src="https://github.com/ashishmurali/model-zoo/blob/master/NLP/Transformer_Tensorflow/assets/scaled_attention.png">
+  </p>   
+   
   The attention function used by the transformer takes three inputs: Q (query), K (key), V (value). The equation used to calculate the attention weights is:
   
   ![attention](https://github.com/ashishmurali/model-zoo/blob/master/NLP/Transformer_Tensorflow/assets/attention.png)
   
 * **Multi-head attention**
 
-  ![Multi Head Attention](https://github.com/ashishmurali/model-zoo/blob/master/NLP/Transformer_Tensorflow/assets/multi_head_attention.png)
+  <p align="center">
+  <img src="https://github.com/ashishmurali/model-zoo/blob/master/NLP/Transformer_Tensorflow/assets/multi_head_attention.png">
+  </p>  
   
   Each multi-head attention block gets three inputs; Q (query), K (key), V (value). These are put through linear (Dense) layers and split up into multiple heads.
   The scaled_dot_product_attention defined above is applied to each head (broadcasted for efficiency). An appropriate mask must be used in the attention step. The   attention output for each head is then concatenated (using tf.transpose, and tf.reshape) and put through a final Dense layer.
