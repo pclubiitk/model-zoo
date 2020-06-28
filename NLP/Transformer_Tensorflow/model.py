@@ -1,9 +1,5 @@
-import tensorflow_datasets as tfds
 import tensorflow as tf
-import datetime
-import time
 import numpy as np
-import matplotlib.pyplot as plt
 
 def get_angles(pos, i, d_model):
   angle_rates = 1 / np.power(10000, (2 * (i//2)) / np.float32(d_model))

@@ -1,8 +1,4 @@
-import tensorflow_datasets as tfds
 import tensorflow as tf
-import datetime
-import time
-import numpy as np
 import matplotlib.pyplot as plt
 
 def plot_attention_weights(attention, sentence, result, layer,tokenizer_en,tokenizer_pt):

@@ -1,9 +1,4 @@
-import tensorflow_datasets as tfds
 import tensorflow as tf
-import datetime
-import time
-import numpy as np
-import matplotlib.pyplot as plt
 
 class Load_Data:
     def __init__(self,MAX_LENGTH,tokenizer_en,tokenizer_pt):

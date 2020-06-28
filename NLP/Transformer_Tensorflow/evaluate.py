@@ -1,9 +1,4 @@
-import tensorflow_datasets as tfds
 import tensorflow as tf
-import datetime
-import time
-import numpy as np
-import matplotlib.pyplot as plt
 
 from utils import plot_attention_weights
 from model import create_masks
