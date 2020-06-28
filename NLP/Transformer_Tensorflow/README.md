@@ -65,67 +65,84 @@ optional arguments:
   models because it does not imply any Recurrent Networks (GRU, LSTM, etc.). The core idea behind the Transformer model is self-attention—the ability to attend 
   to different positions of the input sequence to compute a representation of that sequence. 
   
-  A transformer model handles variable-sized input using stacks of self-attention layers instead of RNNs or CNNs. This general architecture has a number of advantages:
+  A transformer model handles variable-sized input using stacks of self-attention layers instead of RNNs or CNNs. This general architecture has a number of         advantages:
 
   * It make no assumptions about the temporal/spatial relationships across the data. This is ideal for processing a set of objects (for example, StarCraft units).
   * Layer outputs can be calculated in parallel, instead of a series like an RNN.
   * Distant items can affect each other's output without passing through many RNN-steps, or convolution layers (see Scene Memory Transformer for example).
   * It can learn long-range dependencies. This is a challenge in many sequence tasks.
 
-* **Model Architecture**
+* **Model Architecture**:
 
   Transformer consists of the encoder, decoder and a final linear layer. The output of the decoder is the input to the linear layer and its output is returned.
   
   ![Transformer](https://github.com/ashishmurali/model-zoo/blob/master/NLP/Transformer_Tensorflow/assets/transformer.png)
+  
+* **Encoder**:
 
-* Results
-  * Good looking images MNIST-numbers and human faces. (Grayscale, rather homogeneous datasets.)
-  * Not so good looking images of CIFAR-10. (Color, rather heterogeneous datasets.)
+  The input is put through an embedding which is summed with the positional encoding. The output of this summation is the input to the encoder layers. 
+  Each encoder layer consists of sublayers:
+  * Multi-head attention (with padding mask)
+  * Point wise feed forward networks.
+  Each of these sublayers has a residual connection around it followed by a layer normalization. Residual connections help in avoiding the vanishing gradient       problem in deep networks.The output of the encoder is the input to the decoder.
 
+* **Decoder**:
 
+  The target is put through an embedding which is summed with the positional encoding. The output of this summation is the input to the decoder layers. 
+  The output   of the decoder is the input to the final linear layer.
+  Each decoder layer consists of sublayers:
+  * Masked multi-head attention (with look ahead mask and padding mask)
+  * Multi-head attention (with padding mask). V (value) and K (key) receive the encoder output as inputs. Q (query) receives the output from the masked 
+    multi-head attention sublayer.
+  * Point wise feed forward networks
+
+* **Scaled Dot Product Attention**
+
+  ![Scaled Attention](https://github.com/ashishmurali/model-zoo/blob/master/NLP/Transformer_Tensorflow/assets/scaled_attention.png)
+  
+  The attention function used by the transformer takes three inputs: Q (query), K (key), V (value). The equation used to calculate the attention weights is:
+  
+  ![attention](https://github.com/ashishmurali/model-zoo/blob/master/NLP/Transformer_Tensorflow/assets/attention.png)
+  
+* **Multi-head attention**
+
+  ![Multi Head Attention](https://github.com/ashishmurali/model-zoo/blob/master/NLP/Transformer_Tensorflow/assets/multi_head_attention.png)
+  
+  Each multi-head attention block gets three inputs; Q (query), K (key), V (value). These are put through linear (Dense) layers and split up into multiple heads.
+  The scaled_dot_product_attention defined above is applied to each head (broadcasted for efficiency). An appropriate mask must be used in the attention step. The   attention output for each head is then concatenated (using tf.transpose, and tf.reshape) and put through a final Dense layer.
+  
 -------------------------
+
 ## Our implementation :
 
-
-
-* We have implemented the GAN model with the following architectures :
-
-* Generator Architecture
-
-  ![Generator](https://github.com/ashishmurali/model-zoo/blob/master/generative_models/VanillaGAN_TensorFlow/assets/generator_architecture.png)
-  
-  
-* Discriminator Architecture 
-
-  ![Discriminator](https://github.com/ashishmurali/model-zoo/blob/master/generative_models/VanillaGAN_TensorFlow/assets/discriminator_architecture.png)
-
-
+* We have implemented a transformer model to translate Portuguese to English.
+* The default hyperparameters used in the model are similar to those given in the 'Attention is All You Need' paper.
+* We used [TFDS](https://www.tensorflow.org/datasets) to load the [Portugese-English translation dataset](https://github.com/neulab/word-embeddings-for-nmt)
+  from the [TED Talks Open Translation Project](https://www.ted.com/participate/translate).
+  This dataset contains approximately 50000 training examples, 1100 validation examples, and 2000 test examples.
+* We used the Adam optimizer with a custom learning rate scheduler according to the formula in the paper. 
+* By default we are training the model for 20 epochs. After training we can translate the input Portuguese sentence to English and plot the attention weight of     any decoder layer.
 
 ## Results of our implementation :
 
+* After training we translated the following Portuguese sentence to English and plotted the attention weight of all heads in the 2nd attention block of 4th decoder layer.
+INPUT PORTUGUESE SENTENCE : este é o primeiro livro que eu fiz.
+REAL ENGLISH TRANSLATION : this is the first book i've ever done.
+PREDICTED ENGLISH TRANSLATION : this is the first book that i did .
 
+![plot_attention](https://github.com/ashishmurali/model-zoo/blob/master/NLP/Transformer_Tensorflow/assets/plot_attention.png)
 
-* The following GIF shows how our model has improved generating digits after 400 epochs of training
+* The results after training for 20 epochs :
+1. Train Accuracy 
+![](https://github.com/ashishmurali/model-zoo/blob/master/NLP/Transformer_Tensorflow/assets/train_accuracy.png)
+2. Test Accuracy
+![](https://github.com/ashishmurali/model-zoo/blob/master/NLP/Transformer_Tensorflow/assets/test_accuracy.png)
+3. Train Loss
+![](https://github.com/ashishmurali/model-zoo/blob/master/NLP/Transformer_Tensorflow/assets/train_loss.png)
+4. Test Loss
+![](https://github.com/ashishmurali/model-zoo/blob/master/NLP/Transformer_Tensorflow/assets/test_loss.png)
 
-  ![gif](https://github.com/ashishmurali/model-zoo/blob/master/generative_models/VanillaGAN_TensorFlow/assets/gan.gif)
-  
-* The image generated by our model after the first epoch
-
-  ![epoch1](https://github.com/ashishmurali/model-zoo/blob/master/generative_models/VanillaGAN_TensorFlow/assets/gan_image%201.png) 
-  
-* The image generated by our model after the 400th epoch
-
-  ![epoch400](https://github.com/ashishmurali/model-zoo/blob/master/generative_models/VanillaGAN_TensorFlow/assets/gan_image%20400.png)  
- 
-* The Generator loss for our model 
-
-  ![gloss](https://github.com/ashishmurali/model-zoo/blob/master/generative_models/VanillaGAN_TensorFlow/assets/generator_loss.png)
-  
-* The Discriminator loss for our model 
-
-  ![dloss](https://github.com/ashishmurali/model-zoo/blob/master/generative_models/VanillaGAN_TensorFlow/assets/discriminator_loss.png)
-
-
+> **_NOTE:_** The above graphs were plotted using tensorboard
 
 ## Sources:
 * [Transformer model for language understanding](https://www.tensorflow.org/tutorials/text/transformer)
