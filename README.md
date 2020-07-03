@@ -6,29 +6,6 @@ The models are broadly categorised into the folders [Generative](/generative_mod
 
 ## Usage
 
-The zoo comes with its own [Julia project](https://julialang.github.io/Pkg.jl/latest/#Using-someone-else's-project-1), which lists the packages you need to run the models. You can run the models by opening Julia in the project folder and running
-
-```
-using Pkg; Pkg.activate("."); Pkg.instantiate()
-```
-
-to install all needed packages. Then you can run the model code with `include("script.jl")` or by running the script line-by-line. More details are available in the README for each model.
-
-Models may also be run with NVIDIA GPU support, if you have a CUDA installed. Most models will have this capability by default, pointed at by calls to `gpu` in the model code.
-
-### Gitpod Online IDE
-
-Each model can be used in [Gitpod](https://www.gitpod.io/), just [open the repository by gitpod](https://gitpod.io/#https://github.com/FluxML/model-zoo)
-
-#### Consideration:
-
-* Based on [Gitpod's policies](https://www.gitpod.io/pricing/), free access is limited.
-* All of your work will place in the Gitpod's cloud.
-* It isn't an officially maintained feature.
-
-## Contributing
-
-We welcome contributions of new models. They should be in a folder with a project and manifest file, to pin all relevant packages, as well as a README to explain what the model is about, how to run it, and what results it achieves (if applicable). If possible models should not depend directly on GPU functionality, but ideally should be CPU/GPU agnostic.
 
 ## Model Listing
 
