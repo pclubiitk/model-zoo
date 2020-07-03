@@ -7,9 +7,8 @@
 * pickle
 * cuda(*highly recommended*)
 ## Usage 
-* Run the following command : 
-      <pre><code>python train.py --num_epoch <num_of_epochs> --batch_size <batch_size> --num_workers <num_workers> --lrD <learning_rate_discriminator> --lrG <learning_rate_generator> --beta1 <beta1_adam_param> --beta2 <beta2_adam_param> --recog_weight <recogniser_weight> --save_epoch <model_checkpoints>
-      </code></pre>
+```bash
+python train.py --num_epoch <num_of_epochs> --batch_size <batch_size> --num_workers <num_workers> --lrD <learning_rate_discriminator> --lrG <learning_rate_generator> --beta1 <beta1_adam_param> --beta2 <beta2_adam_param> --recog_weight <recogniser_weight> --save_epoch <model_checkpoints>
 > ***NOTE** : Use python3 instead in case of Linux/Mac .*
 * Arguments
   * -num_epoch : Default: 50, number of epochs.
