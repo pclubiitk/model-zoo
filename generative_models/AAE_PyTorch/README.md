@@ -1,10 +1,10 @@
 # Adversarial Autoencoder
 ## Usage
-```bash
-> python main.py --arguments
+```
+> python main.py --help
 ```
 The arguments are as follows-
-```bash
+```
 usage: main.py [-h] [--directory DIRECTORY] [--epochs EPOCHS]
                [--batch_size BATCH_SIZE] [--gen_lr GEN_LR] [--dis_lr DIS_LR]
                [--download DOWNLOAD]
