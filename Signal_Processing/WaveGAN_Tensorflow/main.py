@@ -27,13 +27,13 @@ if __name__ == "__main__":
                         help="No of epochs for training: default 50 ")
     parser.add_argument('--batch_size', type=int, default=64,
                         help="Batch size to use while training. paper suggests 64. Default: 64")
-    parser.add_argument('--lr', type=int, default=1e-4,
+    parser.add_argument('--lr', type=float, default=1e-4,
                         help="Learning rate for training,Default: 1e-4 ")
-    parser.add_argument('--beta1', type=int, default=0.5,
+    parser.add_argument('--beta1', type=float, default=0.5,
                         help="We are using Adam optimizer, as suggested in the paper. this is the beta 1 paprameter for the Adam optimizer. Default: 0.5")
-    parser.add_argument('--beta2', type=int, default=0.9,
+    parser.add_argument('--beta2', type=float, default=0.9,
                         help="We are using Adam optimizer, as suggested in the paper. this is the beta 2 paprameter for the Adam optimizer. Default: 0.9")
-    parser.add_argument('--d_per_g', type=int, default=1e-4,
+    parser.add_argument('--d_per_g', type=int, default=5,
                         help="No. of updates discriminator per generator update. Default: 5 ")
     parser.add_argument('--gp_weight', type=int, default=10,
                         help="GP Weight for Wgan-GP (lambda). Default: 10")

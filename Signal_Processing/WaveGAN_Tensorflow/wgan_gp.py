@@ -47,7 +47,7 @@ class WGAN(tf.keras.Model):
 
         # Get the batch size
         batch_size = tf.shape(real_output)[0]
-        for i in range(self.d_steps):
+        for i in range(int(self.d_steps)):
             # Get the latent vector
             random_latent_vectors = tf.random.normal(
                 shape=(batch_size, self.latent_dim)
