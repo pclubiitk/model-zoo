@@ -1,6 +1,6 @@
 import tensorflow as tf
 from tensorflow.keras import layers
-from utils import phaseshuffle
+from utils import apply_phaseshuffle
 
 def Generator(kernel_len=(5,5),dim=64,channels=1):
     model = tf.keras.Sequential(name='generator')
