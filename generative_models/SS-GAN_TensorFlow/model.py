@@ -1,12 +1,7 @@
 import numpy as np
-from numpy import expand_dims
-from numpy import ones
-from numpy import zeros
-from numpy import asarray
-from numpy.random import randn
-from numpy.random import randint
+
 import keras
-from keras.layers import UpSampling2D ,Reshape, Conv2D , Dense ,Input , Lambda, BatchNormalization , LeakyReLU , Conv2DTranspose , Flatten , Dropout , Activation 
+from keras.layers import Reshape,LeakyReLU ,  Conv2D , Dense ,Input , Lambda , Conv2DTranspose , Flatten , Dropout , Activation 
 from keras.models import Model
 from keras.datasets.mnist import load_data
 from keras import backend
