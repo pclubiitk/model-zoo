@@ -28,7 +28,7 @@ args = parse_args()
 epochs = args.epochs
 dataset = args.dataset
 batch_size = args.batch_size
-outdir = os.path.join(args.outdir, dataset, "")
+outdir = os.path.join(args.outdir, dataset)
 lr = args.learning_rate
 latent_size = args.latent_size
 
