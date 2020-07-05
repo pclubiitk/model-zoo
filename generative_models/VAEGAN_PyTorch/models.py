@@ -1,6 +1,6 @@
 import torch
 import torch.nn as nn
-
+from torch.autograd import Variable
 #weight initialisation with mean=0 and stddev=0.02
 def weights_init(m):
     classname = m.__class__.__name__
