@@ -29,7 +29,7 @@ def main():
     parser.add_argument("--momentum", default=0.9, type=float, help="Momentum, Default: 0.9")
     parser.add_argument("--weight-decay", default=1e-4, type=float, help="Weight decay, Default: 1e-4")
     parser.add_argument("--pretrained", default='', type=str, help="Path to pretrained model")
-    parser.add_argument("--train_data", required=True, type=str, help="Path to preprocessed train dataset")
+    parser.add_argument("--train_data", default="train.h5", type=str, help="Path to preprocessed train dataset")
     parser.add_argument("--test_data", default="./assets/", type=str, help="Path to file containing test images")
     args = parser.parse_args()
 
@@ -42,7 +42,7 @@ def main():
 
     cudnn.benchmark = True
 
-    train_set = prepareDataset("data/train.h5")
+    train_set = prepareDataset(args.train_data)
     train_data = DataLoader(dataset=train_set, num_workers=args.threads, batch_size=args.batchSize, shuffle=True)
 
     model = VDSR()
@@ -113,9 +113,12 @@ def eval( model, args):
     out_y = out_y * 255.
     out_y[out_y > 255.] = 255.
     out_y[out_y < 0] = 0
-
+    out_y = out_y[0,:,:]
+    
+    psnr_org = computePSNR(im_gt_y, im_b_y)
     psnr_score = computePSNR(im_gt_y, out_y)
     print(" PSNR score for our predicted image is ", psnr_score)
+    print(" Improvement from blur image is ",psnr_score-psnr_org)
 
     out_img = colorize(out_y, im_b_ycbcr)
     im_gt = Image.fromarray(im_gt_ycbcr, "YCbCr").convert("RGB")
@@ -129,7 +132,7 @@ def eval( model, args):
     plt.savefig("Input.png")
     plt.show()
     
-    plt.imshow(im_h)
+    plt.imshow(out_y)
     plt.savefig("img.png")
     plt.show()
 
