@@ -114,9 +114,7 @@ for epoch in range(args.epochs1):
     optimG1.step()
     if i%10==0:
       print("Epoch [%d/%d] Step[%d/%d] G_loss:%f D_loss:%f KL: %f"%(epoch+1,args.epochs1,i+1,len(dataloader),lossG.item(),lossD.item(),kl.item()) )
-      gen,_,_=netG(data[2],z_fixed)
-      gen=gen.detach()
-      show_and_save("%d"%(i) ,make_grid((gen*0.5+0.5).cpu(),8))
+      
 
 
 '''
