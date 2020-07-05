@@ -93,8 +93,8 @@ def train(start_epoch, dataloader, optimizer, model, criterion, Epoch, args):
             save_checkpoint(model, epoch)
 
 def eval( model, args):
-    im_gt = Image.open(args.test_data+"GT.png").convert("RGB")
-    im_b = Image.open(args.test_data+"Input.png").convert("RGB")
+    im_gt = Image.open(args.test_data+"butterfly_GT.bmp").convert("RGB")
+    im_b = Image.open(args.test_data+"butterfly_GT_scale_4.bmp").convert("RGB")
     # Convert the images into YCbCr mode and extraction the Y channel (for PSNR calculation)
     im_gt_ycbcr = np.array(im_gt.convert("YCbCr"))
     im_b_ycbcr = np.array(im_b.convert("YCbCr"))
