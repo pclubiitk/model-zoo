@@ -132,7 +132,7 @@ def eval( model, args):
     plt.savefig("Input.png")
     plt.show()
     
-    plt.imshow(out_y)
+    plt.imshow(out_img)
     plt.savefig("img.png")
     plt.show()
 
