@@ -65,8 +65,8 @@ def prepare_data(path):
     order = np.random.permutation(count)
     data = np.reshape(np.array(data),(count,1,41,41))
     label = np.reshape(np.array(label), (count,1,41,41))
-    data = np.take(data, order, axis=3)
-    label = np.take(label, order, axis=3)
+    data = np.take(data, order, axis=0)
+    label = np.take(label, order, axis=0)
     
     return data, label
 
