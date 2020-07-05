@@ -112,7 +112,7 @@ for epoch in range(args.epochs1):
     optimG1.zero_grad()
     lossG.backward()
     optimG1.step()
-    if i%10==0:
+    if i%10==9:
       print("Epoch [%d/%d] Step[%d/%d] G_loss:%f D_loss:%f KL: %f"%(epoch+1,args.epochs1,i+1,len(dataloader),lossG.item(),lossD.item(),kl.item()) )
       
 
@@ -164,5 +164,5 @@ for epoch in range(args.epochs2):
     lossG.backward()
     optimG2.step()
     
-    if i%10==0:
+    if i%10==9:
       print("Epoch [%d/%d] Step[%d/%d] G_loss:%f D_loss:%f KL: %f"%(epoch+1,args.epochs2,i+1,len(dataloader),lossG.item(),lossD.item(),kl.item()) )
