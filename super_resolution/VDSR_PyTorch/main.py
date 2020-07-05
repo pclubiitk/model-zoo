@@ -87,7 +87,7 @@ def train(start_epoch, dataloader, optimizer, model, criterion, Epoch, args):
             optimizer.step()
 
             if i % 100 == 0:
-                print("Epoch[{}]({}/{}): Loss: {:.10f}".format(epoch, i, len(dataloader), loss.data[0]))
+                print("Epoch[{}]({}/{}): Loss: {:.10f}".format(epoch, i, len(dataloader), loss.item()))
 
         if epoch % 2 == 0:
             save_checkpoint(model, epoch)
