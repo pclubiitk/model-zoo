@@ -23,6 +23,8 @@ def main():
                      help='set 1 when you use pre-trained models'),
     parser.add_argument('--img_size', type=int, default=96,
                        help='set the input image size of frame'),
+    parser.add_argument('--data', type=str, default='data',
+                       help='set the path for the direcotry containing dataset'),
     parser.add_argument('--channel', type=int, default=3,
                        help='set the no. of channel of the frame'),
     parser.add_argument('--hidden', type=int, default=100,
