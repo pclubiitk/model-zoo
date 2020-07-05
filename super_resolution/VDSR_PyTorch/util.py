@@ -36,7 +36,7 @@ def computePSNR(gt, pred, border=1):
     rmse = math.sqrt(np.mean((pred-gt)**2))
     if rmse == 0:
         return 100
-    return 10*math.log10(255*255/rmse)
+    return 20*math.log10(255.0/rmse)
 
 def colorize(y, ycbcr):
     img = np.zeros((y.shape[0], y.shape[1], 3), np.uint8)
