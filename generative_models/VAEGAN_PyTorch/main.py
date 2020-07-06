@@ -11,7 +11,9 @@ import time
 from collections import OrderedDict
 import logging
 import argparse
-
+import numpy as np
+import matplotlib.pyplot as plt 
+from torchvision.utils import make_grid , save_image
 from dataloader import dataloader
 from models import VAE_GAN,Discriminator
 from utils import show_and_save,plot_loss
@@ -25,7 +27,7 @@ parser.add_argument('--image_size', type=int, default=64)
 parser.add_argument('--latent_dim', type=int, default=128)
 # run config
 parser.add_argument('--ndata', type=str, required=True)
-parser.add_argument('--root', type=str, default=../data)
+parser.add_argument('--root', type=str, default='../data')
 # optim config
 parser.add_argument('--epochs', type=int, default=25)
 parser.add_argument('--batch_size', type=int, default=64)
