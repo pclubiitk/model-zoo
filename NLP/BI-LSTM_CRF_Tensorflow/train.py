@@ -6,7 +6,7 @@ import tensorflow_addons as tf_ad
 import os
 import numpy as np
 import datetime
-import argsparse
+import argparse
 from dataloader import load_data
 
 ######################################################################################################
@@ -47,7 +47,7 @@ print("hidden_num:{}, vocab_size:{}, label_size:{}".format(args.hidden_num, len(
 
 #######################################################################################################
 
-model = NerModel(hidden_num = args.hidden_num, vocab_size = len(word2id), label_size= len(tag2id), embedding_size = args.embedding_size)
+model = NerModel(hidden_num = args.hidden_num, vocab_size = len(word2id)+1, label_size= len(tag2id), embedding_size = args.embedding_size)
 optimizer = tf.keras.optimizers.Adam(args.lr)
 
 

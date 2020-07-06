@@ -15,7 +15,7 @@ $ python3 main.py --epochs 40000
 
 ```
 usage: main.py [-h] [--batch-size BATCH_SIZE] [--epochs EPOCHS]
-               [--pre-train PRE_TRAIN] [--img_size IMG_SIZE]
+               [--pre-train PRE_TRAIN] [--img_size IMG_SIZE] [--data DATA] 
                [--channel CHANNEL] [--hidden HIDDEN] [--dc DC] [--de DE]
                [--lr LR] [--beta BETA] [--trained_path TRAINED_PATH] [--T T]
 
@@ -29,6 +29,7 @@ optional arguments:
   --pre-train PRE_TRAIN
                         set 1 when you use pre-trained models
   --img_size IMG_SIZE   set the input image size of frame
+  --data DATA           set the path for the direcotry containing dataset
   --channel CHANNEL     set the no. of channel of the frame
   --hidden HIDDEN       set the hidden layer size for gru
   --dc DC               set the size of motion vector
