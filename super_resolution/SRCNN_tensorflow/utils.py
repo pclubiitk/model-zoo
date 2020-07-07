@@ -41,4 +41,3 @@ def draw_loss_plot(history):
     plt.xlabel('epoch')
     plt.legend(['train', 'validation'], loc='upper left')
     plt.show()
-
