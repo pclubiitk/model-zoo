@@ -4,8 +4,6 @@ This repository contains implementations of various deep learning research paper
 
 The models are broadly categorised into the folders [Generative](/generative_models) (e.g. various generative models), [NLP](/NLP) (e.g. various recurrent neural networks (RNNs) and natural language processing (NLP) models), [Image Classification](/image_classification) (e.g. various CNN models to classify images), [Object Detection](/object_detection) , [Video Classification](/Video_Classification), [Multimodal](/multimodal_models) , [Super resolution](/super_resolution) , [3D Computer Vision](/vision3d) . See the READMEs of respective models for more information.
 
-## Usage
-
 
 ## Model Listing
 
@@ -43,3 +41,4 @@ The models are broadly categorised into the folders [Generative](/generative_mod
   * VDSR [PyTorch](super_resolution/VDSR_PyTorch)
 * 3D Computer Vision
   * 3DGAN [PyTorch](vision3d/3DGAN_PyTorch)
+ 
