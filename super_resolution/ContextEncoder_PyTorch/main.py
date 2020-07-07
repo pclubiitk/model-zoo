@@ -88,7 +88,7 @@ model_config = config['model_config']
 dataset_name = config['data_config']['dataset_name']
 nc = model_config['in_channels']
 mask_size = config['data_config']['mask_size']
-lamda_adv = run_config['lamda_adv']
+lamda_adv = optim_config['lamda_adv']
 
 #get dataloaders
 dataloader,test_dataloader = get_loader(optim_config['train_batch_size'],run_config['test_batch_size'],mask_size,dataset_name,run_config['num_workers'])
