@@ -67,7 +67,8 @@ def log_images(writer,dataloader,mask_size,device,generator,current_step):
   clone_sample = masked_samples.clone().cpu()
   clone_sample[:,:,i:i+mask_size,i:i+mask_size] = gene_image
   for i in range(clone_sample.size(0)):
-    clone_sample[i] = inv_transform(clone_sample[i])  
+    clone_sample[i] = inv_transform(clone_sample[i])
+    samples[i] = inv_transform(samples[i])  
 
   grid_image = make_grid(clone_sample,nrow=4)
   grid_samples = make_grid(samples,nrow=4)

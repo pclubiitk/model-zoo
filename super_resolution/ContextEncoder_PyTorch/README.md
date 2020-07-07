@@ -2,6 +2,18 @@
 
 ## Usage
 
+
+### NOTE: if you are using the celeba dataset,follow these instructions to install the dataset.
+
+```python
+!mkdir data && wget https://s3-us-west-1.amazonaws.com/udacity-dlnfd/datasets/celeba.zip 
+with zipfile.ZipFile("celeba.zip","r") as zip_ref:
+  zip_ref.extractall("data/")
+```
+Start tensor board with :
+```python
+tensorboard --logdir=summaries
+```
 Clone the repo with :
  ```git clone link-to-repo```
 
@@ -48,6 +60,8 @@ optional arguments:
 In a Colab Notebook, use 
 ```python
 !git clone link-to-repo
+%load_ext tensorboard
+%tensorboard --logdir #insert writer_directory argument (default is runs)
 %run main.py #Insert arguments here 
 ```
 ## References 

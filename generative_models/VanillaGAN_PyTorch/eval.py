@@ -18,7 +18,7 @@ to_image = transforms.Compose([transforms.ToPILImage(),transforms.Resize((500,50
 def make_gif(generator,images,outdir):
 
     imgs = [np.array(to_image(i)) for i in images]
-    imageio.mimsave("/results/progress.png", imgs)
+    imageio.mimsave(outdir+"progress.gif", imgs)
     return
 
 def show_generator(generator,noise):
