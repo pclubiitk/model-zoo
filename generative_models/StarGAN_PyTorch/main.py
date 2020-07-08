@@ -75,8 +75,8 @@ def classification_loss(logit,target):
     """
     return F.binary_cross_entropy_with_logits(logit.float(),target.float(),size_average=False)/logit.float().size(0)
 
-D_=Discriminator().to(device)
-G_=Generator().to(device)
+D_=Discriminator(c_dims).to(device)
+G_=Generator(c_dims).to(device)
 optimD=optim.Adam(D_.parameters(),lr=args.dis_lr,betas=(0.5,0.999))
 optimG=optim.Adam(G_.parameters(),lr=args.gen_lr,betas=(0.5,0.999))
 lambda1=lambda epoch: (-(1e-5)*epoch + 2e-4)

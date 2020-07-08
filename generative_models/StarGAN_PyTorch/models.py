@@ -1,6 +1,5 @@
 import torch
 import torch.nn as nn
-from main import c_dims
 
 class Discriminator(nn.Module):
     """
@@ -16,7 +15,7 @@ class Discriminator(nn.Module):
         cls (tensor, shape(c_dims,)): Returns class-wise probability, similar to that of AC-GAN (Goodfellow et.al).
     """
 
-    def __init__(self):
+    def __init__(self,c_dims):
         super().__init__()
         self.input_layer=nn.Sequential(
             nn.Conv2d(in_channels=3,out_channels=64,kernel_size=(4,4),stride=2,padding=1),
@@ -71,7 +70,7 @@ class Generator(nn.Module):
     Output:
         Image Tensor (-1,3,128,128)
     """
-    def __init__(self):
+    def __init__(self,c_dims):
         super().__init__()
         self.down_sample=nn.Sequential(
             nn.Conv2d(in_channels=3+c_dims,out_channels=64,kernel_size=(7,7),stride=1,padding=3,bias=False),
