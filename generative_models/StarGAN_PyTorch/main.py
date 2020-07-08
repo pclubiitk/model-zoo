@@ -91,7 +91,7 @@ d_losses=[]
 warnings.filterwarnings("ignore")
 for epoch in range(args.epochs):
     
-    for i,data in enumerate(tqdm(data_loader)):
+    for i,data in enumerate(tqdm.tqdm(data_loader)):
         real_image, orig_labels = data[0].to(device),data[1].to(device)
         running_g_loss=.0
         running_d_loss=.0
