@@ -119,6 +119,7 @@ for epoch in range(args.epochs1):
       show_and_save("%d"%(i) ,make_grid((gen*0.5+0.5).cpu(),8))
 
 
+
 '''
 STAGE 2
 '''

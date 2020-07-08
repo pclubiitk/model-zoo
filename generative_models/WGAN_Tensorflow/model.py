@@ -9,12 +9,12 @@ class Discriminator(tf.keras.Model):
 		self.dropout2 = tf.keras.layers.Dropout(0.3)
 		self.flatten = tf.keras.layers.Flatten()
 		self.fc1 = tf.keras.layers.Dense(1)
-                self.batch_norm = tf.keras.layers.BatchNormalization()
-        
+		self.batch_norm = tf.keras.layers.BatchNormalization()
+
 	def call(self, x):
 		x = self.dropout1(self.conv1(x))
 		x = self.dropout2(self.conv2(x))
-                x = self.batch_norm(x)
+		x = self.batch_norm(x)
 		x = self.flatten(x)
 		x = self.fc1(x)
 		return x

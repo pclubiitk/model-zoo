@@ -38,7 +38,7 @@ def parse_args():
     parser.add_argument('--num_workers', type=int, default=2)
     parser.add_argument('--k_steps', type=int, default=1)
     parser.add_argument('--test_size', type=int, default=64)
-    parser.add_argument('--outdir', type=str, required=True,default='.')
+    parser.add_argument('--outdir', type=str,default='./results/')
     
     args = parser.parse_args()
 

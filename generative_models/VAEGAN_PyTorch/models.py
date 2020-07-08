@@ -1,7 +1,10 @@
 import torch
 import torch.nn as nn
-
+from torch.autograd import Variable
 #weight initialisation with mean=0 and stddev=0.02
+
+device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
+
 def weights_init(m):
     classname = m.__class__.__name__
     if classname.find('Conv') != -1:
