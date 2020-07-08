@@ -38,7 +38,7 @@ class generator(nn.Module):
             nn.Sigmoid(),
         )
     
-    def forward(self,x,vectorSize):
+    def forward(self,x):
         bsize=x.size(0)
         x=x.view(bsize,self.vectorSize,1,1,1)
         x=self.layer1(x)
