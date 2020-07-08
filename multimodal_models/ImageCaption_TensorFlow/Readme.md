@@ -53,57 +53,53 @@ Using TensorFlow backend.
 
 ## Introduction
 
-Visual Question Answering (VQA) is the task of answering questions about a given piece of visual content such as an image, video or infographic. It involves answering questions about visual content requires a variety of skills include recognizing entities and objects, reasoning about their interactions with each other, both spatially and temporally, reading text, parsing audio, interpreting abstract and graphical illustrations as well as using external knowledge not directly present in the given content.
+A quick glance at an image is sufficient for a human to point out and describe an immense amount of details about the visual scene. However, this remarkable ability has proven to be an elusive task for our visual recognition models.The primary challenge towards this goal is in the design of a model that is rich enough to simultaneously reason about contents of images and their representation in the domain of natural language. Additionally, the model should be free of assumptions about specific hard-coded templates, rules or categories and instead rely on learning from the training data.
 
-It is a combination of Natural Language Processing and Computer Vision, enabling our model to inpterpret the questions posed by the user and also search for the answers in the input picture.  
+The model used is a combination of Natural Language Processing and Computer Vision, enabling our model to inpterpret the image and give a description of what is happening in it. This alignment model is based on a novel combination of Convolutional Neural Networks over image regions, bidirectional Recurrent Neural Networks over sentences, and a structured objective that aligns the two modalities through a multimodal embedding. We then describe a Multimodal Recurrent Neural Network architec- ture that uses the inferred alignments to learn to generate novel descriptions of image regions. 
 
-![Egs](https://miro.medium.com/max/552/1*jLshTllNrGvpXjJWkSDFSQ.png)
+An excellent dscription of the method and functioning is given here:
+[https://towardsdatascience.com/image-captioning-with-keras-teaching-computers-to-describe-pictures-c88a46a311b8]
 
-While seemingly an easy task for humans, VQA affords several challenges to AI systems spanning the fields of natural language processing, computer vision, audio processing, knowledge representation and reasoning. Over the past few years, the advent of deep learning, availability of large datasets to train VQA models as well as the hosting of a number of benchmarking contests have contributed to a surge of interest in VQA amongst researchers in the above disciplines.
+While seemingly an easy task for humans, extracting Visual-Semantic Alignments affords several challenges to AI systems spanning the fields of natural language processing, computer vision, knowledge representation and reasoning.Just prior to the recent development of Deep Neural Networks this problem was inconceivable even by the most advanced researchers in Computer Vision. But with the advent of Deep Learning this problem can be solved very easily if we have the required dataset.
 
-One of the early and popular datasets for this task was the VQA-v1 dataset. The VQA-v1 dataset is a very large dataset consisting of two types of images: natural images (referred to as real images) as well as synthetic images (referred to as abstract scenes) and comes in two answering modalities: multiple choice question answering (the task of selecting the right answer amongst a set of choices) as well as open ended question answering (the task of generating an answer with an open ended vocabulary).  
+Let’s see few applications where a solution to this problem can be very useful.
+* Self driving cars — Automatic driving is one of the biggest challenges and if we can properly caption the scene around the car, it can give a boost to the self driving system
+* Aid to the blind — We can create a product for the blind which will guide them travelling on the roads without the support of anyone else. 
+* CCTV cameras are everywhere today, but along with viewing the world, if we can also generate relevant captions, then we can raise alarms as soon as there is some malicious activity going on somewhere. 
+* Automatic Captioning can help, make Google Image Search as good as Google Search.
 
-The real images fraction of the VQA-v1 dataset consists of over 200,000 natural images sourced from the MS-COCO dataset, a large scale dataset of images used to benchmark tasks such as object detection, segmentation and image captioning. Each image is paired with 3 questions written down by crowdsourced annotators.  
-
-The dataset contains a variety of question types such as: What color, What kind, Why, How many, Is the, etc. To account for potential disagreements between humans for some questions, as well as account for crowd sourcing noise, each question is accompanied by 10 answers.  
-
-Given an image and a question, the goal of a VQA system is to produce an answer that matches those provided by human annotators. For the open ended answering modality, the evaluation metric used is:  
-
-__accuracy__ =min(# annotator answers matching the generated answer/3, 1)  
-
-The intuition behind this metric is as follows:  
-If a system generated answer matches one produced by at least 3 unique annotators, it gets a maximum score of 1 on account of producing a popular answer. If it generates an answer that isn’t present amongst the 10 candidates, it gets a score of 0, and it is assigned a fractional score if it produces an answer that is deemed rare. If the denominator 3 is lowered, wrong and noisy answers in the dataset (often present due to annotation noise) will receive a high credit. Conversely, if it is raised towards 10, a system producing the right answer may only receive partial credit, if the answer choices consist of synonyms or happen to contain a few noisy answers.
 
 ## Implementation
 
 Our implementation, which is the standard and best implementation described by the authors of the VGQ paper uses Image embeddings from a pretrained VGG net and using the word encodings by passing the GloVe word embeddings of the input words through 2 layers of LSTM In contrast to averaging, using an LSTM preserves information regarding the order of the words in the question and leads to an improved VQA accuracy.  
-The other possible variants of VQA are  
-![Model](https://miro.medium.com/max/1104/1*OULUt5c9t_MvGMWLmnPGTA.png)
+### Data Preprocessing - Images
+We need to convert every image into a fixed sized vector which can then be fed as input to the neural network. For this purpose, we opt for transfer learning by using the InceptionV3 model (Convolutional Neural Network) created by Google Research.
+### Data Preprocessing - Captioning
+We will predict the caption word by word. Thus, we need to encode each word into a fixed sized vector. Stating simply, we will represent every unique word in the vocabulary by an integer (index). Then we will map the every word (index) to a 200-long vector and for this purpose,using Glove Pretrained Embeddings
+### Model architecture
+
+
 
 We use the following default configuration: 
 - Pretrained VGG Activations of VQA input images
 - 2 Layers of LSTMs which follows pretrained GloVe word embeddings of input texts
 - Concatenation of the outputs of the NLP and Vision parts into a single dense layer.
 
-![sysans](./assets/acc.png)
-![sysans](./assets/loss.png)
+![4](./assets/acc.png)
+![4](./assets/loss.png)
 ## Results
 
-Here are some of the bad results model.  
+
+##### Here are some of the best results: 
+![4](./assets/good2.png)  
+![4](./assets/good3.png)  
+![4](./assets/good4.png) 
+
+##### But sometimes it may output some bad outputs  
 
 
-![sysans](./assets/bad1.png)  
-![sysans](./assets/bad2.png)  
-![sysans](./assets/bad3.png)  
-![sysans](./assets/good1.png)  
-![sysans](./assets/good2.png)  
-![sysans](./assets/good3.png)  
+![4](./assets/bad.png)  
+![4](./assets/bad2.png)  
+![4](./assets/bad3.png)  
 
-This figure shows P(answer | model is correct) for 50 most frequently predicted answers on the VQA validation set (plot is sorted by prediction
-frequency, not accuracy).  
-![anssys](./assets/ans_giv_sys.png)
-
-# Sources
-
-- [Vanilla VQA](https://medium.com/ai2-blog/vanilla-vqa-adcaaaa94336)  
 
