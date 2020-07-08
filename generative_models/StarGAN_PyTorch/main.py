@@ -44,6 +44,7 @@ parser.add_argument('--selected_attrs', '--list', nargs='+', help='selected attr
 args = parser.parse_args()
 
 c_dims=len(args.selected_attrs)
+num_epochs=args.epochs
 
 transform=transforms.Compose([
     transforms.RandomHorizontalFlip(p=0.5),
