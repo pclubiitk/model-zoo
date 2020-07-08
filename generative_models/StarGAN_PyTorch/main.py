@@ -99,7 +99,7 @@ for epoch in range(args.epochs):
         # Training discriminator
         optimG.zero_grad(),G_.zero_grad()
         optimD.zero_grad(),D_.zero_grad()
-        target_labels=fakeLabels(orig_labels.size(0))
+        target_labels=fakeLabels(orig_labels.size(0)).to(device)
         D_src_real,D_cls_real=D_(real_image)
 
         pred=G_(real_image,target_labels)
@@ -117,7 +117,7 @@ for epoch in range(args.epochs):
         if (i+1)%args.d_times==0:
             D_src_real,D_cls_real=D_(real_image)
             
-            target_labels=fakeLabels(orig_labels.size(0))
+            target_labels=fakeLabels(orig_labels.size(0)).to(device)
             pred=G_(real_image,target_labels)
             D_src_pred,D_cls_pred=D_(pred)
 
