@@ -40,7 +40,7 @@ dataset=ModelNet10GAN(filename=args.filename,dir=args.directory)
 # loading dataset into Dataloader
 data_loader=loader.DataLoader(dataset, batch_size=args.batch_size)
 
-G_=generator().to(device)
+G_=generator(args.latent_dim).to(device)
 D_=discriminator().to(device)
 
 num_epochs=args.epochs
