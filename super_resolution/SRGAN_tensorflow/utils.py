@@ -1,4 +1,5 @@
 import numpy as np
+import cv2
 import tensorflow as tf
 DIV2K_RGB_MEAN = np.array([0.4488, 0.4371, 0.4040]) * 255
 
@@ -20,7 +21,7 @@ def evaluate(model, dataset):
     psnr_values = []
     for lr, hr in dataset:
         sr = resolve(model, lr)
-        cv2.imwrite("img.jpg", sr[0])
+        #cv2.imwrite("img.jpg", sr[0])
         psnr_value = psnr(hr, sr)[0]
         psnr_values.append(psnr_value)
     return tf.reduce_mean(psnr_values)

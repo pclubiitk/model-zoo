@@ -8,7 +8,7 @@ from tensorflow.keras.optimizers.schedules import PiecewiseConstantDecay
 from tensorflow.keras.applications.vgg19 import preprocess_input
 import tensorflow as tf
 import datetime,time
-from model import vgg
+from model import vgg as VGG
 
 # Used in content_loss
 mean_squared_error = tf.keras.losses.MeanSquaredError()
@@ -39,7 +39,7 @@ def content_loss(vgg,hr, sr):
 def train(generator, discriminator, train_ds, valid_ds, steps=2000, lr_rate=1e-4):
     generator_optimizer = Adam(learning_rate=lr_rate)
     discriminator_optimizer = Adam(learning_rate=lr_rate)
-    vgg = vgg()
+    vgg = VGG()
 
     pls_metric = tf.keras.metrics.Mean()
     dls_metric = tf.keras.metrics.Mean()
