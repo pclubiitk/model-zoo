@@ -67,7 +67,7 @@ for epoch in range(num_epochs):
 
         # Train D
 
-        real_data=data.to(device)
+        real_data=data.to(device).float()
         noise=torch.normal(torch.zeros(bSize, 200), 
                              torch.ones(bSize, 200) * .33).to(device)
         fake_data=G_(noise)
