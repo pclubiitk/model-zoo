@@ -27,8 +27,8 @@ parser.add_argument('--directory', type=str, default='./')
 
 parser.add_argument('--epochs', type=int, default=10000)
 parser.add_argument('--batch_size', type=int, default=50)
-parser.add_argument('--gen-lr', type=float, default=0.0025)
-parser.add_argument('--dis-lr', type=float, default=0.00001)
+parser.add_argument('--gen_lr', type=float, default=0.0025)
+parser.add_argument('--dis_lr', type=float, default=0.00001)
 parser.add_argument('--threshold', type=float, default=0.8)
 
 parser.add_argument('--filename', type=str, default='monitor.npy.gz')
@@ -44,8 +44,8 @@ G_=generator().to(device)
 D_=discriminator().to(device)
 
 num_epochs=args.epochs
-optimizerD=optim.Adam(D_.parameters(),lr=args.dis-lr,betas=(0.5,0.999))
-optimizerG=optim.Adam(G_.parameters(),lr=args.gen-lr,betas=(0.5,0.999))
+optimizerD=optim.Adam(D_.parameters(),lr=args.dis_lr,betas=(0.5,0.999))
+optimizerG=optim.Adam(G_.parameters(),lr=args.gen_lr,betas=(0.5,0.999))
 
 # Lists to store d_losses and g_losses.
 G_losses=[]
