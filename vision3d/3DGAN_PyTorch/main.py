@@ -5,6 +5,7 @@ import numpy as np
 import matplotlib.pyplot as plt
 from torch.autograd import Variable
 import torch.utils.data as loader
+import torch.optim as optim
 
 import os
 import time
