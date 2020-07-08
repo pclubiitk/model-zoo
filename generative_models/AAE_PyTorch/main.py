@@ -7,8 +7,8 @@ import torch.nn as nn
 import torch.nn.functional as F
 import torchvision.transforms as transforms
 import torch.utils.data as loader
-from models
-from utils
+import models
+import utils
 import warnings
 
 device="cuda:0" if torch.cuda.is_available() else "cpu"
