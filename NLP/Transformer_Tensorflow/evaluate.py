@@ -3,7 +3,6 @@ import tensorflow as tf
 from utils import plot_attention_weights
 from model import create_masks
 
-
 def evaluate(inp_sentence,tokenizer_en,tokenizer_pt,MAX_LENGTH,transformer):
   start_token = [tokenizer_pt.vocab_size]
   end_token = [tokenizer_pt.vocab_size + 1]
