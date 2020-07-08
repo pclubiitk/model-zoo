@@ -45,6 +45,8 @@ args = parser.parse_args()
 
 c_dims=len(args.selected_attrs)
 num_epochs=args.epochs
+lamb_cls=args.lam_cls
+lamb_rec=10
 
 transform=transforms.Compose([
     transforms.RandomHorizontalFlip(p=0.5),
