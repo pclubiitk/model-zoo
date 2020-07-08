@@ -54,7 +54,7 @@ transform=transforms.Compose([
 ])
 dataset=CelebA(root=args.directory ,attributes=args.selected_attrs,transform=transform,download=args.download)
 
-data_loader=loader.DataLoader(dataset,batch_size=args.batchsize)
+data_loader=loader.DataLoader(dataset,batch_size=args.batch_size)
 
 def fakeLabels(lth):
     """
