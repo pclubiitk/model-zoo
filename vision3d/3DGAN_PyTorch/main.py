@@ -4,6 +4,7 @@ import torchvision.transforms as transforms
 import numpy as np
 import matplotlib.pyplot as plt
 from torch.autograd import Variable
+import torch.utils.data as loader
 
 import os
 import time
