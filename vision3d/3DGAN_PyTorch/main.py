@@ -40,12 +40,12 @@ dataset=ModelNet10GAN(filename=args.filename,dir=args.directory)
 # loading dataset into Dataloader
 data_loader=loader.DataLoader(dataset, batch_size=args.batch_size)
 
+G_=generator().to(device)
+D_=discriminator().to(device)
+
 num_epochs=args.epochs
 optimizerD=optim.Adam(D_.parameters(),lr=args.dis-lr,betas=(0.5,0.999))
 optimizerG=optim.Adam(G_.parameters(),lr=args.gen-lr,betas=(0.5,0.999))
-
-G_=generator().to(device)
-D_=discriminator().to(device)
 
 # Lists to store d_losses and g_losses.
 G_losses=[]
