@@ -1,6 +1,6 @@
 import torch
 import torch.nn as nn
-
+from main import c_dims
 
 class Discriminator(nn.Module):
     """
