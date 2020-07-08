@@ -35,7 +35,6 @@ def create_discriminator(learning_rate,beta_1):
     discriminator.add(LeakyReLU(0.2))
     discriminator.add(Dropout(0.3))
 
-
     discriminator.add(Dense(units=512))
     discriminator.add(LeakyReLU(0.2))
     discriminator.add(Dropout(0.3))
