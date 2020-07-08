@@ -20,6 +20,7 @@ class ModelNet10GAN(Dataset):
             download (boolean): Set to True if you want to download. 
                 Default=False.
         """
+        self.filename=filename
         self.dir=dir
         self.download=download
         self.transform=transform
@@ -33,7 +34,7 @@ class ModelNet10GAN(Dataset):
         return (self.arr.shape[0]-1)
 
     def _check_exists(self):
-        return (os.path.exists(self.dir+filename))
+        return (os.path.exists(self.dir+self.filename))
 
     def __getitem__(self, ind):
         """
