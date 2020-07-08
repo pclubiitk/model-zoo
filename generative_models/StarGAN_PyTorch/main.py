@@ -90,6 +90,8 @@ if num_epochs>=10:
 g_losses=[]
 d_losses=[]
 
+num_intervals=5
+
 warnings.filterwarnings("ignore")
 for epoch in range(args.epochs):
     
