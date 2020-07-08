@@ -38,7 +38,7 @@ parser.add_argument('--download', help='Argument to download dataset. Set to Tru
 parser.add_argument('--eval_idx', help='Index of image you want to run evaluation on.', type=int, default=0)
 # parser.add_argument('--eval_attr', '--list', nargs='+', help='Attributes you want to translate the eval image to.',
 #                         default=[0,0,1,0,1])
-parser.add_argument('--attrs', '--list', nargs='+', help='selected attributes for the CelebA dataset', 
+parser.add_argument('--selected_attrs', '--list', nargs='+', help='selected attributes for the CelebA dataset', 
                         default=['Black_Hair', 'Blond_Hair', 'Brown_Hair', 'Male', 'Young'])
 
 args = parser.parse_args()
