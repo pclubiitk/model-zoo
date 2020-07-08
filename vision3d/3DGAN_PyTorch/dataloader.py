@@ -11,7 +11,7 @@ class ModelNet10GAN(Dataset):
     Custom dataset for training a 3D-GAN, without using a variational autoencoder.
     I have not implemented download of dataset. I don't know how to download using python script (too lazy to find out).
     """
-    def __init__(self,filename, dir="./", download=False):
+    def __init__(self,filename, dir="./", download=False,transform=None):
         """
         Args:
             filename (string): Filename of dataset, like - "modelnet10.npy.gz"
