@@ -5,6 +5,7 @@ import torch.optim as optim                 # For all Optimization algorithms, S
 import torchvision.datasets as datasets     # Has standard datasets we can import in a nice way
 import torchvision.transforms as transforms # Transformations we can perform on our dataset
 from torch.utils.data import DataLoader     # Gives easier dataset managment and creates mini batches
+from utils import *
 
 import argparse
 parser = argparse.ArgumentParser()
@@ -26,6 +27,7 @@ num_epochs = args.num_epochs
 image_size = 64
 features_d = 128
 features_g = 128
+channels_img = 1
 
 device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 
@@ -51,6 +53,7 @@ criterion = nn.BCELoss()
 
 real_label = 1
 fake_label = 0
+fixed_noise = torch.randn(batch_size, channels_noise, 1, 1).to(device)
 
 img_list = []
 G_losses = []
@@ -100,11 +103,10 @@ for epoch in range(num_epochs):
                 fake = netG(fixed_noise).detach().cpu()
             img_list.append(torchvision.utils.make_grid(fake, padding=2, normalize=True))
    
+with torch.no_grad():
+    fake = netG(fixed_noise)
+    compare_img(data,fake)         # compare generated imgs with real mnist images
 
-
-from utils import compare_img , plot_loss , animation
 plot_loss(G_losses,D_losses)   # visualise losses vs iterations
-compare_img(data,fake)         # compare generated imgs with real mnist images
-animation(img_list)            # visualise generated images on a fixed noise at intervals
 
 
