@@ -7,6 +7,7 @@ from tensorflow.keras.optimizers import Adam
 from tensorflow.keras.optimizers.schedules import PiecewiseConstantDecay
 from tensorflow.keras.applications.vgg19 import preprocess_input
 import tensorflow as tf
+from utils import evaluate
 import datetime,time
 
 def pre_train(generator, train_dataset, valid_dataset, steps, evaluate_every=1,lr_rate=1e-4):
