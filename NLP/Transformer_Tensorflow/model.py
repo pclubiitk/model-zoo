@@ -5,7 +5,6 @@ def get_angles(pos, i, d_model):
   angle_rates = 1 / np.power(10000, (2 * (i//2)) / np.float32(d_model))
   return pos * angle_rates
 
-
 def positional_encoding(position, d_model):
   angle_rads = get_angles(np.arange(position)[:, np.newaxis],
                           np.arange(d_model)[np.newaxis, :],
@@ -19,17 +18,14 @@ def positional_encoding(position, d_model):
     
   return tf.cast(pos_encoding, dtype=tf.float32)
 
-
 def create_padding_mask(seq):
   seq = tf.cast(tf.math.equal(seq, 0), tf.float32)
 
   return seq[:, tf.newaxis, tf.newaxis, :] 
 
-
 def create_look_ahead_mask(size):
   mask = 1 - tf.linalg.band_part(tf.ones((size, size)), -1, 0)
   return mask  
-
 
 def create_masks(inp, tar):
   enc_padding_mask = create_padding_mask(inp)
@@ -42,6 +38,7 @@ def create_masks(inp, tar):
   
   return enc_padding_mask, combined_mask, dec_padding_mask
 
+##### SCALED DOT PRODUCT ATTENTION #####
 
 def scaled_dot_product_attention(q, k, v, mask):
 
@@ -59,6 +56,7 @@ def scaled_dot_product_attention(q, k, v, mask):
 
   return output, attention_weights  
 
+##### MULTI HEAD ATTENTION #####
 
 class MultiHeadAttention(tf.keras.layers.Layer):
 
@@ -102,7 +100,6 @@ class MultiHeadAttention(tf.keras.layers.Layer):
         
     return output, attention_weights
 
-
 def point_wise_feed_forward_network(d_model, dff):
   return tf.keras.Sequential([
       tf.keras.layers.Dense(dff, activation='relu'),  
@@ -136,7 +133,6 @@ class EncoderLayer(tf.keras.layers.Layer):
     out2 = self.layernorm2(out1 + ffn_output)  
     
     return out2
-
 
 class Encoder(tf.keras.layers.Layer):
   def __init__(self, num_layers, d_model, num_heads, dff, input_vocab_size,
@@ -186,8 +182,7 @@ class DecoderLayer(tf.keras.layers.Layer):
     self.dropout1 = tf.keras.layers.Dropout(rate)
     self.dropout2 = tf.keras.layers.Dropout(rate)
     self.dropout3 = tf.keras.layers.Dropout(rate)
-    
-    
+        
   def call(self, x, enc_output, training, 
            look_ahead_mask, padding_mask):
 
@@ -205,7 +200,6 @@ class DecoderLayer(tf.keras.layers.Layer):
     out3 = self.layernorm3(ffn_output + out2)  
     
     return out3, attn_weights_block1, attn_weights_block2
-
 
 class Decoder(tf.keras.layers.Layer):
   def __init__(self, num_layers, d_model, num_heads, dff, target_vocab_size,
