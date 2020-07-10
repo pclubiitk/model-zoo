@@ -4,6 +4,8 @@ import torchvision.transforms as transforms
 import numpy as np
 import matplotlib.pyplot as plt
 from torch.autograd import Variable
+import torch.utils.data as loader
+import torch.optim as optim
 
 import os
 import time
@@ -25,8 +27,8 @@ parser.add_argument('--directory', type=str, default='./')
 
 parser.add_argument('--epochs', type=int, default=10000)
 parser.add_argument('--batch_size', type=int, default=50)
-parser.add_argument('--gen-lr', type=float, default=0.0025)
-parser.add_argument('--dis-lr', type=float, default=0.00001)
+parser.add_argument('--gen_lr', type=float, default=0.0025)
+parser.add_argument('--dis_lr', type=float, default=0.00001)
 parser.add_argument('--threshold', type=float, default=0.8)
 
 parser.add_argument('--filename', type=str, default='monitor.npy.gz')
@@ -38,12 +40,12 @@ dataset=ModelNet10GAN(filename=args.filename,dir=args.directory)
 # loading dataset into Dataloader
 data_loader=loader.DataLoader(dataset, batch_size=args.batch_size)
 
-num_epochs=args.epochs
-optimizerD=optim.Adam(D_.parameters(),lr=args.dis-lr,betas=(0.5,0.999))
-optimizerG=optim.Adam(G_.parameters(),lr=args.gen-lr,betas=(0.5,0.999))
-
-G_=generator().to(device)
+G_=generator(args.latent_dim).to(device)
 D_=discriminator().to(device)
+
+num_epochs=args.epochs
+optimizerD=optim.Adam(D_.parameters(),lr=args.dis_lr,betas=(0.5,0.999))
+optimizerG=optim.Adam(G_.parameters(),lr=args.gen_lr,betas=(0.5,0.999))
 
 # Lists to store d_losses and g_losses.
 G_losses=[]
@@ -65,7 +67,7 @@ for epoch in range(num_epochs):
 
         # Train D
 
-        real_data=data.to(device)
+        real_data=data.to(device).float()
         noise=torch.normal(torch.zeros(bSize, 200), 
                              torch.ones(bSize, 200) * .33).to(device)
         fake_data=G_(noise)

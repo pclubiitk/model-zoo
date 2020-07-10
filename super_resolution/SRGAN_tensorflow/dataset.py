@@ -95,7 +95,7 @@ class DIV2K:
         return [os.path.join(images_dir, self._lr_image_file(image_id)) for image_id in self.image_ids]
 
     def _lr_image_file(self, image_id):
-        return f'{image_id:04}x{self.scale}bicubic.png'
+        return f'{image_id:04}x{self.scale}.png'
 
     def _hr_images_dir(self):
         return os.path.join(self.images_dir, f'DIV2K_{self.subset}_HR')

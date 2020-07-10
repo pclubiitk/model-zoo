@@ -38,12 +38,15 @@ parser.add_argument('--download', help='Argument to download dataset. Set to Tru
 parser.add_argument('--eval_idx', help='Index of image you want to run evaluation on.', type=int, default=0)
 # parser.add_argument('--eval_attr', '--list', nargs='+', help='Attributes you want to translate the eval image to.',
 #                         default=[0,0,1,0,1])
-parser.add_argument('--attrs', '--list', nargs='+', help='selected attributes for the CelebA dataset', 
+parser.add_argument('--selected_attrs', '--list', nargs='+', help='selected attributes for the CelebA dataset', 
                         default=['Black_Hair', 'Blond_Hair', 'Brown_Hair', 'Male', 'Young'])
 
 args = parser.parse_args()
 
 c_dims=len(args.selected_attrs)
+num_epochs=args.epochs
+lamb_cls=args.lam_cls
+lamb_rec=10
 
 transform=transforms.Compose([
     transforms.RandomHorizontalFlip(p=0.5),
@@ -54,7 +57,7 @@ transform=transforms.Compose([
 ])
 dataset=CelebA(root=args.directory ,attributes=args.selected_attrs,transform=transform,download=args.download)
 
-data_loader=loader.DataLoader(dataset,batch_size=args.batchsize)
+data_loader=loader.DataLoader(dataset,batch_size=args.batch_size)
 
 def fakeLabels(lth):
     """
@@ -75,8 +78,8 @@ def classification_loss(logit,target):
     """
     return F.binary_cross_entropy_with_logits(logit.float(),target.float(),size_average=False)/logit.float().size(0)
 
-D_=Discriminator().to(device)
-G_=Generator().to(device)
+D_=Discriminator(c_dims).to(device)
+G_=Generator(c_dims).to(device)
 optimD=optim.Adam(D_.parameters(),lr=args.dis_lr,betas=(0.5,0.999))
 optimG=optim.Adam(G_.parameters(),lr=args.gen_lr,betas=(0.5,0.999))
 lambda1=lambda epoch: (-(1e-5)*epoch + 2e-4)
@@ -87,10 +90,12 @@ if num_epochs>=10:
 g_losses=[]
 d_losses=[]
 
+num_intervals=5
+
 warnings.filterwarnings("ignore")
 for epoch in range(args.epochs):
     
-    for i,data in enumerate(tqdm.notebook.tqdm(data_loader)):
+    for i,data in enumerate(tqdm.tqdm(data_loader)):
         real_image, orig_labels = data[0].to(device),data[1].to(device)
         running_g_loss=.0
         running_d_loss=.0
@@ -98,7 +103,7 @@ for epoch in range(args.epochs):
         # Training discriminator
         optimG.zero_grad(),G_.zero_grad()
         optimD.zero_grad(),D_.zero_grad()
-        target_labels=fakeLabels(orig_labels.size(0))
+        target_labels=fakeLabels(orig_labels.size(0)).to(device)
         D_src_real,D_cls_real=D_(real_image)
 
         pred=G_(real_image,target_labels)
@@ -116,7 +121,7 @@ for epoch in range(args.epochs):
         if (i+1)%args.d_times==0:
             D_src_real,D_cls_real=D_(real_image)
             
-            target_labels=fakeLabels(orig_labels.size(0))
+            target_labels=fakeLabels(orig_labels.size(0)).to(device)
             pred=G_(real_image,target_labels)
             D_src_pred,D_cls_pred=D_(pred)
 

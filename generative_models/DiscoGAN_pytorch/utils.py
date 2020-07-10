@@ -2,8 +2,6 @@ import os
 import cv2
 import numpy as np
 import pandas as pd
-from scipy.misc import imresize
-import scipy.io
 
 celebA_path = './celeba/'
 

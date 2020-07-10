@@ -25,9 +25,9 @@ parser.add_argument('--dropout_rate', type = float, default = 0.1, help = "Dropo
 parser.add_argument('--beta_1', type = float, default = 0.9, help = "Exponential decay rate for 1st moment")
 parser.add_argument('--beta_2', type = float, default = 0.98, help = "Exponential decay rate for 2nd moment")
 parser.add_argument('--input', type = str, default = '.', help = "Input sentence in portuguese")
+parser.add_argument('--real_translation', type = str, default = '.', help = "Real translation of input sentence in English")
 parser.add_argument('--outdir', type = str, default = '.', help = "Directory in which to store data")
 parser.add_argument('--plot', type = str, default = 'decoder_layer1_block2', help = "Decoder layer and block whose attention weights are to be plotted")
-
 
 args = parser.parse_args()
 
@@ -46,6 +46,7 @@ beta_1 = args.beta_1
 beta_2 = args.beta_2
 
 input_sentence = args.input
+real_translation = args.real_translation
 plot = args.plot
 
 #### SETUP INPUT PIPELINE ####
@@ -174,7 +175,6 @@ def test_step(inp, tar):
   test_loss(loss)
   test_accuracy(tar_real, predictions)
 
-
 for epoch in range(EPOCHS):
   start = time.time()
   
@@ -207,6 +207,7 @@ for epoch in range(EPOCHS):
   train_accuracy.reset_states()
   test_accuracy.reset_states()
 
-  #### TRANSLATE PORTUGUESE TO ENGLISH ####
+#### TRANSLATE PORTUGUESE TO ENGLISH ####
 
-  translate(input_sentence,tokenizer_en,tokenizer_pt,MAX_LENGTH,transformer,plot=plot)
+translate(input_sentence,tokenizer_en,tokenizer_pt,MAX_LENGTH,transformer,plot=plot)
+print ("Real translation: {}".format(real_translation))

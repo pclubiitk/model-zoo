@@ -17,8 +17,13 @@ NOTE: on Colab Notebook use following command:
 ### Help Log
 ```
 
-usage: main.py [-h] [--EPOCHS EPOCHS] [--num_layers NUM_LAYERS] [--d_model D_MODEL] [--dff DFF] [--num_heads NUM_HEADS] [--BUFFER_SIZE BUFFER_SIZE] [--BATCH_SIZE BATCH_SIZE]
-               [--MAX_LENGTH MAX_LENGTH] [--dropout_rate DROPOUT_RATE] [--beta_1 BETA_1] [--beta_2 BETA_2] [--input INPUT] [--outdir OUTDIR] [--plot PLOT]
+usage: main.py [-h] [--EPOCHS EPOCHS] [--num_layers NUM_LAYERS]
+               [--d_model D_MODEL] [--dff DFF] [--num_heads NUM_HEADS]
+               [--BUFFER_SIZE BUFFER_SIZE] [--BATCH_SIZE BATCH_SIZE]
+               [--MAX_LENGTH MAX_LENGTH] [--dropout_rate DROPOUT_RATE]
+               [--beta_1 BETA_1] [--beta_2 BETA_2] [--input INPUT]
+               [--real_translation REAL_TRANSLATION] [--outdir OUTDIR]
+               [--plot PLOT]
 
 optional arguments:
   -h, --help            show this help message and exit
@@ -40,8 +45,11 @@ optional arguments:
   --beta_1 BETA_1       Exponential decay rate for 1st moment
   --beta_2 BETA_2       Exponential decay rate for 2nd moment
   --input INPUT         Input sentence in portuguese
+  --real_translation REAL_TRANSLATION
+                        Real translation of input sentence in English
   --outdir OUTDIR       Directory in which to store data
-  --plot PLOT           Decoder layer and block whose attention weights are to be plotted
+  --plot PLOT           Decoder layer and block whose attention weights are to
+                        be plotted
                         
 ```
 

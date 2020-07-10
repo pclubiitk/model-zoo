@@ -10,6 +10,7 @@ from utils import *
 from model import *
 from download import CelebA
 import scipy
+import imageio
 from progressbar import ETA, Bar, Percentage, ProgressBar
 
 parser = argparse.ArgumentParser(description='PyTorch implementation of DiscoGAN')
@@ -46,7 +47,7 @@ transform=transforms.Compose([
     transforms.ToTensor(),
     transforms.Normalize((0.5, 0.5, 0.5),(0.5, 0.5, 0.5))
 ])
-dataset=CelebA(root='./',attributes=args.selected_attrs,transform=transform,download=True)
+dataset=CelebA(root='./',attributes=args.attrs,transform=transform,download=True)
 
 data_A, data_B = get_celebA_files(style_A=args.style_A, style_B=args.style_B, constraint=args.constraint, constraint_type=args.constraint_type, test=False, n_test=args.n_test)
 test_A, test_B = get_celebA_files(style_A=args.style_A, style_B=args.style_B, constraint=args.constraint, constraint_type=args.constraint_type, test=True, n_test=args.n_test)
@@ -160,15 +161,8 @@ for epoch in range(epoch_size):
         A_path = data_style_A[ i * batch_size: (i+1) * batch_size ]
         B_path = data_style_B[ i * batch_size: (i+1) * batch_size ]
 
-        if args.task_name.startswith( 'edges2' ):
-            A = read_images( A_path, 'A', args.image_size )
-            B = read_images( B_path, 'B', args.image_size )
-        elif args.task_name =='handbags2shoes' or args.task_name == 'shoes2handbags':
-            A = read_images( A_path, 'B', args.image_size )
-            B = read_images( B_path, 'B', args.image_size )
-        else:
-            A = read_images( A_path, None, args.image_size )
-            B = read_images( B_path, None, args.image_size )
+        A = read_images( A_path, None, args.image_size )
+        B = read_images( B_path, None, args.image_size )
 
         A = Variable( torch.FloatTensor( A ) )
         B = Variable( torch.FloatTensor( B ) )
@@ -211,15 +205,8 @@ for epoch in range(epoch_size):
         gen_loss_A_total = (gen_loss_B*0.1 + fm_loss_B*0.9) * (1.-rate) + recon_loss_A * rate
         gen_loss_B_total = (gen_loss_A*0.1 + fm_loss_A*0.9) * (1.-rate) + recon_loss_B * rate
 
-        if args.model_arch == 'discogan':
-            gen_loss = gen_loss_A_total + gen_loss_B_total
-            dis_loss = dis_loss_A + dis_loss_B
-        elif args.model_arch == 'recongan':
-            gen_loss = gen_loss_A_total
-            dis_loss = dis_loss_B
-        elif args.model_arch == 'gan':
-            gen_loss = (gen_loss_B*0.1 + fm_loss_B*0.9)
-            dis_loss = dis_loss_B
+        gen_loss = gen_loss_A_total + gen_loss_B_total
+        dis_loss = dis_loss_A + dis_loss_B
 
         if iters % args.update_interval == 0:
             dis_loss.backward()
@@ -259,12 +246,12 @@ for epoch in range(epoch_size):
                 BAB_val = BAB[im_idx].cpu().data.numpy().transpose(1,2,0)* 255.
 
                 filename_prefix = os.path.join (subdir_path, str(im_idx))
-                scipy.misc.imsave( filename_prefix + '.A.jpg', A_val.astype(np.uint8)[:,:,::-1])
-                scipy.misc.imsave( filename_prefix + '.B.jpg', B_val.astype(np.uint8)[:,:,::-1])
-                scipy.misc.imsave( filename_prefix + '.BA.jpg', BA_val.astype(np.uint8)[:,:,::-1])
-                scipy.misc.imsave( filename_prefix + '.AB.jpg', AB_val.astype(np.uint8)[:,:,::-1])
-                scipy.misc.imsave( filename_prefix + '.ABA.jpg', ABA_val.astype(np.uint8)[:,:,::-1])
-                scipy.misc.imsave( filename_prefix + '.BAB.jpg', BAB_val.astype(np.uint8)[:,:,::-1])
+                imageio.imwrite( filename_prefix + '.A.jpg', A_val.astype(np.uint8)[:,:,::-1])
+                imageio.imwrite( filename_prefix + '.B.jpg', B_val.astype(np.uint8)[:,:,::-1])
+                imageio.imwrite( filename_prefix + '.BA.jpg', BA_val.astype(np.uint8)[:,:,::-1])
+                imageio.imwrite( filename_prefix + '.AB.jpg', AB_val.astype(np.uint8)[:,:,::-1])
+                imageio.imwrite( filename_prefix + '.ABA.jpg', ABA_val.astype(np.uint8)[:,:,::-1])
+                imageio.imwrite( filename_prefix + '.BAB.jpg', BAB_val.astype(np.uint8)[:,:,::-1])
 
         if iters % args.model_save_interval == 0:
             torch.save( generator_A, os.path.join(model_path, 'model_gen_A-' + str( iters / args.model_save_interval )))
