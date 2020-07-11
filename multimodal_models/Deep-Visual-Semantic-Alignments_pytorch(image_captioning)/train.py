@@ -18,13 +18,13 @@ from dataloader import DataLoader, shuffle_data
 # ---------------------------------
 if __name__ == '__main__':
     parser = argparse.ArgumentParser()
-    parser.add_argument('--model',type=str,default='resnet18')
-    parser.add_argument('--dir',type=str,default='train')
-    parser.add_argument('--save_epoch',type=int,default=2)
-    parser.add_argument('--learning_rate',type=float,default=1e-3)
-    parser.add_argument('--num_epoch',type=int,default=10)
-    parser.add_argument('--hidden_dim',type=int,default=512)
-    parser.add_argument('--embedding_dim',type=int,default=512)
+    parser.add_argument('-model',type=str,default='resnet18',help="Encoder CNN architecture.Default: 'resnet18', other option is 'inception' (Inception_v3). Model dir is automatically saved with name of model + current_datetime.")
+    parser.add_argument('-dir',type=str,default='train', help="Training Directory path, default: 'train'")
+    parser.add_argument('-save_epoch',type=int,default=2,help="Epochs after which model saves checkpoint, default : 2")
+    parser.add_argument('-learning_rate',type=float,default=1e-3,help='Adam optimizer learning rate, default : 1e-3 (0.001)')
+    parser.add_argument('-num_epoch',type=int,default=10,help="Number of epochs, default : 10")
+    parser.add_argument('-hidden_dim',type=int,default=512,help='Dimensions in hidden state of LSTM decoder, default : 512')
+    parser.add_argument('-embedding_dim',type=int,default=512,help='Dimensions of encoder output, default : 512')
 
     args = parser.parse_args()
     print(args)

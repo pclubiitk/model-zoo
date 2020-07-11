@@ -8,52 +8,108 @@
 * pickle
 * cuda(*highly recommended*)
 ## Usage 
+Clone the repo to your local system :
+```bash
+git clone link-to-repo
+```
+> ***NOTE**: If you are using Colab, use* **!git** instead.
+
 ### 1. Preprocessing the data
 * Dataset used is Flickr8k ([*download here*](https://www.kaggle.com/shadabhussain/flickr8k)). 
 * Extract and move images to a folder named : images and text files to folder named : text
 > ***NOTE** : Place both folders alongside the python files.*
 * Run the following command in Windows : 
-      <pre><code>python preprocess.py
-      </code></pre>
-      If using Linux/Mac use : 
-      <pre><code>python3 preprocess.py
-      </code></pre>
-      
+```bash
+python preprocess.py
+```
+> ***NOTE** : Hey buddy :) , for all the python commands , keep in mind that these are for Windows. If using Linux/Mac use **python3**. On Colab use **!python**.*
+
 ### 2. Training the data
+* Load the tensorboard (optional):
+```bash
+load_ext tensorboard
+tensorboard --logdir=runs
+```
+> ***NOTE** : On Colab, use the command below.*
+```bash
+%load_ext tensorboard
+%tensorboard --logdir=runs
+```
 * Run the following command : 
-      <pre><code>python train.py --model <encoder_CNN_architecture> --dir <train_dir_path> --save_epoch <model_checkpoint> --learning_rate <learning_rate> --num_epoch <num_epoch> --hidden_dim <lstm_hidden_state_dim> --embedding_dim <encoder_CNN_output>
-      </code></pre>
-> ***NOTE** : Use python3 instead in case of Linux/Mac .*
-* Arguments
-  * -model : Default: 'resnet18', other option is 'inception' (Inception_v3). Model dir is automatically saved with name of model + current_datetime. 
-  * -dir : Training Directory path, default: 'train'
-  * -save_epoch : Epochs after which model saves checkpoint, default : 2
-  * -learning_rate : Adam optimizer learning rate, default : 1e-3 (0.001)
-  * -num_epoch : Number of epochs, default : 10
-  * -hidden_dim : Dimensions in hidden state of LSTM decoder, default : 512
-  * -embedding_dim : Dimensions of encoder output, default : 512
+```bash
+python train.py
+```
+```bash
+usage: train.py [-h] [-model MODEL] [-dir DIR] [-save_epoch SAVE_EPOCH]
+                [-learning_rate LEARNING_RATE] [-num_epoch NUM_EPOCH]
+                [-hidden_dim HIDDEN_DIM] [-embedding_dim EMBEDDING_DIM]
+
+optional arguments:
+  -h, --help            show this help message and exit
+  -model MODEL          Encoder CNN architecture.Default: 'resnet18', other
+                        option is 'inception' (Inception_v3). Model dir is
+                        automatically saved with name of model +
+                        current_datetime.
+  -dir DIR              Training Directory path, default: 'train'
+  -save_epoch SAVE_EPOCH
+                        Epochs after which model saves checkpoint, default : 2
+  -learning_rate LEARNING_RATE
+                        Adam optimizer learning rate, default : 1e-3 (0.001)
+  -num_epoch NUM_EPOCH  Number of epochs, default : 10
+  -hidden_dim HIDDEN_DIM
+                        Dimensions in hidden state of LSTM decoder, default :
+                        512
+  -embedding_dim EMBEDDING_DIM
+                        Dimensions of encoder output, default : 512
+```
 
 ### 3. Testing the model
 * Run the following command : 
-    <pre><code>python test.py --model <encoder_CNN_architecture> --model_dir <model_dir> --test_dir<test_dir> --filename <filename> --epoch <epoch_num></code></pre>
-> ***NOTE** : Once again, use python3 instead in case of Linux/Mac .*
-* Arguments
-  * -model : Default: 'resnet18', other option is 'inception' (Inception_v3).
-  * -model_dir : Saved model directory name.
-  * -test_dir : Default: 'test'.
-  * -filename : Image name.
-  * -epoch : Trained model to be used after this many epochs.
+```bash
+python test.py model_dir <MODEL_DIR> filename <FILENAME> epoch <EPOCH>
+```
+```bash
+usage: test.py [-h] [-model MODEL] [-test_dir TEST_DIR]
+               filename epoch model_dir
+
+positional arguments:
+  filename            Image filename.
+  epoch               Number of epochs model has been trained for.
+  model_dir           Saved model directory, which has name of format: model +
+                      current_datetime.
+
+optional arguments:
+  -h, --help          show this help message and exit
+  -model MODEL        Encoder CNN architecture.Default: 'resnet18', other
+                      option is 'inception' (Inception_v3).
+  -test_dir TEST_DIR  Test dataset directory name, default: 'test'.
+```
   
 ### 4. Validation 
 * Run the following command : 
-    <pre><code>python train.py --model <encoder_CNN_architecture> --model_dir <saved_model_dir> --dir <dev_dir_path> --save_epoch <model_checkpoint> --num_epoch <num_epoch></code></pre>
-> ***NOTE** : For last time, use python3 instead in case of Linux/Mac :).*
-* Arguments
-  * -model : Default: 'resnet18', other option is 'inception' (Inception_v3).
-  * -model_dir : Saved model directory, which has name of format model + current_datetime.
-  * -dir : Development Directory path, default: 'dev'
-  * -save_epoch : Epochs after which model saves checkpoint, default : 2
-  * -num_epoch : Number of epochs, default : 10
+```bash
+python validation.py model_dir <MODEL_DIR>
+```
+```bash
+usage: validation.py [-h] [--model MODEL] [--dir DIR]
+                     [--save_epoch SAVE_EPOCH] [--num_epoch NUM_EPOCH]
+                     model_dir
+
+positional arguments:
+  model_dir             Saved model directory, which has name of format: model
+                        + current_datetime.
+
+optional arguments:
+  -h, --help            show this help message and exit
+  --model MODEL         Default: 'resnet18', other option is 'inception'
+                        (Inception_v3).
+  --dir DIR             Development Directory path, default: 'dev'
+  --save_epoch SAVE_EPOCH
+                        Epochs after which trained model has saved checkpoint,
+                        default : 2
+  --num_epoch NUM_EPOCH
+                        Number of epochs model was trained for, default : 10
+```
 > ***NOTE** : The save_epoch and num_epoch should match with your corresponding training model .*
 
 ## Factual Details

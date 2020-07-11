@@ -14,11 +14,11 @@ from dataloader import DataLoader, shuffle_data
 #--------------------------
 if __name__=='__main__':
     parser = argparse.ArgumentParser()
-    parser.add_argument('--model',type=str,default='resnet18')
-    parser.add_argument('--model_dir',type=str)
-    parser.add_argument('--test_dir',type=str,default='test')
-    parser.add_argument('--filename',type=str)
-    parser.add_argument('--epoch',type=int)
+    parser.add_argument('filename',type=str,help="Image filename.")
+    parser.add_argument('epoch',type=int,help="Number of epochs model has been trained for.")
+    parser.add_argument('model_dir',type=str,help="Saved model directory, which has name of format: model + current_datetime.")
+    parser.add_argument('-model',type=str,default='resnet18',help="Encoder CNN architecture.Default: 'resnet18', other option is 'inception' (Inception_v3).")
+    parser.add_argument('-test_dir',type=str,default='test',help="Test dataset directory name, default: 'test'.")
 
     args = parser.parse_args()
     print(args)
@@ -42,7 +42,7 @@ if __name__=='__main__':
 
     cnn = get_CNN(architecture= model_name, embedding_dim=embedding_dim)
     lstm = RNN(embedding_dim=embedding_dim,hidden_dim=hidden_dim,vocab_size=vocab_size)
-    device = 'cuda' if torch.cuda.is_available() else 'cpu'
+    device = torch.device('cuda:0' if torch.cuda.is_available() else 'cpu')
     cnn.to(device)
     lstm.to(device)
     image = image.unsqueeze(0)
