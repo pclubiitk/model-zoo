@@ -126,7 +126,7 @@ def preprocess(image_path):
     x = preprocess_input(x)
     return x
 
-def encode(image):
+def encode(image,model_new):
     image = preprocess(image) # preprocess the image
     fea_vec = model_new.predict(image) # Get the encoding vector for the image
     fea_vec = np.reshape(fea_vec, fea_vec.shape[1]) # reshape from (1, 2048) to (2048, )
