@@ -6,62 +6,100 @@
 * pytorch-vision
 * pickle
 * cuda(*highly recommended*)
-## Usage 
+## Usage
+* Clone the repo to your local system :
 ```bash
-python train.py --num_epoch <num_of_epochs> --batch_size <batch_size> --num_workers <num_workers> --lrD <learning_rate_discriminator> --lrG <learning_rate_generator> --beta1 <beta1_adam_param> --beta2 <beta2_adam_param> --recog_weight <recogniser_weight> --save_epoch <model_checkpoints>
-> ***NOTE** : Use python3 instead in case of Linux/Mac .*
-* Arguments
-  * -num_epoch : Default: 50, number of epochs.
-  * -batch_size : Default: 100.
-  * -num_workers : Default : 2.
-  * -lrD : Adam optimizer discriminator learning rate, default : 2e-4 (0.0002)
-  * -lrG : Adam optimizer generator learning rate, default : 1e-3 (0.001)
-  * -beta1 : Default : 0.5
-  * -beta2 : Default : 0.99
-  * -recog_weight : Default : 0.5, coefficient of information maximising.
-  * -model_path : Default : 'trained_model'+ current datetime (*added itself*)
-  * -save_epoch : Default : 5.
+git clone link-to-repo
+```
+> ***NOTE** : For Colab, use the command below.*
+```bash
+!git clone link-to-repo
+```
+* Load the tensorboard (optional):
+```bash
+load_ext tensorboard
+tensorboard --logdir=runs
+```
+> ***NOTE** : For Colab, use the command below.*
+```bash
+%load_ext tensorboard
+%tensorboard --logdir=runs
+```
+* Run the following command :
+```bash
+python train.py
+```
+> ***NOTE** : Use python3 instead in case of Linux/Mac . **For Colab, use !python** .*
+```bash
+usage: train.py [-h] [-num_epoch NUM_EPOCH] [-batch_size BATCH_SIZE]
+                [-num_workers NUM_WORKERS] [-lrD LRD] [-lrG LRG]
+                [-beta1 BETA1] [-beta2 BETA2] [-recog_weight RECOG_WEIGHT]
+                [-model_path MODEL_PATH] [-save_epoch SAVE_EPOCH]
+
+optional arguments:
+  -h, --help            show this help message and exit
+  -num_epoch NUM_EPOCH  Number of epochs,default: 50
+  -batch_size BATCH_SIZE
+                        Size of each batch, default: 100
+  -num_workers NUM_WORKERS
+                        Number of processes that generate batches in parallel,
+                        default: 2
+  -lrD LRD              Adam optimizer discriminator learning rate, default :
+                        2e-4 (0.0002)
+  -lrG LRG              Adam optimizer generator learning rate, default : 1e-3
+                        (0.001)
+  -beta1 BETA1          Momentum1 of Adam, default : 0.5
+  -beta2 BETA2          Momentum2 of Adam, default : 0.999
+  -recog_weight RECOG_WEIGHT
+                        Weight given to continuous Latent codes in loss
+                        calculation, default: 0.5
+  -model_path MODEL_PATH
+                        Default : 'trained_model'+ current datetime (datetime
+                        is added itself)
+  -save_epoch SAVE_EPOCH
+                        Epoch at which model checkpoint is saved, default: 5
+```
 
 
 ## Factual Details
-- **Title** : Interpretable Representation Learning by Information Maximizing Generative Adversarial Nets 
+- **Title** : Interpretable Representation Learning by Information Maximizing Generative Adversarial Nets
 - **Dated** : 12.06.2016
 - **Authors** : Xi Chen, Yan Duan, Rein Houthooft, John Schulman, Ilya Sutskever, Pieter Abbeel
 - **University** : UC Berkley
-- **Field** : Deep Learning, Generative Adversarial Networks 
+- **Field** : Deep Learning, Generative Adversarial Networks
 
 ## Contributed by
 - [*Gurbaaz Singh Nandra*](https://github.com/gurbaaz27)
 
 # Summary
 
-## A Gentle Intoduction : Why ? 
-Since the inception of generative adversarial networks, popularly called GANs, they revolutionised the genrative models understanding, as well as the whole Deep Learning in general. GAN is basically a police-forgerer fight between discriminator and generator, where discriminator tries to classify between real and fake, which serves as a constant purpose for generator to come back hard for discriminator the next time. Over course of time, discriminator has a hard time in telling fake ones from real, as the data has been imitated so well, all unsupervisedly. DCGAN used deep convolution layers and a certain architecture to improve this. 
+## A Gentle Intoduction : Why ?
+Since the inception of generative adversarial networks, popularly called GANs, they revolutionised the genrative models understanding, as well as the whole Deep Learning in general. GAN is basically a police-forgerer fight between discriminator and generator, where discriminator tries to classify between real and fake, which serves as a constant purpose for generator to come back hard for discriminator the next time. Over course of time, discriminator has a hard time in telling fake ones from real, as the data has been imitated so well, all unsupervisedly. DCGAN used deep convolution layers and a certain architecture to improve this.
 
-But still, it seemed that all learning was kinda like black box, and model didnt really get know various features of image, for example, sunglasses, curves, angle. The learning seemed, and was indeed, entangled. InfoGAN proposed disentagled representation of data to acquire these features with the help of latent codes and information maximisation. 
+But still, it seemed that all learning was kinda like black box, and model didnt really get know various features of image, for example, sunglasses, curves, angle. The learning seemed, and was indeed, entangled. InfoGAN proposed disentagled representation of data to acquire these features with the help of latent codes and information maximisation.
 
 > ***Latent :** something existing but hidden, not manifested, concealed .eg. latent heat of fusion*
 
-## Understanding the Theory : What ? 
+## Understanding the Theory : What ?
 The main difference is the addition of latent code 'c' to the tranditional noise vector 'z' fed into the Generator. So now G(z) looks like G(z,c). To hope that the network understands these latent codes in an unsupervised manner, an information-theoretic regularisation is proposed: there should be high mutual information between latent codes c and generator distribution G(z,c). Formally, I(c; G(z, c)) should be high. So basically, an additional regularisation term is added to original GAN objective.
 <p align="center">
-  <img width="358" height="63" src="images/1.png">
+  <img width="358" height="63" src="assets/1.png">
 </p>
 
 Now, as the fairyland it seems, practically maximizing this I(c; G(z,c)) is hard as it requires knowledge of the posterior P(c|x), but we can still find a lower bound solution. This consists of introducing an “auxiliary” distribution Q(c|x), which is modeled by a parameterized neural network, and is meant to approximate the real P(c|x). They then use a re-parameterization trick to make it such that you can merely sample from a user-specified prior (i.e. uniform distribution) instead of the unknown posterior.
 <p align="center">
-  <img width="571" height="274" src="images/2.png">
+  <img width="571" height="274" src="assets/2.png">
 </p>
 
 ## Implementing the Architecture : How ?
 Auxiliary network Q is modelled as a neural network, and shares most of the structure with that of Discriminator except the last layer, since their purpose are different. For MNIST, linear input of 74 variables is fed, consisting of 62 random noise variables, 10 for the categories we hope would match to each of the digit, and 2 latent codes, 1 for width and other for the rotation of digits, random values between -1 and +1. Even though InfoGAN introduces an extra hyperparameter λ, it’s easy to tune and simply setting to 1 is sufficient for discrete latent codes. Knowing the difficult training of GAN, the paper copies the layers from an existing architecture, [DCGAN](https://arxiv.org/abs/1511.06434). So, to ease things out, InfoGAN basically adds a few components to the DCGAN, latent code 'c', an auxiliary network Q and all the training to estimate c unsupervisedly.
 <p align="center">
-  <img width="572" height="133" src="images/infogan5.png">
+  <img width="572" height="133" src="assets/infogan5.png">
 </p>
 
 ## Results :
 ### Training on MNIST dataset for 50 epochs :
-<pre><code>
+```bash
 Training Started!
 Epoch[1/50]	Loss_D: 0.1175	Loss_G: 7.1921	Time:0.27
 Epoch[2/50]	Loss_D: 0.1191	Loss_G: 7.2145	Time:0.27
@@ -113,40 +151,40 @@ Epoch[47/50]	Loss_D: 0.2114	Loss_G: 4.1357	Time:0.28
 Epoch[48/50]	Loss_D: 0.2629	Loss_G: 3.7725	Time:0.28
 Epoch[49/50]	Loss_D: 0.4998	Loss_G: 4.0496	Time:0.28
 Epoch[50/50]	Loss_D: 0.2323	Loss_G: 4.0389	Time:0.29
-</code></pre>
+```
 <p align="center">
-  <img width="433" height="289" src="images/discriminator_loss.PNG">
-  <img width="433" height="289" src="images/generator_loss.PNG"> 
+  <img width="433" height="289" src="assets/discriminator_loss.PNG">
+  <img width="433" height="289" src="assets/generator_loss.PNG">
 </p>
 
 > ***NOTE** : Images get saved in trained_model directory in png format.*
 ### Generated Images
 * Going down, generated images are at 10,20,30,40 and 50 epochs. ***Im wondering what the hell happened at 40 epochs!***
 <p align="center">
-  <img width="302" height="302" src="images/epoch_10_c1.png">
-  <img width="302" height="302" src="images/epoch_10_c2.png"> 
+  <img width="302" height="302" src="assets/epoch_10_c1.png">
+  <img width="302" height="302" src="assets/epoch_10_c2.png">
 </p>
 <p align="center">
-  <img width="302" height="302" src="images/epoch_20_c1.png">
-  <img width="302" height="302" src="images/epoch_20_c2.png"> 
+  <img width="302" height="302" src="assets/epoch_20_c1.png">
+  <img width="302" height="302" src="assets/epoch_20_c2.png">
 </p>
 <p align="center">
-  <img width="302" height="302" src="images/epoch_30_c1.png">
-  <img width="302" height="302" src="images/epoch_30_c2.png"> 
+  <img width="302" height="302" src="assets/epoch_30_c1.png">
+  <img width="302" height="302" src="assets/epoch_30_c2.png">
 </p>
 <p align="center">
-  <img width="302" height="302" src="images/epoch_40_c1.png">
-  <img width="302" height="302" src="images/epoch_40_c2.png"> 
+  <img width="302" height="302" src="assets/epoch_40_c1.png">
+  <img width="302" height="302" src="assets/epoch_40_c2.png">
 </p>
 <p align="center">
-  <img width="302" height="302" src="images/epoch_50_c1.png">
-  <img width="302" height="302" src="images/epoch_50_c2.png"> 
+  <img width="302" height="302" src="assets/epoch_50_c1.png">
+  <img width="302" height="302" src="assets/epoch_50_c2.png">
 </p>
 
 ### GIF of formation
 <p align="center">
-  <img width="302" height="302" src="images/c1.gif">
-  <img width="302" height="302" src="images/c2.gif"> 
+  <img width="302" height="302" src="assets/c1.gif">
+  <img width="302" height="302" src="assets/c2.gif">
 </p>
 
 ## Acknowledgement

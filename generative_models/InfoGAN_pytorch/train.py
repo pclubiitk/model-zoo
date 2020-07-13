@@ -27,22 +27,22 @@ if __name__ == '__main__':
     parser = argparse.ArgumentParser()
 
     # training hyper-parameters
-    parser.add_argument('--num_epoch', type=int, default=50)
-    parser.add_argument('--batch_size', type=int, default=100)
-    parser.add_argument('--num_workers', type=int, default=2)
+    parser.add_argument('--num_epoch', type=int, default=50, help='Number of epochs,default: 50')
+    parser.add_argument('--batch_size', type=int, default=100, help='Size of each batch, default: 100')
+    parser.add_argument('--num_workers', type=int, default=2, help='Number of processes that generate batches in parallel, default: 2')
     # Learning Rate for D
-    parser.add_argument('--lrD', type=float, default=0.0002)
+    parser.add_argument('--lrD', type=float, default=0.0002, help='Adam optimizer discriminator learning rate, default : 2e-4 (0.0002)')
     # Learning Rate for G
-    parser.add_argument('--lrG', type=float, default=0.001)
-    parser.add_argument('--beta1', type=float, default=0.5)  # momentum1 in Adam
+    parser.add_argument('--lrG', type=float, default=0.001, help='Adam optimizer generator learning rate, default : 1e-3 (0.001)')
+    parser.add_argument('--beta1', type=float, default=0.5, help='Momentum1 of Adam, default : 0.5')  # momentum1 in Adam
     parser.add_argument('--beta2', type=float,
-                        default=0.999)  # momentum2 in Adam
-    parser.add_argument('--recog_weight', type=float, default=0.1)
+                        default=0.999, help='Momentum2 of Adam, default : 0.999')  # momentum2 in Adam
+    parser.add_argument('--recog_weight', type=float, default=0.1, help='Weight given to continuous Latent codes in loss calculation, default: 0.5')
     # misc
     parser.add_argument('--model_path', type=str,
-                        default='trained_model')  # Model Save
+                        default='trained_model', help="Default : 'trained_model'+ current datetime (datetime is added itself)")  # Model Save
     parser.add_argument('--save_epoch', type=int,
-                        default=5)  # Saving epochs after
+                        default=5, help='Epoch at which model checkpoint is saved, default: 5')  # Saving epochs after
 
     args = parser.parse_args()
     print(args)
