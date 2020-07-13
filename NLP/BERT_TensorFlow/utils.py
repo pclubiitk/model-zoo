@@ -90,6 +90,7 @@ def encode_examples(ds, tokenizer, max_length, limit=-1):
                         max_length = max_length, # max length of the text that can go to BERT
                         pad_to_max_length = True, # add [PAD] tokens
                         return_attention_mask = True, # add attention mask to not focus on pad tokens
+                        truncation = True
               )
   
     input_ids_list.append(bert_input['input_ids'])
