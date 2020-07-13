@@ -35,4 +35,6 @@ def get_data(path):
     
     for i in range(4):
         extract(urls[i], base, paths[i], str(i))
+    if not os.path.exists(base + '/ckpts'):
+            os.makedirs(base + '/ckpts')
 
