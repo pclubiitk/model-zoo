@@ -31,7 +31,7 @@ tensorboard --logdir=runs
 ```bash
 python train.py
 ```
-> ***NOTE** : Use python3 instead in case of Linux/Mac . **For Colab, use !python** .*
+> ***NOTE** : Use python3 instead in case of Linux/Mac . **For Colab, use %run** .*
 ```bash
 usage: train.py [-h] [--num_epoch NUM_EPOCH] [--save_epoch SAVE_EPOCH]
                 [--batch_size BATCH_SIZE] [--embedding_dim EMBEDDING_DIM]

@@ -22,7 +22,7 @@ if __name__=='__main__':
     parser = argparse.ArgumentParser()
 
     parser.add_argument('--num_epoch', type=int, default=100, help='Number of epochs,default: 100')
-    parser.add_argument('--save_epoch', type=int, default=1, help='Epochs after which model is saved,default: 1')
+    parser.add_argument('--save_epoch', type=int, default=10, help='Epochs after which model is saved,default: 10')
     parser.add_argument('--batch_size',type=int, default=2048,help='Batch size, default: 2048')
 
     parser.add_argument('--embedding_dim',type=int, default=300, help='Embedding dimension, default: 512')
@@ -74,7 +74,7 @@ if __name__=='__main__':
         if (epoch+1) % args.save_epoch == 0:
         	torch.save({'glove' : glove.state_dict(),'optimizer' :optimizer.state_dict(),'params' : args}, os.path.join(model_name, 'epoch_%d_model.pkl'%(epoch+1)))
 
-
+    plt.plot(LOSS)
     print('Saving losses .....!')
     torch.save(LOSS, os.path.join(model_name, 'training_loss.pt'))
     print('Saved!')
