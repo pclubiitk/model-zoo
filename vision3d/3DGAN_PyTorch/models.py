@@ -10,7 +10,8 @@ class generator(nn.Module):
     layer at the end. The input is a 200-dimensional vector, and the output is a 64 × 64 × 64 
     matrix with values in [0, 1].
     """
-    def __init__(self):
+    def __init__(self,vectorSize):
+        self.vectorSize=vectorSize
         super().__init__()
         self.layer1=nn.Sequential(
             nn.ConvTranspose3d(in_channels=200,out_channels=512,kernel_size=2,stride=1,bias=False),
@@ -39,7 +40,7 @@ class generator(nn.Module):
     
     def forward(self,x):
         bsize=x.size(0)
-        x=x.view(bsize,vectorSize,1,1,1)
+        x=x.view(bsize,self.vectorSize,1,1,1)
         x=self.layer1(x)
         x=self.layer2(x)
         x=self.layer3(x)

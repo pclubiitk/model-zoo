@@ -2,7 +2,6 @@ import matplotlib.pyplot as plt
 import glob
 import imageio
 
-
 def plot_generated_images(epoch, generator, noise,outdir):
     examples = 25
     figsize = (5,5)
@@ -16,7 +15,6 @@ def plot_generated_images(epoch, generator, noise,outdir):
     plt.tight_layout()
     plt.savefig('{}/img_at_epoch_{:04d}.png'.format(outdir, epoch))
     plt.show()
-
 
 def make_gif(outdir):
     anim_file = '{}/gan.gif'.format(outdir)

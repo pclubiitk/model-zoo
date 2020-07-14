@@ -30,14 +30,13 @@ class modifying(object):
 
     def indexing(self):
        
-       word2idx = {w: i + 2 for i, w in enumerate(self.words)}
-       word2idx['UNK'] =1
+       word2idx = {w: i + 1 for i, w in enumerate(self.words)}
        word2idx['PAD'] =0
 
        tag2idx = {t: i+1 for i, t in enumerate(self.tags)}
        tag2idx['PAD'] = 0
 
-       return  tag2idx,len(self.tags)+1,word2idx,len(self.words)+2
+       return  tag2idx,len(self.tags)+1,word2idx,len(self.words)+1
 
     def padding(self,max_len,word2idx,tag2idx):
    

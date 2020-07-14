@@ -54,26 +54,19 @@ def prepare_data(path):
                                 
                                 if count == 0:
                                   label = subim_label
-                                  count += 1
-                                  continue
-                                print(label.shape,subim_label.shape)
-                                label = np.vstack((label, subim_label))
-                                
-                                if count == 0:
                                   data = subim_input
                                   count += 1
                                   continue
-                                print(data.shape,subim_input.shape)
+                                label = np.vstack((label, subim_label))
                                 data = np.vstack((data, subim_input))
                                 count += 1
-                                print(data.shape,"  ",count,label.shape)
+                                print(count)
 
     order = np.random.permutation(count)
-    print(count)
-    data = np.reshape(np.array(data),(41,41,1,count))
-    label = np.reshape(np.array(label), (41, 41, 1, count))
-    data = np.take(data, order, axis=3)
-    label = np.take(label, order, axis=3)
+    data = np.reshape(np.array(data),(count,1,41,41))
+    label = np.reshape(np.array(label), (count,1,41,41))
+    data = np.take(data, order, axis=0)
+    label = np.take(label, order, axis=0)
     
     return data, label
 
@@ -89,7 +82,7 @@ def write_hdf5(data, label, file):
 if __name__ == '__main__':
     parser = argparse.ArgumentParser()
     parser.add_argument("--dir", type=str, required=True, help="path to the dataset directory")
-    parser.add_argument("--out_dir", type=str, required=True, help="path to the output dataset directory")
+    parser.add_argument("--out_dir", type=str, default="train.h5", help="path to the output dataset directory")
     args = parser.parse_args()
 
     DATA_PATH = args.dir
@@ -101,4 +94,4 @@ if __name__ == '__main__':
     print("preparing data")
     data, label = prepare_data(DATA_PATH)
     print("storing data")
-    write_hdf5(data, label, "train.h5")
+    write_hdf5(data, label, args.out_dir)

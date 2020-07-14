@@ -9,7 +9,7 @@ import skvideo.io
 def crop():
     current_path = os.path.dirname(__file__)
     resized_path = os.path.join(current_path, 'resized_data')
-    dirs = glob.glob(os.path.join(current_path, 'data/*'))
+    dirs = glob.glob(os.path.join(current_path, args.data+'/*'))
     files = [ glob.glob(dir+'/*') for dir in dirs ]
     files = sum(files, []) # flatten
 

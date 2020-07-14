@@ -1,7 +1,7 @@
-from srgan.model import generator, discriminator
-from srgan.dataset import DIV2K
-from srgan.pre_train import pre_train
-from srgan.train import train
+from model import generator, discriminator
+from dataset import DIV2K
+from pre_train import pre_train
+from train import train
 import tensorflow as tf
 import cv2
 import argparse
@@ -47,8 +47,8 @@ else:
     generator = generator()
     discriminator = discriminator(HR_SIZE=args.HR_PATCH_SIZE)
 
-    pre_train(train_ds, valid_ds, steps=args.PREGENSTEPS,
-              evaluate_every=1, lr_rate=args.le_pre_gen)
+    pre_train(generator,train_ds, valid_ds, steps=args.PREGENSTEPS,
+              evaluate_every=1, lr_rate=args.lr_pre_gen)
 
     train(generator, discriminator, train_ds, valid_ds,
           steps=args.STEPS, lr_rate=args.lr_gen)
