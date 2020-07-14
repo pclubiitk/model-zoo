@@ -29,7 +29,7 @@ tensorboard --logdir=runs
 ```bash
 python train.py
 ```
-> ***NOTE** : Use python3 instead in case of Linux/Mac . **For Colab, use !python** .*
+> ***NOTE** : Use python3 instead in case of Linux/Mac . **For Colab, use %run** .*
 ```bash
 usage: train.py [-h] [-num_epoch NUM_EPOCH] [-batch_size BATCH_SIZE]
                 [-num_workers NUM_WORKERS] [-lrD LRD] [-lrG LRG]
@@ -38,25 +38,25 @@ usage: train.py [-h] [-num_epoch NUM_EPOCH] [-batch_size BATCH_SIZE]
 
 optional arguments:
   -h, --help            show this help message and exit
-  -num_epoch NUM_EPOCH  Number of epochs,default: 50
-  -batch_size BATCH_SIZE
+  --num_epoch NUM_EPOCH  Number of epochs,default: 50
+  --batch_size BATCH_SIZE
                         Size of each batch, default: 100
-  -num_workers NUM_WORKERS
+  --num_workers NUM_WORKERS
                         Number of processes that generate batches in parallel,
                         default: 2
-  -lrD LRD              Adam optimizer discriminator learning rate, default :
+  --lrD LRD              Adam optimizer discriminator learning rate, default :
                         2e-4 (0.0002)
-  -lrG LRG              Adam optimizer generator learning rate, default : 1e-3
+  --lrG LRG              Adam optimizer generator learning rate, default : 1e-3
                         (0.001)
-  -beta1 BETA1          Momentum1 of Adam, default : 0.5
-  -beta2 BETA2          Momentum2 of Adam, default : 0.999
-  -recog_weight RECOG_WEIGHT
+  --beta1 BETA1          Momentum1 of Adam, default : 0.5
+  --beta2 BETA2          Momentum2 of Adam, default : 0.999
+  --recog_weight RECOG_WEIGHT
                         Weight given to continuous Latent codes in loss
                         calculation, default: 0.5
-  -model_path MODEL_PATH
+  --model_path MODEL_PATH
                         Default : 'trained_model'+ current datetime (datetime
                         is added itself)
-  -save_epoch SAVE_EPOCH
+  --save_epoch SAVE_EPOCH
                         Epoch at which model checkpoint is saved, default: 5
 ```
 
