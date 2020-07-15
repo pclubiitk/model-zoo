@@ -93,3 +93,4 @@ if __name__=='__main__':
         for idx in range(top_k):
             plt.scatter(*embed_tsne[idx, :], color='steelblue')
             plt.annotate(dataset._id2word[idx], (embed_tsne[idx, 0], embed_tsne[idx, 1]), alpha=0.7)
+    plt.show()
