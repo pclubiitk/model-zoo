@@ -22,10 +22,11 @@ if __name__=='__main__':
     parser = argparse.ArgumentParser()
 
     parser.add_argument('--num_epoch', type=int, default=100, help='Number of epochs,default: 100')
-    parser.add_argument('--save_epoch', type=int, default=1, help='Epochs after which model is saved,default: 1')
+    parser.add_argument('--save_epoch', type=int, default=10, help='Epochs after which model is saved,default: 10')
+
     parser.add_argument('--batch_size',type=int, default=2048,help='Batch size, default: 2048')
 
-    parser.add_argument('--embedding_dim',type=int, default=300, help='Embedding dimension, default: 512')
+    parser.add_argument('--embedding_dim',type=int, default=300, help='Embedding dimension, default: 300')
     parser.add_argument('--lr',type=float,default=0.05,help='Learning rate of Adagrad optimiser, default: 0.05')
     parser.add_argument('--x_max',type=int,default=100, help='Parameter in computing weighting terms, default: 100')
     parser.add_argument('--alpha',type=float,default=0.75, help='Parameter in computing weighting terms, default: 0.75')
@@ -38,7 +39,7 @@ if __name__=='__main__':
     model_name = "GloVe_" + str(datetime.datetime.now())
     os.mkdir(model_name)
     device  = torch.device('cuda:0' if torch.cuda.is_available() else 'cpu')
-    dataset = GloveDataset(open(os.path.join('data', 'text8').read(), 10000000)
+    dataset = GloveDataset(open(os.path.join('data', 'text8')).read(), 10000000)
     glove  = Glove(dataset._vocab_len, args.embedding_dim).to(device)
 
     optimizer = torch.optim.Adagrad(glove.parameters(), lr=args.lr)
@@ -75,6 +76,8 @@ if __name__=='__main__':
         	torch.save({'glove' : glove.state_dict(),'optimizer' :optimizer.state_dict(),'params' : args}, os.path.join(model_name, 'epoch_%d_model.pkl'%(epoch+1)))
 
 
+    plt.plot(LOSS)
+
     print('Saving losses .....!')
     torch.save(LOSS, os.path.join(model_name, 'training_loss.pt'))
     print('Saved!')
@@ -90,4 +93,4 @@ if __name__=='__main__':
         for idx in range(top_k):
             plt.scatter(*embed_tsne[idx, :], color='steelblue')
             plt.annotate(dataset._id2word[idx], (embed_tsne[idx, 0], embed_tsne[idx, 1]), alpha=0.7)
-            plt.show()
+    plt.show()

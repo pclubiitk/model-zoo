@@ -31,7 +31,9 @@ tensorboard --logdir=runs
 ```bash
 python train.py
 ```
-> ***NOTE** : Use python3 instead in case of Linux/Mac . **For Colab, use !python** .*
+
+> ***NOTE** : Use python3 instead in case of Linux/Mac . **For Colab, use %run** .*
+
 ```bash
 usage: train.py [-h] [--num_epoch NUM_EPOCH] [--save_epoch SAVE_EPOCH]
                 [--batch_size BATCH_SIZE] [--embedding_dim EMBEDDING_DIM]
@@ -47,7 +49,7 @@ optional arguments:
   --batch_size BATCH_SIZE
                         Batch size, default: 2048
   --embedding_dim EMBEDDING_DIM
-                        Embedding dimension, default: 512
+                        Embedding dimension, default: 300
   --lr LR               Learning rate of Adagrad optimiser, default: 0.05
   --x_max X_MAX         Parameter in computing weighting terms, default: 100
   --alpha ALPHA         Parameter in computing weighting terms, default: 0.75
