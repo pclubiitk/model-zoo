@@ -9,6 +9,7 @@ import torch.nn as nn
 from torch.nn import init
 from torch.autograd import Variable
 import torch.nn.functional as F
+import torchvision
 import torchvision.datasets as dsets
 import torchvision.transforms as transforms
 import utils
@@ -249,7 +250,7 @@ class cycleGAN(object):
             ########################
             self.g_lr_scheduler.step()
             self.d_lr_scheduler.step()
-    def test(args):
+    def test(self,args):
     
         transform = transforms.Compose(
             [transforms.Resize((args.crop_height,args.crop_width)),
