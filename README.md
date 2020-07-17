@@ -33,8 +33,7 @@ The models are broadly categorised into the folders [Generative](/generative_mod
   * StackGAN [PyTorch](multimodal_models/StackGAN_PyTorch)
   * VQA [TensorFlow](multimodal_models/VQA_TensorFlow)
   * WaveGAN [TensorFlow](multimodal_models/WaveGAN_TensorFlow)
-  * ImageCaption [TensorFlow](multimodal_models/ImageCaption_TensorFlow)
-  * DeepVisualSemantic [PyTorch](multimodal_models/DeepVisualSemantic_PyTorch)
+  * ImageCaption [TensorFlow](multimodal_models/ImageCaption_TensorFlow) [PyTorch](multimodal_models/ImageCaption_PyTorch)
 * Object detection
   * YOLOv2 [TensorFlow](object_detection/YOLOv2_TensorFlow)
   * YOLOv3 [TensorFlow](object_detection/YOLOv3_TensorFlow)
