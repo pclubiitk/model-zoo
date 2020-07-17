@@ -21,11 +21,11 @@ The models are broadly categorised into the folders [Generative](/generative_mod
   * cGAN [TensorFlow](generative_models/cGAN_TensorFlow) [PyTorch](generative_models/cGAN_PyTorch)
   * SS-GAN [TensorFlow](generative_models/SS-GAN_TensorFlow)
 * NLP
-  * BERT [TensorFlow](NLP/BERT_TensorFlow) [PyTorch](NLP/BERT_PyTorch)
-  * BI-LSTM_CRF [TensorFlow](NLP/BI-LSTM_CRF_TensorFlow)
-  * GloVe [TensorFlow](NLP/GloVe_TensorFlow) [PyTorch](NLP/GloVe_PyTorch)
-  * Transformer [TensorFlow](NLP/Transformer_TensorFlow)
-  * Word2Vec [PyTorch](Word2Vec_PyTorch)
+  * BERT [TensorFlow](NLP/BERT_TensorFlow) [PyTorch](nlp/BERT_PyTorch)
+  * BI-LSTM_CRF [TensorFlow](nlp/BI-LSTM_CRF_TensorFlow)
+  * GloVe [TensorFlow](nlp/GloVe_TensorFlow) [PyTorch](nlp/GloVe_PyTorch)
+  * Transformer [TensorFlow](nlp/Transformer_TensorFlow)
+  * Word2Vec [PyTorch](nlp/Word2Vec_PyTorch)
 * classification
   * ResNet [PyTorch](classification/ResNet_PyTorch)
   * T3D ConvNets [TensorFlow](classification/T3D_TensorFlow)
@@ -33,8 +33,7 @@ The models are broadly categorised into the folders [Generative](/generative_mod
   * StackGAN [PyTorch](multimodal_models/StackGAN_PyTorch)
   * VQA [TensorFlow](multimodal_models/VQA_TensorFlow)
   * WaveGAN [TensorFlow](multimodal_models/WaveGAN_TensorFlow)
-  * ImageCaption [TensorFlow](multimodal_models/ImageCaption_TensorFlow)
-  * DeepVisualSemantic [PyTorch](multimodal_models/DeepVisualSemantic_PyTorch)
+  * ImageCaption [TensorFlow](multimodal_models/ImageCaption_TensorFlow) [PyTorch](multimodal_models/ImageCaption_PyTorch)
 * Object detection
   * YOLOv2 [TensorFlow](object_detection/YOLOv2_TensorFlow)
   * YOLOv3 [TensorFlow](object_detection/YOLOv3_TensorFlow)
