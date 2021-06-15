@@ -71,5 +71,3 @@ def load_cifar10():
 
     return train_ds, test_ds
 
-
-load_cifar10()

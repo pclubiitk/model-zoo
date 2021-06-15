@@ -4,6 +4,11 @@
 ```py
    $ python3 main.py --epochs 40 --model mobilenetv1
 ```
+## Test:
+### run this code after training the model, the model will be saved as .h5 file in the directory
+```py
+   $ python3 evaluate.py
+```   
 
 ## References:
 
@@ -26,10 +31,10 @@ out of fully factorized convolutions and showed the potential of extremely facto
 
 ## Model Architecture:
 
-The major reason behind mobilenet being lightweight is the use of depthwise seperable convolutions which is divided into two parts, the first part applies a depthwise convolution to the input feature map.The model essentially consists of alternate depthwise and standard convolutions being applied to the input feature map. This decreases the model size and number of parameters. The first part of the depthwise layer filters the input channel and the 1x1 conv operations is use to combine outputs of first layer. Most of the parameters is present in psenet in pointwise convolutions (apprx 75%).
+The major reason behind mobilenet being lightweight is the use of depthwise seperable convolutions which is divided into two parts, the first part applies a depthwise convolution to the input feature map.The model essentially consists of alternate depthwise and standard convolutions being applied to the input feature map. This decreases the model size and number of parameters. The first part of the depthwise layer filters the input channel and the 1x1 conv operations is use to combine outputs of first layer. Most of the parameters is present  in pointwise convolutions (apprx 75%).
 
 
-![alt text](assets/archtecture.png)
+![alt text](assets/architecture.png)
 
 
 
@@ -46,3 +51,7 @@ The major reason behind mobilenet being lightweight is the use of depthwise sepe
 * Implemented the MobileNet_V1 ON CIFAR10 dataset which consists of 50,000 training images and 10,000 test images.
 * Initially started the training process for 20 epochs using model.fit() method and obtained a training accuracy of 86%
 * Obtained an accuracy of 80% on the test data.
+
+## MobileNet_v1 compared to other models
+
+![alt text](assets/compare.png)
