@@ -48,7 +48,6 @@ with open('models/config.yml', 'w') as f:
 
 model = UNetPP(config['input_channels'], config['num_classes'], config['deep_supervision'])
 model = model.to(config['device'])
-model.double()
 params = filter(lambda p: p.requires_grad, model.parameters())
 
 criterion = BCEDiceLoss
