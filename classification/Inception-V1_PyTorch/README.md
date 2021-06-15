@@ -2,7 +2,6 @@
 
 ## Usage
 
-<br>
 
 > $ python3 main.py
 
@@ -13,19 +12,16 @@ Note: On Colab Notebook use following command:
 > !git clone link-to-repo<br>
 > %run main.py
 
-<br>
 
 ## References
 
 - Szegedy, Christian, et al. “Going Deeper with Convolutions.” 2015 IEEE Conference on Computer Vision and Pattern Recognition (CVPR), 2015, doi:10.1109/cvpr.2015.7298594.
 
-<br>
 
 ## Contributed by:
 
 - <a href="https://github.com/amanjain252002">Aman Jain</a>
 
-<br>
 
 # Summary
 
@@ -60,7 +56,7 @@ This leads to the second idea where by judiciously applying dimension reductions
 
 <br>
 
-| ![GoogLeNet incarnation of the Inception architecture](assets\architecture.png) |
+| ![GoogLeNet incarnation of the Inception architecture](assets/architecture.png) |
 | :-----------------------------------------------------------------------------: |
 |             **GoogLeNet incarnation of the Inception architecture**             |
 
@@ -71,7 +67,7 @@ Due to the relatively large depth of the network, the ability to propagate gradi
 
 <br>
 
-| ![GoogLeNet network with all the bells and whistles](assets\full-architecture.png) |
+| ![GoogLeNet network with all the bells and whistles](assets/full-architecture.png) |
 | :--------------------------------------------------------------------------------: |
 |               **GoogLeNet network with all the bells and whistles**                |
 
@@ -83,13 +79,13 @@ Due to the relatively large depth of the network, the ability to propagate gradi
 Comparison with state of the art methods:
 <br><br>
 
-| ![Classification performance](assets\Classifiaction-result.png) |
+| ![Classification performance](assets/Classifiaction-result.png) |
 | :-------------------------------------------------------------: |
 |                 **Classification performance**                  |
 
 <br>
 
-| ![Detection performance](assets\Detection-result.png) |
+| ![Detection performance](assets/Detection-result.png) |
 | :---------------------------------------------------: |
 |               **Detection performance**               |
 
@@ -99,7 +95,7 @@ Results after training for 100 epochs.
 
 <br>
 
-| ![Loss and Accuracy per epoch](assets\epochs.png) |
+| ![Loss and Accuracy per epoch](assets/epochs.png) |
 | :-----------------------------------------------: |
 |                                                   |
 
