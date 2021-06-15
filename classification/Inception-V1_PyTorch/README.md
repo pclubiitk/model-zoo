@@ -47,7 +47,7 @@ However this simple solution comes with two major drawbacks.
 Inception architecture mainly consists of “Inception modules” which are stacked on top of each other.
 <br>
 
-| ![Inception Module](assets\inception-module.png) |
+| ![Inception Module](assets/inception-module.png) |
 | :----------------------------------------------: |
 |               **Inception Module**               |
 
