@@ -23,7 +23,7 @@
 
 # Model Summary:
 
-## Introduction:
+## * Introduction:
 
 MobileNets are built primarily from depthwise separable convolutions initially introduced in  and subsequently
 used in Inception models  to reduce the computation in the first few layers. Flattened networks  build a network
