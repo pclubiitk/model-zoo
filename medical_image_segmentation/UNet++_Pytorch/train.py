@@ -5,15 +5,11 @@ from collections import OrderedDict
 
 def train_step(model, criterion, train_dl, optimizer, deep_supervision, device, metric):
     losses, nums, metrics = [], [], []
-    t = 0
+ 
     for xb, yb in train_dl:
-        
-        t += 1
-        if t == 15:
-            break
 
-        xb = xb.to(device)
-        yb = yb.to(device)
+        xb = (xb.to(device)).float()
+        yb = (yb.to(device)).float()
 
         # compute predictions
         if deep_supervision:
@@ -47,15 +43,10 @@ def validation_step(model, criterion, dataloader, deep_supervision, device, metr
     with torch.no_grad():
         losses, nums, metrics = [], [], []
 
-        t = 0
         for xb, yb in dataloader:
             
-            t += 1
-            if t == 10:
-                break
-
-            xb = xb.to(device)
-            yb = yb.to(device)
+            xb = (xb.to(device)).float()
+            yb = (yb.to(device)).float()
 
             if deep_supervision:
                 outputs = model(xb)
@@ -126,6 +117,7 @@ def train(config, train_dl, valid_dl, model, optimizer, scheduler, criterion, me
             print("=> Early stopping")
             break
 
-        torch.cuda.empty_cache()
+        if config['device'] == 'cuda':
+            torch.cuda.empty_cache()
 
     return log
