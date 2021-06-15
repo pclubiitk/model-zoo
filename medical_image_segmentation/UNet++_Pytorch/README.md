@@ -1,4 +1,4 @@
-# Pytorch Implementation of UNet Model
+# Pytorch Implementation of UNet++ Model
 ### Usage
 ```bash
 $ python3 main.py --arguments
