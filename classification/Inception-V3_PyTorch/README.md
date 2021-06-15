@@ -13,19 +13,16 @@ Note: On Colab Notebook use following command:
 > !git clone link-to-repo<br>
 > %run main.py
 
-<br>
 
 ## References
 
 - Szegedy, Christian, et al. “Rethinking the Inception Architecture for Computer Vision.” 2016 IEEE Conference on Computer Vision and Pattern Recognition (CVPR), 2016, doi:10.1109/cvpr.2016.308.
 
-<br>
 
 ## Contributed by:
 
 - <a href="https://github.com/amanjain252002">Aman Jain</a>
 
-<br>
 
 # Summary
 
@@ -50,7 +47,7 @@ The above paper focuses on exploring ways to scale up networks in ways that aim 
 
 <br>
 
-| ![Mini-network replacing the 5 × 5 convolutions.](<assets\Replacing(5x5).png>) |
+| ![Mini-network replacing the 5 × 5 convolutions.](<assets/Replacing(5x5).png>) |
 | :----------------------------------------------------------------------------: |
 |               **Mini-network replacing the 5 × 5 convolutions.**               |
 
@@ -61,7 +58,7 @@ The above paper focuses on exploring ways to scale up networks in ways that aim 
 
 <br>
 
-| ![Mini-network replacing the 3 × 3 convolutions.](<assets\Replacing(3x3).png>) |
+| ![Mini-network replacing the 3 × 3 convolutions.](<assets/Replacing(3x3).png>) |
 | :----------------------------------------------------------------------------: |
 |               **Mini-network replacing the 3 × 3 convolutions**                |
 
@@ -71,7 +68,7 @@ The above paper focuses on exploring ways to scale up networks in ways that aim 
 
 <br>
 
-![Model Architecture](assets\model.png)
+![Model Architecture](assets/model.png)
 
 <br>
 
@@ -81,13 +78,13 @@ The above paper focuses on exploring ways to scale up networks in ways that aim 
 Comparison with state of the art methods:
 <br><br>
 
-|                       ![Classification performance](assets\results.png)                       |
+|                       ![Classification performance](assets/results.png)                       |
 | :-------------------------------------------------------------------------------------------: |
 | **Single-model, multi-crop experimental results on the ILSVRC 2012 classification benchmark** |
 
 <br>
 
-|                      ![Ensemble Classification performance](assets\ensemble-results.png)                      |
+|                      ![Ensemble Classification performance](assets/ensemble-results.png)                      |
 | :-----------------------------------------------------------------------------------------------------------: |
 | **Ensemble evaluation results comparing multi-model, multi-crop on the ILSVRC 2012 classification benchmark** |
 
@@ -97,7 +94,7 @@ Results after training for 100 epochs.
 
 <br>
 
-| ![Loss and Accuracy per epoch](assets\epochs.png) |
+| ![Loss and Accuracy per epoch](assets/epochs.png) |
 | :-----------------------------------------------: |
 |                                                   |
 
