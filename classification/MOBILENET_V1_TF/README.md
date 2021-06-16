@@ -1,6 +1,7 @@
 # MobileNet_V1 implementation in Tensorflow for Image Classification
 
-## Libraries to be installed via pip ```py $ pip3 install _ ```
+## Libraries to be installed via pip 
+```py $ pip3 install _ ```
 
 * tensorflow
 * matplotlib
