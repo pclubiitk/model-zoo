@@ -39,7 +39,7 @@ $ pip3 install _
 
 MobileNets are built primarily from depthwise separable convolutions initially introduced in  and subsequently
 used in Inception models  to reduce the computation in the first few layers. Flattened networks  build a network
-out of fully factorized convolutions and showed the potential of extremely factorized networks. The model is bassically efficient in comparison to the extremely dense networks in terms of degree of computations. It is an efficient network architecture with two hyperparameters that can be used in mobile applications due to its small size.There are various versions of MobileNet, this paper rovides the architecture of mobilenet_v1.Although there is a sliht decrease in accuracy but mobilenet proves to be an excellent lightweight deep learning model. There are other networks like Squeezenet which uses a bottleneck approach to prodeucs a smaler networks. Mobilenets are also used in the implementation of SSD, Fast- RCNN  etc. for object detection.
+out of fully factorized convolutions and showed the potential of extremely factorized networks. The model is bassically efficient in comparison to the extremely dense networks in terms of degree of computations. It is an efficient network architecture with two hyperparameters that can be used in mobile applications due to its small size.There are various versions of MobileNet, this paper rovides the architecture of mobilenet_v1.Although there is a sliht decrease in accuracy but mobilenet proves to be an excellent lightweight deep learning model. There are other networks like Squeezenet which uses a bottleneck approach to produce a smaller network. Mobilenets are also used in the implementation of SSD, Fast-RCNN  etc. for object detection.
 
 ## Model Architecture:
 
