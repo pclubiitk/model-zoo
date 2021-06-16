@@ -42,6 +42,7 @@ Below are DPM & R-CNN models :
 ![R-CNN and DPM models](./assets/rcnn_dpm.png)
 
 Below is the YOLO model : 
+
 ![YOLO model](./assets/yolo_model.png)
 The proposed model improves drastically in the speed aspect , the YOLO model processes(Looks at) the image only once ! And, that is why the name, You Only Look Once.
 
@@ -72,7 +73,7 @@ But we could have multiple cells detecting the same object right ? Yes !
 To deal with this we use Non Max Suppression(NMS) , to find out the best fitting bounding box . NMS looks for the cell with highest confidence for a particular class of object . Then it discards off any object with IoU>0.6 (Intersection over Union) with the box selected previously. And this way we discard all the duplicate boxes for an object , and the best fitting one stays.
 
 Here is how it would look like :
-![Non Max Suppression to eliminate the duplicate boxes](./assets/non_max_supression.png)
+![Non Max Suppression to eliminate the duplicate boxes](./assets/non_max_suppresion.png)
 
 Coming to the training of the model :
 
