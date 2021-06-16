@@ -38,6 +38,9 @@ The major difference that repvgg architecture has as compared to for RESNET etc 
 
 # Results
 
+The REPVGG model results before and after reparametrizations .
+
+
 ## before reparamaterization 
 
 1hr 58min 43sec 80 epoch 
