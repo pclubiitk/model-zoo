@@ -3,6 +3,15 @@
 # Contributed by:
 * [Imad Khan](https://github.com/imad08)
 
+### Usage
+```bash
+$ python3 main.py 
+```
+NOTE: on Colab Notebook use following command:
+```python
+!git clone link-to-repo
+%run main.py 
+```
 
 # References
 
