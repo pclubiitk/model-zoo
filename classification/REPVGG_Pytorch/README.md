@@ -7,8 +7,7 @@ $ python3 main.py
 
 ## References
 
-* **Title**: StackGAN++: Realistic Image Synthesis
-with Stacked Generative Adversarial Networks
+* **Title**:RepVGG: Making VGG-style ConvNets Great Again
 * **Authors**: Xiaohan Ding,  Xiangyu Zhang,  Ningning Ma, 
 Jungong Han,  Guiguang Ding, Jian Sun 
 * **Link**: https://arxiv.org/pdf/2101.03697.pdf
