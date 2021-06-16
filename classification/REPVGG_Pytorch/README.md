@@ -19,15 +19,33 @@ Jungong Han,  Guiguang Ding, Jian Sun
 # Summary 
 
 REPVGG is a simple but powerful architecture of CNN which has a VGG like inference time .It runs 101% faster then 
-
+![a block in residual network](https://www.google.com/url?sa=i&url=https%3A%2F%2Fwww.arxiv-vanity.com%2Fpapers%2F2101.03697%2F&psig=AOvVaw1iXo5RHJKraeTNj0Hz1b8C&ust=1623949300283000&source=images&cd=vfe&ved=0CAIQjRxqFwoTCKC-udzQnPECFQAAAAAdAAAAABAD)
 ## Architecture of StackGAN
 
-### Reparametrization is key in REPVGG
 
 
+## model summary 
+Reparamateriztion is key in 
+### before reparamaterization 
 
-## model architecture summary 
+1hr 58min 43sec 80 epoch 
+accuracy approx 86%
 
+Total params: 15,681,066
+
+Trainable params: 15,681,066
+
+Non-trainable params: 0
+
+Params size (MB): 59.82
+
+Estimated Total Size (MB): 196.78
+
+### After reparametrization 
+
+1hr 0 min 33 se 
+
+accuracy 84%
 
 Total params: 7,041,194
 
