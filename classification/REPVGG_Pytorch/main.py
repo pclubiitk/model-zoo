@@ -50,7 +50,8 @@ def parse_args():
         ('multiplier', args.multiplier),
         ('depth', args.depth),
         ('blocks',args.blocks),
-        ('in_channels',args.in_channels)
+        ('in_channels',args.in_channels),
+        ('reparametriz',args.reparametrize}
     ])
 
     optim_config = OrderedDict([
@@ -83,50 +84,38 @@ def parse_args():
     return config
 
 
-config = parse_args()
+    config = parse_args()
 
-    
-model = REPVGG(blocks= config['model_config']['block'] , multipl = config['model_config']['multiplier'],in_channels=config['model_config']['in_channels'],num_classes= config['model_config']['numclasses'])
+    if config['model_config]['reparametriz'] == False :
+
+                model = REPVGG(blocks= config['model_config']['block'] , multipl = config['model_config']['multiplier'],in_channels=config['model_config']['in_channels'],num_classes= config['model_config']['numclasses'])
+
+    if config['model_config]['reparametriz'] == True :
+                model = REPVGG(blocks= config['model_config']['block'] , multipl = config['model_config']['multiplier'],in_channels=config['model_config']['in_channels'],num_classes= config['model_config']['numclasses'])
+                model.reparametrize()
 
 
-optimizer = torch.optim.Adam(params=model.parameters(),lr = config['optim_config']['base_lr'],weight_decay=config['optim_config']['weight_decay'])
-scheduler = torch.optim.lr_scheduler.MultiStepLR(optimizer,milestones=config['optim_config']['milestones'],gamma=config['optim_config']['lr_decay'])
-criterion = nn.CrossEntropyLoss()
-def train(model,epochs,trainloader,testloader,device,criterion,optimizer,scheduler):
-    for epoch in range(epochs):
-      for i, (images, labels) in enumerate(train_loader):
-    start_time = time.time()
-    images = images.to(device)
-    labels = labels.to(device)
-    outputs = model(images).to(device)
-    loss = criterion(outputs, labels)
-    optimizer.zero_grad()
-    loss.backward()
+    optimizer = torch.optim.Adam(params=model.parameters(),lr = config['optim_config']['base_lr'],weight_decay=config['optim_config']['weight_decay'])
+    scheduler = torch.optim.lr_scheduler.MultiStepLR(optimizer,milestones=config['optim_config']['milestones'],gamma=config['optim_config']['lr_decay'])
+    criterion = nn.CrossEntropyLoss()
+    def train(model,epochs,trainloader,testloader,device,criterion,optimizer,scheduler):
+                for epoch in range(epochs):
+                  for i, (images, labels) in enumerate(train_loader):
+                start_time = time.time()
+                images = images.to(device)
+                labels = labels.to(device)
+                outputs = model(images).to(device)
+                loss = criterion(outputs, labels)
+                optimizer.zero_grad()
+                loss.backward()
 
-    optimizer.step()
-    if (i+1) % 250 == 0:
-      elapsed_time = time.time() - start_time
-      total_time += elapsed_time
-      print ("Epoch {}, Step {} Loss: {:.4f} time : {:.4f}min".format(epoch+1, i+1, loss.item(),total_time))
-    return train_losses,test_losses,train_correct,test_correct
-
-def train_reparametrize(model.reparametrize(),epochs,trainloader,testloader,device,criterion,optimizer,scheduler):
-    for epoch in range(epochs):
-      for i, (images, labels) in enumerate(train_loader):
-    start_time = time.time()
-    images = images.to(device)
-    labels = labels.to(device)
-    outputs = model(images).to(device)
-    loss = criterion(outputs, labels)
-    optimizer.zero_grad()
-    loss.backward()
-
-    optimizer.step()
-    if (i+1) % 250 == 0:
-      elapsed_time = time.time() - start_time
-      total_time += elapsed_time
-      print ("Epoch {}, Step {} Loss: {:.4f} time : {:.4f}min".format(epoch+1, i+1, loss.item(),total_time))
-    return train_losses,test_losses,train_correct,test_correct
+                optimizer.step()
+                if (i+1) % 250 == 0:
+                  elapsed_time = time.time() - start_time
+                  total_time += elapsed_time
+                  print ("Epoch {}, Step {} Loss: {:.4f} time : {:.4f}min".format(epoch+1, i+1, loss.item(),total_time))
+                return train_losses,test_losses,train_correct,test_correct
+            
     
 device = config['run_config']['device']
 
