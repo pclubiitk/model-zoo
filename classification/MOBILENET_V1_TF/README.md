@@ -1,5 +1,14 @@
 # MobileNet_V1 implementation in Tensorflow for Image Classification
 
+## Libraries to be installed via pip ```py $ pip3 install _ ```
+
+* tensorflow
+* matplotlib
+* seaborn
+* pandas
+* numpy
+
+
 ## Train:
 ```py
    $ python3 main.py --epochs 40 --model mobilenetv1
