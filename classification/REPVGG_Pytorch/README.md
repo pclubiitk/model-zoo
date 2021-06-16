@@ -1,7 +1,7 @@
 # RepVGG: Making VGG-style ConvNets Great Again Pytorch Implementation
 
 # Contributed by:
-* [Imad Khan](https://github.com/imad08)
+# * [Imad Khan](https://github.com/imad08)
 
 ### Usage
 ```bash
