@@ -21,8 +21,8 @@ def BCEDiceLoss(outputs, labels, smooth=1e-5):
 
 # metrics
 def dice_coef(outputs, labels, smooth=1e-5):
-    outputs = torch.sigmoid(outputs).view(-1).data.numpy()
-    labels = labels.view(-1).data.numpy()
+    outputs = torch.sigmoid(outputs).view(-1).data.cpu().numpy()
+    labels = labels.view(-1).data.cpu().numpy()
     intersection = (outputs * labels).sum()
     
     dice =  (2. * intersection + smooth) / (outputs.sum() + labels.sum() + smooth)
@@ -30,9 +30,9 @@ def dice_coef(outputs, labels, smooth=1e-5):
 
 
 def iou(outputs, labels, smooth=1e-5):
-    outputs = torch.sigmoid(outputs).data.numpy()
+    outputs = torch.sigmoid(outputs).data.cpu().numpy()
     outputs = outputs > 0.5
-    labels = labels.data.numpy()
+    labels = labels.data.cpu().numpy()
     labels = labels > 0.5
     
     intersection = (outputs & labels).sum()
