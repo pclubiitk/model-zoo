@@ -31,7 +31,7 @@ $ pip3 install _
 
 ## Contributed by:
 
-* Rajarshi1001
+* [Rajarshi Dutta](https://github.com/Rajarshi1001)
 
 # Model Summary:
 
