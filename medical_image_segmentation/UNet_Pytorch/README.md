@@ -54,24 +54,32 @@ Convolutional Networks have existed for a long time. However, their success was 
 Convolutional Networks are typically used for classification tasks.
 However, in many visual tasks, especially in biomedical image processing, there is a need for image localization, i.e., a class label is supposed to be assigned to each pixel. Moreover, there is limited availability of training images in biomedical tasks. 
 
-In this paper, the authors build upon a “**fully convolutional network**”. They modified this architecture in such a way that it yields more precise segmentation by training it with very few images, as shown in figure 1. 
+In this paper, the authors build upon a “**fully convolutional network**”. They modified this architecture in such a way that it yields more precise segmentation by training it with very few images, as shown in figure 3. 
 * Their main idea was to supplement a usual contracting network by successive layers, where **upsampling operators replace pooling operators**. Hence, these layers increase the resolution of the output. In order to localize, **high-resolution features from the contracting path are combined with the upsampled output**. A successive convolution layer can then learn to assemble a more precise output based on this information. 
 * In the upsampling part, the authors used many feature channels, which allow the network to propagate context information to higher resolution layers.
 Consequently, the expansive path is more or less symmetric to the contracting path and yields a **u-shaped architecture**. 
-* The network does not have any fully connected layers. It only uses the valid part of each convolution, i.e., the segmentation map only contains the pixels, for which the whole context is available in the input image. This strategy allows the seamless segmentation of arbitrarily large images by **an overlap-tile strategy** (Figure 2). 
+* The network does not have any fully connected layers. It only uses the valid part of each convolution, i.e., the segmentation map only contains the pixels, for which the whole context is available in the input image. This strategy allows the seamless segmentation of arbitrarily large images by **an overlap-tile strategy** (Figure 1). 
 * To predict the pixels in the border region of the image, the missing context is extrapolated by mirroring the input image. This tiling strategy is vital to apply the network to large images since otherwise, the resolution would be limited by the GPU memory. 
+
+|![Architecture](https://github.com/ris27hav/model-zoo/blob/master/medical_image_segmentation/UNet_Pytorch/assets/fig2.png?raw=true)|
+|:--:|
+|(Fig. 1) Overlap-tile strategy for seamless segmentation of arbitrary large images. Prediction of the segmentation in the yellow area, requires image data within the blue area as input. Missing input data is extrapolated by mirroring.|
 
 If there is very little training data available, excessive data augmentation can be used by applying elastic deformations.  This is particularly important in biomedical segmentation since deformation used to be the most common variation in tissue, and realistic deformations can be simulated efficiently. 
 
 Another challenge in many cell segmentation tasks is separating touching objects of the same class, as shown in figure 3. The use of a weighted loss can fix this issue, where the separating background labels between touching cells obtain a considerable weight in the loss function.
 
+|![Architecture](https://github.com/ris27hav/model-zoo/blob/master/medical_image_segmentation/UNet_Pytorch/assets/fig3.png?raw=true)|
+|:--:|
+|(Fig. 2) HeLa cells on glass recorded with DIC (differential interference contrast) microscopy. (a) raw image. (b) overlay with ground truth segmentation. Different colors indicate different instances of the HeLa cells. (c) generated segmentation mask (white: foreground, black: background). (d) map with a pixel-wise loss weight to force the network to learn the border pixels.|
+
 ---
 
 ## Network-Architecture
 
-|![Architecture](https://lmb.informatik.uni-freiburg.de/people/ronneber/u-net/u-net-architecture.png)|
+|![Architecture](https://github.com/ris27hav/model-zoo/blob/master/medical_image_segmentation/UNet_Pytorch/assets/arch.png?raw=true)|
 |:--:|
-|(Fig. 1) U-net architecture (example for 32x32 pixels in the lowest resolution).|
+|(Fig. 3) U-net architecture (example for 32x32 pixels in the lowest resolution).|
 
 The network architecture consists of a contracting path (left side) and an expansive path (right side). 
 
@@ -88,11 +96,11 @@ To allow a seamless tiling of the output segmentation map, it is important to se
 This network was applied to the segmentation of neuronal structures in EM stacks, where it out-performed the other networks at that time. Furthermore, it was trained for cell segmentation in light microscopy images from the ISBI cell tracking challenge 2015. Here the authors won with a large margin on the two most challenging 2D transmitted light datasets.
 
 
-|![Results Table 1](https://github.com/ris27hav/model-zoo/blob/master/medical_image_segmentation/UNet++_Pytorch/assets/results1.png?raw=true)|
+|![Results Table 1](https://github.com/ris27hav/model-zoo/blob/master/medical_image_segmentation/UNet_Pytorch/assets/results1.png?raw=true)|
 |:--:|
 |(Table.1)  Ranking on the EM segmentation challenge (as of march 6th, 2015), sorted by warping error.|
 
-|![Results Table 2](https://github.com/ris27hav/model-zoo/blob/master/medical_image_segmentation/UNet++_Pytorch/assets/results1.png?raw=true)|
+|![Results Table 2](https://github.com/ris27hav/model-zoo/blob/master/medical_image_segmentation/UNet_Pytorch/assets/results2.png?raw=true)|
 |:--:|
 |(Table.2)  Segmentation results (IOU) on the ISBI cell tracking challenge 2015.|
 
