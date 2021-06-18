@@ -48,7 +48,7 @@ hist = model.fit(
 
 def plot_traingraph(hist):
 
-    epoch = range(70)
+    epoch = range(40)
     train_acc = hist.history["accuracy"]
     train_loss = hist.history["loss"]
     validation_acc = hist.history["val_accuracy"]
