@@ -2,7 +2,9 @@ import cv2
 import numpy as np
 import tensorflow as tf
 from generate_def_box import generate_def_box
-import ssd_utils
+from utils.ssd_utils import one_hot_class_label, match_gt_boxes_to_default_boxes
+from utils.bbox_util import encode_bboxes
+from utils.data_utils import read_sample
 
 scale = np.linspace(0.2, 0.9, 6)
 aspect_ratios = [[1.0, 2.0, 0.5], [1.0, 2.0, 0.5, 3.0, 0.33], [1.0, 2.0, 0.5, 3.0, 0.33], 
@@ -77,7 +79,7 @@ class SSD_DATA_GENERATOR(tf.keras.utils.Sequence):
 
         for batch_idx, sample_idx in enumerate(batch):
             image_path, label_path = self.samples[sample_idx].split(" ")
-            image, bboxes, classes = ssd_utils.read_sample(
+            image, bboxes, classes = read_sample(
                 image_path=image_path,
                 label_path=label_path
             )
@@ -99,9 +101,9 @@ class SSD_DATA_GENERATOR(tf.keras.utils.Sequence):
                 width = (abs(bbox[2] - bbox[0]) * width_scale) / self.input_size
                 height = (abs(bbox[3] - bbox[1]) * height_scale) / self.input_size
                 gt_boxes[i] = [cx, cy, width, height]
-                gt_classes[i] = ssd_utils.one_hot_class_label(classes[i], self.label_maps)
+                gt_classes[i] = one_hot_class_label(classes[i], self.label_maps)
 
-            matches, neutral_boxes = ssd_utils.match_gt_boxes_to_default_boxes(
+            matches, neutral_boxes = match_gt_boxes_to_default_boxes(
                 gt_boxes=gt_boxes,
                 default_boxes=default_boxes[:, :4],
                 match_threshold=self.match_threshold,
@@ -114,7 +116,7 @@ class SSD_DATA_GENERATOR(tf.keras.utils.Sequence):
             y[batch_idx, neutral_boxes[:, 1], self.num_classes: self.num_classes + 4] = gt_boxes[neutral_boxes[:, 0]]
             y[batch_idx, neutral_boxes[:, 1], 0: self.num_classes] = np.zeros((self.num_classes))  # neutral boxes have a class vector of all zeros
             # encode the bounding boxes
-            y[batch_idx] = ssd_utils.encode_bboxes(y[batch_idx])
+            y[batch_idx] = encode_bboxes(y[batch_idx])
             X.append(input_img)
 
         X = np.array(X, dtype=np.float)

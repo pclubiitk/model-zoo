@@ -5,7 +5,7 @@ from tensorflow.keras import Model
 from tensorflow.keras.layers import Conv2D, MaxPool2D, Input, Concatenate, Reshape, Activation
 import numpy as np
 from tensorflow.python.keras.backend import shape
-from ssd_utils import get_pred_4, get_pred_6
+from utils.ssd_utils import get_pred_4, get_pred_6
 
 def ssd_model():
     
@@ -118,8 +118,4 @@ def ssd_model():
 
     predictions = Concatenate(axis=-1, name='Predictions')([conf_act, loc, defau])
 
-    model = Model(inputs=input, outputs=predictions)
-    return model
-
-ssd_model1 = ssd_model()
-print(ssd_model1.summary()) 
+    return Model(inputs=input, outputs=predictions)
