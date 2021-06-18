@@ -1,5 +1,6 @@
 import numpy as np
 
+# function to evaluate IOU between two boxes
 def iou(bbox1, bbox2):
 
     # shape of both tensor is (num_box, 4) 

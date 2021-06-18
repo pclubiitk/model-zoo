@@ -14,6 +14,13 @@ variance = [0.1, 0.1, 0.2, 0.2]
 aspect_ratio_4 = [1.0, 2.0, 0.5]
 aspect_ratio_6 = [1.0, 2.0, 0.5, 3.0, 0.33]
 
+# The below 2 are custom functions, used in model architecture
+'''
+It takes the output of a feature map and returns three layers.
+First layer : Confidence scores for different classes.
+Second layer : Bounding Box Parameters for predictions.
+Third layer : Default Boxes layer corresponding to the feature map.
+'''
 def get_pred_4(input, scale1, next_scale1):
   
     conf_4 = Conv2D(4 * num_class, (3,3), padding='same')(input)
@@ -38,11 +45,17 @@ def get_pred_6(input, scale1, next_scale1):
 
     return conf_6, loc_6, def_box_6
 
+# Generates a label vector with value 1 corresponding to given class
 def one_hot_class_label(classname, label_maps):
     temp = np.zeros((len(label_maps)), dtype=np.int)
     temp[label_maps.index(classname)] = 1
     return temp
 
+'''
+As in SSD training, not all default boxes will correspond to an object.
+Hence we need to match default boxes with ground truth boxes ( here done by Jaccard overlap ).
+This function does the purpose and returns matched boxes.
+'''
 def match_gt_boxes_to_default_boxes(gt_boxes, default_boxes, match_threshold=0.5, neutral_threshold=0.3):
     gt_boxes = centre_to_corner(gt_boxes)
     default_boxes = centre_to_corner(default_boxes)

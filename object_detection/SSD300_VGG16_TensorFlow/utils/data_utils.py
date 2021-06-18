@@ -3,6 +3,8 @@ import cv2
 import xml.etree.ElementTree as ET
 import numpy as np
 
+# This function is used to load data
+# Path to image file, and xml_file are given as input, and it returns image, bounding_box, class as output
 def read_sample(image_path, label_path):
 
     image_path = image_path.strip("\n")
@@ -26,6 +28,8 @@ def read_sample(image_path, label_path):
         classes.append(name)
     return np.array(image, dtype=np.float), np.array(bboxes, dtype=np.float), classes
 
+# This function creates and returns a list of strings, each string contains the path of image_file and xml_file
+# It takes split file as input, which contain the names of image files in every new line
 def generate_samples_from_split(split_file, images_dir,  xml_dir):
 
     assert os.path.isfile(split_file), "split_file does not exists."

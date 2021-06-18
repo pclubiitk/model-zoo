@@ -1,5 +1,7 @@
+# This file contains utility functions for bounding boxes
 import numpy as np
 
+# Converts the bounding box parameters from (cx, cy, width, height) to (xmin, ymin, xmax, ymax) format
 def centre_to_corner(bbox):
     # bbox is having dimension (number_of_boxes, 4)
     
@@ -15,6 +17,7 @@ def centre_to_corner(bbox):
     
     return bbox2
 
+# Converts the bounding box parameters from (xmin, ymin, xmax, ymax) to (cx, cy, width, height)format
 def corner_to_centre(bbox):
 
     bbox2 = np.copy(bbox)
@@ -26,6 +29,7 @@ def corner_to_centre(bbox):
 
     return bbox2
 
+# This is a function to encode the true "y_value" so that it can be passes in model for training
 def encode_bboxes(y, epsilon=10e-5):
    
     gt_boxes = y[:, -12:-8]

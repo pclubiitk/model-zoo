@@ -7,6 +7,7 @@ import numpy as np
 from tensorflow.python.keras.backend import shape
 from utils.ssd_utils import get_pred_4, get_pred_6
 
+# The SSD model Architecture
 def ssd_model():
     
     #input shape is assumed to be 300x300x3
