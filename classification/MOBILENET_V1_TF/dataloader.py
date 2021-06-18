@@ -8,25 +8,18 @@ import os
 import matplotlib.pyplot as plt
 
 
-# ? to load datasets using load_cifar10()
-# ? This function creates a folder 'data' in the same directory which consists of a folder 'cifar10' which consists of 'train' and 'test' folder
-# ? the 'train' folder consists of 50000 images and labels  for training and the 'test' folder contains 10000 images and labels for testing.
-# ? Normalisation applied to the arrays to help the network to learn properly since all the pixel values are scaled down in such a way that
-# ? the overall mean is 1 and standard deviation is 0. This speeds up the learning and leades to faster convergence.
-
+# This function downloads the cifar10 dataset and displays the distribution of the data using a barplot and then applies data augmentations to the train and test 
+# set. Imageadatagenerator applies augmentations to the during its flow into the model, the original data on disk is unaffected.The funcions returns the 
+# train_generator and the test_generator.
 
 def load_cifar10():
-    #  dataset_url='https://s3.amazonaws.com/fast-ai-imageclas/cifar10.tgz'
-    #  download_url(dataset_url,'.')
-    #  with tarfile.open('./cifar10.tgz', 'r:gz') as tar:
-    #     tar.extractall(path='./data')
     # dataset is opened in the folder format in order to understand the distribution by ploting a barplot.
     url = "https://s3.amazonaws.com/fast-ai-imageclas/cifar10.tgz"
     response = requests.get(url, stream=True)
     file = tarfile.open(fileobj=response.raw, mode="r|gz")
     file.extractall(path=".")
 
-    # ? prints a barplot showing the distribution of training data.
+    # prints a barplot showing the distribution of training data.
     data_url = "cifar10"  # dadaset directory
     img_list = []
     class_list = []  # contains the 10 classes
@@ -50,7 +43,7 @@ def load_cifar10():
     # img_list contains the number of images present in the training sample
     # count_dict contains the key value pairs of the classes and the number of images belonging to that class in the training sample
 
-    # ? creates the train generator and test generator on which augmetations are applied while passing it to the network.
+    # creates the train generator and test generator on which augmetations are applied while passing it to the network.
     train_gen = ImageDataGenerator(
         rescale=1.0 / 255,
         shear_range=0.2,
