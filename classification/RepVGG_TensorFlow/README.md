@@ -1,4 +1,4 @@
-# RepVGG TensorFlow Implementation
+# RepVGG
 
 ## Usage
 ### Train & Test
@@ -9,7 +9,7 @@ Other models: A1, A2, B0, B1, B2, B3
 
 ### References
 * [RepVGG Paper](https://arxiv.org/pdf/2101.03697.pdf)
-* [Tensorflow Documentation on Custom Layers](https://www.tensorflow.org/tutorials/customization/custom_layers)
+* [Tensorflow Documentation on Custom Layers](https://www.tensorflow.org/tutorials/customization/custom_layers) 
 ### Contributed by:
 * [Aditya Tanwar](https://github.com/cliche-niche/)
 

@@ -27,7 +27,7 @@ arch = {
 l, a, b = arch[args.model]
 x_train, y_train, x_test, y_test = load()
 
-
+# Class for callbacks
 class mcb(tf.keras.callbacks.Callback):
     def on_epoch_end(self, epoch, logs={}):
         if logs.get("accuracy") > 0.95:

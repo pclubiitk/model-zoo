@@ -7,6 +7,7 @@ def load():
     trainIm = trainIm / 255.0
     testIm = testIm / 255.0
 
+    # Subtract the mean from the Dataset
     trainImMean = np.mean(trainIm, axis=0)
     trainIm -= trainImMean
     testIm -= trainImMean

@@ -1,47 +1,34 @@
 from tensorflow.keras import layers
-from tensorflow.keras import activations
-from tensorflow.keras import regularizers
+from lay import lay
 
 
 class stage(layers.Layer):
-    def __init__(self, filters, layer, bn=False):
+    def __init__(self, filters, layer):
+        """
+        filters:= The number of channels the layers must have
+        layer:= The number of layers in the stage
+        """
+
         super(stage, self).__init__()
-        self.dow3 = layers.Conv2D(
-            filters,
-            kernel_size=3,
-            strides=2,
-            padding="same",
-            kernel_regularizer=regularizers.l2(1e-4),
-        )
-        self.dow1 = layers.Conv2D(
-            filters, kernel_size=1, strides=2, kernel_regularizer=regularizers.l2(1e-4)
-        )
-        self.con3 = layers.Conv2D(
-            filters,
-            kernel_size=3,
-            padding="same",
-            kernel_regularizer=regularizers.l2(1e-4),
-        )
-        self.con1 = layers.Conv2D(
-            filters,
-            kernel_size=1,
-            padding="same",
-            kernel_regularizer=regularizers.l2(1e-4),
-        )
-        self.bn = layers.BatchNormalization() if bn else None
-        self.re = layers.Activation(activations.relu)
-        self.lay = layer
+        self.num = layer
+        self.lay = []
+        for i in range(self.num):
+            self.append(lay(filters, i == 0))
 
     def call(self, inp):
-        x = self.dow3(inp)
-        y = self.dow1(inp)
-        x = x + y
-        x = self.re(x)
-        for i in range(self.lay - 1):
-            y = self.con3(x)
-            z = self.con1(x)
-            x = x + y + z
-            x = self.re(x)
-        if self.bn is not None:
-            x = self.bn(x)
+        x = inp
+        for i in range(self.num):
+            x = self.lay[i](x)
         return x
+
+    def new_para(self):
+        """
+        Collects the weights of the stage layer-wise and returns them.
+        """
+        w = []
+        b = []
+        for i in range(self.num):
+            wi, bi = self.lay[i].parameters()
+            w.append(wi)
+            b.append(bi)
+        return w, b
