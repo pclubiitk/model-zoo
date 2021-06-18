@@ -6,9 +6,10 @@ from tensorflow.keras.models import Model
 from tensorflow.keras import Input
 from dataloader import load_cifar10
 from models import Mobilenet_v1, depthwise_conv, standard_conv
-from tensorflow.keras.models import load_model
 import matplotlib.pyplot as plt
 
+# This functions takes the arguement from the user needed to execute the training stage of the model on the cifar10 train dataset.
+# The default epochs is set to 40 and the model arguement is set to mobilenetv1.
 
 def take_args():
 
@@ -40,6 +41,10 @@ model.compile(
 hist = model.fit(
     train_ds, validation_data=test_ds, epochs=num_epochs, batch_size=64, verbose=1
 )
+
+
+# This functions plots the variation of training accuracy and validation accuracy in the first graph and then plots the variation between the training loss and 
+# the validation loss in the second graph.
 
 def plot_traingraph(hist):
 
