@@ -2,7 +2,7 @@
 
 ## Libraries to be installed via pip 
 ```py
-$ pip3 install _
+   pip3 install _
 ```
 
 * tensorflow
@@ -14,12 +14,12 @@ $ pip3 install _
 
 ## Train:
 ```py
-   $ python3 main.py --epochs 40 --model mobilenetv1
+   python3 main.py --epochs 40 --model mobilenetv1
 ```
 ## Test:
 ### run this code after training the model, the model will be saved as .h5 file in the directory
 ```py
-   $ python3 evaluate.py
+   python3 evaluate.py
 ```   
 
 ## References:
