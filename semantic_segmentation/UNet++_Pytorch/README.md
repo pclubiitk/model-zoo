@@ -63,7 +63,7 @@ This paper has introduced UNet++, a new, more powerful architecture to address t
 
 ## Network-Architecture
 
-|![Architecture](https://github.com/ris27hav/model-zoo/blob/581d674715a1ae4881825d993e3bfa0c3d05e9c5/semantic_segmentation/UNet++_Pytorch/assets/arch.jpeg?raw=true)|
+|![Architecture](https://github.com/ris27hav/model-zoo/blob/master/semantic_segmentation/UNet++_Pytorch/assets/arch.jpeg?raw=true)|
 |:--:|
 |(Fig.1) UNet++ Architecture (*left*) and UNet Architecture (*right*).|
 
