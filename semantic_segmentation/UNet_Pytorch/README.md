@@ -190,9 +190,7 @@ UNet(
 
 I trained the model for 90 epochs. Training for more epochs can definetely give better results. Loss and IoU graphs are given below:
 
-|![Results](https://github.com/ris27hav/model-zoo/blob/master/semantic_segmentation/UNet_Pytorch/assets/results3.png?raw=true)|
-|:--:|
-|
+![Results](https://github.com/ris27hav/model-zoo/blob/master/semantic_segmentation/UNet_Pytorch/assets/results3.png?raw=true)
 
 >Best IoU / Dice Coefficient obtained on train set :  **0.64 / 0.78**
 >
@@ -210,6 +208,4 @@ U-Net is able to do image localisation by predicting the image pixel by pixel. T
 >Results that I obtained can certainly be improved by training for more epochs. Furthermore, data-augmentation can also be used. Given below are some exapmles of predicted masks I obtained with this model. (not great, but good for starters)
 
 
-|![Outputs](https://github.com/ris27hav/model-zoo/blob/master/semantic_segmentation/UNet_Pytorch/assets/predictions.png?raw=true)|
-|:--:|
-|
+![Outputs](https://github.com/ris27hav/model-zoo/blob/master/semantic_segmentation/UNet_Pytorch/assets/predictions.png?raw=true)
