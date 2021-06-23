@@ -1,10 +1,8 @@
 # Implementation of Faster RCNN in Tensorflow
 
-## TODO
+## Downloading  Pascal VOC Dataset
 
-Create training and evaluation pipeline
-
-<!-- In colab notebook you can download and extract PASCAL VOC 2007 dataset by running following code :
+In colab notebook you can download and extract PASCAL VOC 2007 dataset by running following code :
 
 ```bash
 # Downloading training and validation dataset...
@@ -26,11 +24,20 @@ python3 train.py
 
 > **_NOTE:_** on Colab Notebook use following command:
 
+Install the required package,
+
+```bash
+!pip install pkbar
+```
+
+Then run following code in the cell which will start training and visualize predictions.
+
 ```python
 !git clone <link-to-repo>
+!mv /content/<cloned-folder-name>/* /content/
 %matplotlib inline
 %run train.py
-``` -->
+```
 
 ## Contributed by
 
@@ -74,55 +81,55 @@ Also, the feature network and the detection network is similar to that of Fast R
 
    This paper proposed a network called region proposal network (RPN) that can produce the region proposals. This has some advantages over the Selective Search Algorithm of Fast RCNN:
 
-   1. The region proposals are now generated using a network that could be trained and customized according to the detection task.
+   1. The region proposals are now generated using a network that could be trained end to end and can be customized according to the specific detection task.
    2. As the proposals are generated using a network, they can be trained end-to-end for customized detection task. Hence, it produces better region proposals compared to generic methods like Selective Search and EdgeBoxes.
-   3. The RPN processes the image using the same convolutional layers used in the Fast R-CNN detection network. Thus, the RPN does not take extra time to produce the proposals compared to the algorithms like Selective Search.
-   4. Due to sharing the same convolutional layers, the RPN and the Fast R-CNN can be merged/unified into a single network. Thus, training is done only once.
+   3. The RPN uses the same convolutional layers as the Fast R-CNN detection network to process the image. As a result, when compared to algorithms like Selective Search, the RPN takes less time to generate proposals.
+   4. The RPN and the Fast R-CNN may be combined into a single network since they share the same convolutional layers. As a result, training is only done once.
 
-The RPN works on the output feature map returned from the last convolutional layer shared with the Fast R-CNN. This is shown in the next figure. Based on a rectangular window of size nxn, a sliding window passes through the feature map. For each window, several candidate region proposals are generated. These proposals are not the final proposals as they will be filtered based on their "objectness score".
+The RPN uses the output feature map from the final convolutional layer shared with the Fast R-CNN to perform its task. A sliding window moves across the feature map based on a rectangular window of size nxn. A number of candidate region proposals are generated for each window. These are not the final proposals because they will be filtered according to their "objectivity score."
 
 ### 2-Concept of Anchor Boxes
 
-The feature map of the last shared convolution layer is passed through a rectangular sliding window of size nxn, where n=3 for the VGG-16 net. For each window, K region proposals are generated. Each proposal is parametrized according to a reference box which is called an anchor box. The parameters of the anchor boxes are scale & aspect ratio.
+The last shared convolution layer's feature map is passed via a rectangular sliding window of size nxn, with n=3 for the VGG-16 net. K region proposals are generated for each window. Each proposal is parametrized based on an anchor box, which is a reference box. Scale and aspect ratio are the parameters of the anchor box.
 
-Generally, there are 3 scales and 3 aspect ratios and thus there is a total of K=9 anchor boxes. But K may be different than 9. In other words, K regions are produced from each region proposal, where each of the K regions varies in either the scale or the aspect ratio.  Some of the anchor variations are shown in the next figure.
+Generally, there are 3 scales and 3 aspect ratios and thus there is a total of K=9 anchor boxes, while K may vary.
 
 ![4](./assets/anchor.jpeg)
 
 ### 3-Objectness Score
 
-The cls layer outputs a vector of 2 elements for each region proposal. If the first element is 1 and the second element is 0, then the region proposal is classified as background. If the second element is 1 and the first element is 0, then the region represents an object.
+For each region proposal, the classification layer generates a two-element vector. The region proposal is classified as background if the first element is 1 and the second element is 0, or as an object if the first element is 1 and the second element is 0.
 
-For training the RPN, each anchor is given a positive or negative objectness score based on the Intersection-over-Union (IoU).
+Each anchor is given a positive or negative objectness score based on the Intersection-over-Union method for training the RPN.
 
-The IoU is the ratio between the area of intersection between the anchor box and the ground-truth box to the area of union of the 2 boxes and ranges from 0.0 to 1.0. When there is no intersection, it is 0.0. As the 2 boxes get closer to each other, it increases until reaching 1.0 (when the 2 boxes are 100% identical).
+**NOTE**: The IoU is the ratio between the area of intersection between the anchor box and the ground-truth box to the area of union of the 2 boxes and ranges from 0.0 to 1.0.
 
-The given 4 conditions use the IoU to determine whether a positive or a negative objectness score is assigned to an anchor:
+The IoU is used in the following four conditions to determine whether an anchor receives a positive or negative objectness score:
 
-1. An anchor that has an IoU overlap higher than 0.7 with any ground-truth box is given a positive objectness label.
-2. If there is no anchor with an IoU overlap higher than 0.7, then assign a positive label to the anchor(s) with the highest IoU overlap with a ground-truth box.
-3. A negative objectness score is assigned to a non-positive anchor when the IoU overlap for all ground-truth boxes is less than 0.3. A negative objectness score means the anchor is classified as background.
-4. Anchors that are neither positive nor negative do not contribute to the training objective.
+1. A positive objectness label is assigned to an anchor with an IoU overlap greater than 0.7 and any ground-truth box.
+2. If no anchor has an IoU overlap greater than 0.7, use the ground-truth box to apply a positive label to the anchor with the largest IoU overlap.
+3. When the IoU overlap for all ground-truth boxes is less than 0, a non-positive anchor is given a negative objectness score. 3. If the anchor has a negative objectness score, it is considered background.
+4. Anchors that are neither positive nor negative are irrelevant for training.
 
 ### 4-Feature Sharing between RPN and Fast R-CNN
 
-The 2 modules in the Fast R-CNN architecture, namely the RPN and Fast R-CNN, are independent networks. Each of them can be trained separately. In contrast, for Faster R-CNN it is possible to build a unified network in which the RPN and Fast R-CNN are trained at once.
-
-The core idea is that both the RPN and Fast R-CNN share the same convolutional layers. These layers exist only once but are used in the 2 networks. It is possible to call it layer sharing or feature sharing. Remember that the anchors [3]
-are what makes it possible to share the features/layers between the 2 modules in the Faster R-CNN.
+The RPN and Fast R-CNN modules of the Fast R-CNN architecture are separate networks. Each of them may be individually trained. In the case of Faster R-CNN, however, it is feasible to create a unified network in which both the RPN and the Fast R-CNN are trained at the same time.
 
 **NOTE**: The following figure contains the detailed architecture of the model
 
 ![4](./assets/architecture_detailed.png)
 
-<!-- # Results
+# Results
 
-## Test images after 5 epochs(VOC 2007)
+## Predictions after 5 epochs(VOC 2007)
 
-![4](./assets/.png)
-![4](./assets/.png)
-![4](./assets/.png)
+As single epoch takes about an hour to complete on all classes in the dataset, model does not generalises well while giving predictions in a single epoch. Hence, one can train the model for multiple epochs on a subset of the dataset containing few classes. This would allow model to generalise on those classes giving some decent predictions.
+
+Here, bounding box predictions are red while the ground truth is green in color.
+
+![4](./assets/res0.png)
+![4](./assets/res1.png)
 
 ## Accuracy and speed of Model(VOC 2007)
 
-![4](./assets/.png) -->
+![4](./assets/eta.png)

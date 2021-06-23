@@ -1,7 +1,7 @@
 import tensorflow as tf
 
+#  Calculating the smooth l1 loss
 def smooth_l1_loss(pred_loc, gt_loc, in_weight, sigma):
-    # pred_loc, gt_loc, in_weight
     sigma2 = sigma ** 2
     sigma2 = tf.constant(sigma2, dtype=tf.float32)
     diff = in_weight * (pred_loc - gt_loc)
@@ -11,9 +11,8 @@ def smooth_l1_loss(pred_loc, gt_loc, in_weight, sigma):
     y = (flag * (sigma2 / 2.) * (diff ** 2) + (1 - flag) * (abs_diff - 0.5 / sigma2))
     return tf.reduce_sum(y)
 
-
+# Calculating localization loss
 def fast_rcnn_loc_loss(pred_loc, gt_loc, gt_label, sigma):
-
     idx = gt_label > 0
     idx = tf.stack([idx, idx, idx, idx], axis=1)
     idx = tf.reshape(idx, [-1, 4])

@@ -1,7 +1,7 @@
 import numpy as np
 import tensorflow as tf
 
-
+# Generate anchor base
 def generate_anchor_base(base_size=16, ratios=[0.5, 1, 2], anchor_scales=[8, 16, 32]):
 
     py = base_size / 2.
@@ -20,7 +20,7 @@ def generate_anchor_base(base_size=16, ratios=[0.5, 1, 2], anchor_scales=[8, 16,
 
     return anchor_base
 
-
+# Function name self explanatory
 def enumerate_shifted_anchor(anchor_base, feat_stride, height, width):
 
     shift_y = np.arange(0, height * feat_stride, feat_stride)
@@ -143,7 +143,6 @@ class AnchorTargetCreator(object):
 
 # Take back the anchors that are not completely within the picture that were removed in the front.
 def unmap(data, count, index, fill=0):
-    # Unmap a subset of item (data) back to the original set of items (of size count)
     if len(data.shape) == 1:
         ret = np.empty((count,), dtype=data.dtype)
         ret.fill(fill)

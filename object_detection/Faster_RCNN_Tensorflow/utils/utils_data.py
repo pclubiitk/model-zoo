@@ -2,8 +2,15 @@ import tensorflow as tf
 import os
 import xml.etree.ElementTree as ET
 import numpy as np
-from utils.config import config
 import matplotlib.pyplot as plt
+
+
+DATA_DIR = '/content/VOCdevkit/VOC2007'
+
+LABEL_NAMES = (
+    'aeroplane', 'bicycle', 'bird', 'boat', 'bottle', 'bus', 'car', 'cat',
+    'chair', 'cow', 'diningtable', 'dog', 'horse', 'motorbike', 'person',
+    'pottedplant', 'sheep', 'sofa', 'train', 'tvmonitor')
 
 #  Resizing images acc to paper such that long side does not exceed 1000, the short side does not exceed 600
 class Transform:
@@ -43,11 +50,6 @@ class Transform:
         scale = n_H / H
         return img, bbox, label, scale
 
-VOC_BBOX_LABEL_NAMES = (
-    'aeroplane', 'bicycle', 'bird', 'boat', 'bottle', 'bus', 'car', 'cat',
-    'chair', 'cow', 'diningtable', 'dog', 'horse', 'motorbike', 'person',
-    'pottedplant', 'sheep', 'sofa', 'train', 'tvmonitor')
-
 
 class VOCBboxDataset:
 
@@ -56,7 +58,7 @@ class VOCBboxDataset:
         id_list_file = os.path.join(data_dir, 'ImageSets/Main/{0}.txt'.format(split))
         self.ids = [id_.strip() for id_ in open(id_list_file)]
         self.data_dir = data_dir
-        self.label_names = VOC_BBOX_LABEL_NAMES
+        self.label_names = LABEL_NAMES
 
     def __len__(self):
         return len(self.ids)
@@ -69,12 +71,12 @@ class VOCBboxDataset:
         for obj in annotation.findall('object'):
             if int(obj.find('difficult').text) == 1:
                 continue
-            # The bounding box is the real box
+            
             bndbox_anno = obj.find('bndbox')
-            # Minus one is to make the coordinates start at 0
+            
             bbox.append([int(bndbox_anno.find(tag).text) - 1 for tag in ('ymin', 'xmin', 'ymax', 'xmax')])
             name = obj.find('name').text.lower().strip()
-            label.append(VOC_BBOX_LABEL_NAMES.index(name))
+            label.append(LABEL_NAMES.index(name))
 
         bbox = np.stack(bbox).astype(np.float32)
         label = np.stack(label).astype(np.int32)
@@ -91,8 +93,8 @@ class VOCBboxDataset:
 
 
 class Dataset:
-    def __init__(self, config):
-        self.db = VOCBboxDataset(config.voc_data_dir)
+    def __init__(self, DATA_DIR):
+        self.db = VOCBboxDataset(DATA_DIR)
         self.tsf = Transform()
 
     def __getitem__(self, idx):
@@ -110,7 +112,7 @@ class Dataset:
 # Simple visualizer function of bboxes with labels over image
 def vis(img, bboxes, labels):
     
-    img = img.numpy() #[-1,1]
+    img = img.numpy() 
     img = (img * 0.225) + 0.45
     fig = plt.figure()
     ax = fig.add_subplot(1, 1, 1)
@@ -124,6 +126,6 @@ def vis(img, bboxes, labels):
         height = y2 - y1
         width = x2 - x1
         ax.add_patch(plt.Rectangle((x1,y1), width, height, fill=False, edgecolor='red', linewidth=2))
-        ax.text(x1,y1,VOC_BBOX_LABEL_NAMES[labels[i]],style='italic',bbox={'facecolor': 'white', 'alpha': 0.5, 'pad': 0})
+        ax.text(x1,y1,LABEL_NAMES[labels[i]],style='italic',bbox={'facecolor': 'white', 'alpha': 0.5, 'pad': 0})
 
     return ax
