@@ -44,10 +44,13 @@ So we divide the image into patches. These are also referred to as tokens. The a
 
 We have MLP as the low level component which comprises of two fully connected layers, seperated by a GELU activation.
 ![MLP representation](/classification/MLP-Mixer_tensorflow/assets/MLP.png "MLP Block Representation")
+
 We have MLP Mixer block, which consists of two MLP's, each serving a different purpose. One of them would perform Token Mixing(mixing features among spatial locations), and the other one Channel Mixing(mixing features at the same location). Also we should notice here that this model also makes use of skip connections. And it makes use of Layer Normalization rather than Batch Normalization. Basic operations like transposing the matrix is also involved here
 ![Mixer Block Representation](/classification/MLP-Mixer_tensorflow/assets/mixer_block.png "Mixer Layer Representation")
+
 Finally the combination of generating patches, and then reshaping them to a 2D tensor, and then passing them through a number of Mixer Layers, and then finally through a Classifier head.
 ![Final Architecture Representation](/classification/MLP-Mixer_tensorflow/assets/final_layer.png "Final Architecture Representation")
+
 
 ```
 Model: "model"
@@ -118,5 +121,6 @@ ________________________________________________________________________________
 ---
 I trained the model on CIFAR-100 myself, And I have uploaded my weights in the models directory.
 Here's one result of the trained model,
-![Test predicitons](/classification/MLP-Mixer_tensorflow/assets/test.png "Test Prediction")
+![Test predicitons](/classification/MLP-Mixer_tensorflow/test.png "Test Prediction")
+
 We could have improved using much more efficient parameters.
