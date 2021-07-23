@@ -2,11 +2,7 @@
 
 ## Libraries to be installed via pip 
 ```py
-<<<<<<< HEAD
    $ pip3 install _
-=======
-$ pip3 install _
->>>>>>> 2eea6df691d302e182bb1ff8ec5af3542de562ba
 ```
 
 * tensorflow
