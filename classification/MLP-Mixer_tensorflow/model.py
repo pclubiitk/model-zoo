@@ -2,20 +2,23 @@ import tensorflow.keras as keras
 import tensorflow as tf
 import tensorflow.keras.layers as layers
 import tensorflow_addons as tfa
-
-from load_dataset import (
-    x_train,
-    x_test,
-    y_test,
-    y_train
-)
-
+import os
 
 # Parameters for the model
-positional_encoding=False
-learning_rate = 200
-num_classes = 100          
-input_shape = (32, 32, 3)   
+train_bool = False  # If you want to train the model
+test_display = (
+    True  # To display a random image and the prediction from the test dataset
+)
+
+# *** NOTE : CHANGE YOUR CHECKPOINT DIRECTORY ACCORDINGLY ***
+checkpoint_path = (
+    "/home/merp/Desktop/model-zoo/classification/MLP-Mixer_tensorflow/models/cp.ckpt"
+)
+# ***********************************************************
+positional_encoding = False
+num_classes = 100
+learning_rate = 1e-6
+input_shape = (32, 32, 3)
 weight_decay = 0.0001
 batch_size = 128
 num_epochs = 50
@@ -25,6 +28,9 @@ patch_size = 8  # Size of the patches to be extracted from the input images.
 num_patches = (image_size // patch_size) ** 2  # Size of the data array.
 embedding_dim = 256  # Number of hidden units.
 num_blocks = 4  # Number of blocks.
+
+from load_dataset import x_train, x_test, y_test, y_train
+
 
 def convert_to_patches(input):
     batch_size = tf.shape(input)[0]
@@ -38,6 +44,7 @@ def convert_to_patches(input):
     patch_dims = patches.shape[-1]
     patches = tf.reshape(patches, [batch_size, num_patches, patch_dims])
     return patches
+
 
 class Patches(layers.Layer):
     def __init__(self, patch_size, num_patches):
@@ -100,10 +107,12 @@ class MLPMixerLayer(layers.Layer):
         x = x + mlp2_outputs
         return x
 
+
 def compile_model(model):
     # Create Adam optimizer with weight decay.
     optimizer = tfa.optimizers.AdamW(
-        learning_rate=learning_rate, weight_decay=weight_decay,
+        learning_rate=learning_rate,
+        weight_decay=weight_decay,
     )
     # Compile the model.
     model.compile(
@@ -117,9 +126,54 @@ def compile_model(model):
     model.summary()
     return model
 
+
+def train_model(model, checkpoint_path):
+    # Create a learning rate scheduler callback.
+    reduce_lr = keras.callbacks.ReduceLROnPlateau(
+        monitor="val_loss", factor=0.5, patience=5
+    )
+    # Create an early stopping callback.
+    early_stopping = tf.keras.callbacks.EarlyStopping(
+        monitor="val_loss", patience=10, restore_best_weights=True
+    )
+
+    # Creating a model checkpoint callback, which saves it every 30 epochs
+    cp_callback = tf.keras.callbacks.ModelCheckpoint(
+        filepath=checkpoint_path, verbose=1, save_weights_only=True, save_freq=30
+    )
+
+    # To get the latest checkpoint file
+    checkpoint_dir = os.path.dirname(checkpoint_path)
+    latest = tf.train.latest_checkpoint(checkpoint_dir)
+
+    # Performing a check if we have a checkpoint file
+    if not ((latest) == None):
+        model.load_weights(latest)
+
+    # Fit the model.
+    trained_model = model.fit(
+        x=x_train,
+        y=y_train,
+        batch_size=batch_size,
+        epochs=num_epochs,
+        validation_split=0.1,
+        callbacks=[early_stopping, reduce_lr, cp_callback],
+    )
+
+    _, accuracy, top_5_accuracy = model.evaluate(x_test, y_test)
+    print(f"Test accuracy: {round(accuracy * 100, 2)}%")
+    print(f"Test top 5 accuracy: {round(top_5_accuracy * 100, 2)}%")
+
+    # Return history to plot learning curves.
+    return trained_model
+
+
 def build_model():
     mlpmixer_blocks = keras.Sequential(
-        [MLPMixerLayer(num_patches, embedding_dim, dropout_rate) for _ in range(num_blocks)]
+        [
+            MLPMixerLayer(num_patches, embedding_dim, dropout_rate)
+            for _ in range(num_blocks)
+        ]
     )
 
     inputs = layers.Input(shape=input_shape)
@@ -159,7 +213,6 @@ def build_model():
     logits = layers.Dense(num_classes)(representation)
     # Create the Keras model.
     mlpmixer_classifier = keras.Model(inputs=inputs, outputs=logits)
-
 
     # mlpmixer_classifier = build_classifier(mlpmixer_blocks)
     my_model = compile_model(mlpmixer_classifier)
