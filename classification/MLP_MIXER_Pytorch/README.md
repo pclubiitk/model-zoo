@@ -30,39 +30,45 @@ Daniel Keysers, Jakob Uszkoreit, Mario Lucic, Alexey Dosovitskiy
 
 # Summary 
 
-MLP Mixer is based on multi layer perceptron it does not use modern days CNN , It has two kinds of multi layer preceptrons one is directly applied to image patches , which are created original image then we transpose the layer and apply MLP layer across patches [here](https://github.com/imad08/model-zoo-submissions/blob/main/REPVGG/REPVGG_with_complete_reparamaterization_.ipynb) 
+MLP Mixer is based on multi layer perceptron it does not use modern days CNN , It has two kinds of multi layer preceptrons one is directly applied to image patches , which are created original image then we transpose the layer and apply MLP layer across patches [here](https://github.com/imad08/MLP-Mixer/blob/main/MLP.ipynb) In the extreme case, Multi layer perceptron architecture can be seen as a very special CNN, which uses 1×1 convolutions
+for channel mixing, and single-channel depth-wise convolutions of a full receptive field and parameter
+sharing for token mixing. However, the converse is not true as typical CNNs are not special cases of
+Mixer. Furthermore, a convolution is more complex than the plain matrix multiplication in MLPs as
+it requires an additional costly reduction to matrix multiplication and/or specialized implementation.
 
-![fusing batch normalization and convolutions for reparametrization](https://media.arxiv-vanity.com/render-output/4507333/x1.png)
+# Architecture of MLP
 
-# Architecture of REPVGG
-
-REPVGG heavily use 3x3 kernels and it has plain topology ,and it does not uses maxpool 2d the reason is author wants that the architecture has same kind of operators . In REPVGG we arrange 5 block architecture we can say that one stage , which uses 3x3 kernels and BatchNorm layers . In first layer of ech stage down the sample using the stride of (2,2). the first stage operates with large resolution hence in first stage block we just use one layer for lower latency . last stages has most channels.And most number of layers is in second last stage same as previous resnet architectures .
-
-![main_architecture specifications](https://github.com/imad08/model-zoo/blob/master/classification/REPVGG_Pytorch/Assets/Screenshot%20(2863).png)
-![REPVGG Architecture](https://media.arxiv-vanity.com/render-output/4507333/x3.png)
-
-
- 
-# Reparamateriztion is key in repvgg
-
-The major difference that repvgg architecture has as compared to for RESNET etc , is the state of the art reparametrization . There are various kind of reparametrization removes batchnorm from Identity , Post addition of Batch Norm addition of ReLU in branches addition of 1X1 kernel . Most important reparametrization is fusing of kernel and BN in block. 
+Figure depicts the macro-structure of Mixer. It accepts a sequence of linearly projected image
+patches (also referred to as tokens) shaped as a “patches × channels” table as an input, and maintains
+this dimensionality. Mixer makes use of two types of MLP layers as told above one is applied to image patches , which are created original image then we transpose the layer and apply MLP layer across patches  . The channel-mixing MLPs allow communication between different channels; It is similar to attention models. 
 
 
-![fusing batch normalization and convolutions for reparametrization](https://pic3.zhimg.com/80/v2-686b26f8a41b54c10d76d7a90a6d8bbe_1440w.jpg)
+![main architecture](https://github.com/imad08/model-zoo/blob/master/classification/MLP_MIXER_Pytorch/assets/Screenshot%20(2961).png)
+# How perceptrons layers of multiple patches are mixed
+ Modern deep vision architectures consist of layers that mix features (i) at a given spatial location,
+(ii) between different spatial locations, or both at once. In CNNs, (ii) is implemented with N × N
+convolutions (for N > 1) and pooling. Neurons in deeper layers have a larger receptive field [1, 28].
+At the same time, 1×1 convolutions also perform (i), and larger kernels perform both (i) and (ii).
+In Vision Transformers and other attention-based architectures, self-attention layers allow both (i)
+and (ii) and the MLP-blocks perform (i). The idea behind the Mixer architecture is to clearly separate
+the per-location (channel-mixing) operations (i) and cross-location (token-mixing) operations (ii).
+Both operations are implemented with MLPs.
+![single block of mlp](https://github.com/imad08/model-zoo/blob/master/classification/MLP_MIXER_Pytorch/assets/Screenshot%20(2963).png)
+
 
 # Results
 data - cifar 10 
 
-1hr 58min 43sec 80 epoch 
-accuracy approx 86%
+2hr 28min 43sec 80 epoch 
+accuracy approx 90.1%
 
-Total params: 15,681,066
-
-Trainable params: 15,681,066
-
+Total params: 6,782,858
+Trainable params: 6,782,858
 Non-trainable params: 0
 
-Params size (MB): 59.82
-
-Estimated Total Size (MB): 196.78
+----------------------------------------------------------------
+Input size (MB): 0.01
+Forward/backward pass size (MB): 87.15
+Params size (MB): 25.87
+Estimated Total Size (MB): 113.04
 
