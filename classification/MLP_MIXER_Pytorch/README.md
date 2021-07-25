@@ -30,11 +30,12 @@ Daniel Keysers, Jakob Uszkoreit, Mario Lucic, Alexey Dosovitskiy
 
 # Summary 
 
-MLP Mixer is based on multi layer perceptron it does not use modern days CNN , It has two kinds of multi layer preceptrons one is directly applied to image patches , which are created original image then we transpose the layer and apply MLP layer across patches [here](https://github.com/imad08/MLP-Mixer/blob/main/MLP.ipynb) In the extreme case, Multi layer perceptron architecture can be seen as a very special CNN, which uses 1×1 convolutions
+MLP Mixer is based on multi layer perceptron it does not use modern days CNN , It has two kinds of multi layer preceptrons one is directly applied to image patches , which are created original image then we transpose the layer and apply MLP layer across patches In the extreme case, Multi layer perceptron architecture can be seen as a very special CNN, which uses 1×1 convolutions
 for channel mixing, and single-channel depth-wise convolutions of a full receptive field and parameter
 sharing for token mixing. However, the converse is not true as typical CNNs are not special cases of
 Mixer. Furthermore, a convolution is more complex than the plain matrix multiplication in MLPs as
 it requires an additional costly reduction to matrix multiplication and/or specialized implementation.
+If you want to see training of cifar10 dataset using above architecture you can refer [here](https://github.com/imad08/MLP-Mixer/blob/main/MLP.ipynb)
 
 # Architecture of MLP
 
