@@ -25,11 +25,11 @@ $ pip3 install *
 
 ## References:
 
-* __Title__: Xception:Deep Learning with Depthwise Separable Convolutions.
-* __Author__: François Chollet.
-* __Paper_Link__:[Xception Paper](https://arxiv.org/pdf/1610.02357.pdf).
-* __Tags__: Image Classification.
-* __Year__:2016
+* __Title__:  Xception:Deep Learning with Depthwise Separable Convolutions.
+* __Author__:  François Chollet.
+* __Paper_Link__:  [Xception Paper](https://arxiv.org/pdf/1610.02357.pdf).
+* __Tags__:  Image Classification.
+* __Year__: 2016
 
 
 ## Contributed by:-
@@ -80,6 +80,6 @@ Some of the basic features of the Xception model from standard depthwise convs:
 * Initially started the training process for 10 epochs using model.fit() method and obtained a training accuracy of 87%.
 * Obtained an accuracy of 81% on the test data.
 
-                                                                    --------------x---------------
+                                                            --------------x---------------
 
 
