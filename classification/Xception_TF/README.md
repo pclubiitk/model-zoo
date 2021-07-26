@@ -28,6 +28,7 @@ $ pip3 install *
 * __Title__:  Xception:Deep Learning with Depthwise Separable Convolutions.
 * __Author__:  François Chollet.
 * __Paper_Link__:  [Xception Paper](https://arxiv.org/pdf/1610.02357.pdf).
+* __Blog Link__ :  [Review: Xception](https://towardsdatascience.com/review-xception-with-depthwise-separable-convolution-better-than-inception-v3-image-dc967dd42568)
 * __Tags__:  Image Classification.
 * __Year__: 2016
 
