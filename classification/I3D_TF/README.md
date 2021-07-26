@@ -12,15 +12,10 @@
 
 This model has been pre-trained on both `RGB` and `Optical Flow` channels data for Action Classifcation.The I3D-Model has weights already trained on both only kinetics-400 dataset and both kinetics and imagenet datasets.Pass the Arguements in order to train accordingly.
 
-`rgb I3D Model` having weights pre-trained on:
+`rgb I3D Model` and `Optical_flow I3D Model`  having weights pre-trained on:
 
     Kinetics-400 Dataset only
-    Kinetics-400 and Imagenet Datasets
-`Optical_flow I3D Model` having weights pre-trained on:
-
-    Kinetics-400 Dataset only
-    Kinetics-400 and Imagenet Datasets   
-
+    Kinetics-400 and Imagenet Datasets 
 ### Evaluate the model:
 
 ```py
@@ -57,6 +52,8 @@ $ python3 evaluate.py --type both --pretrain bothsets
 <u><h2>Model Summary:</h2></u>
 
 <u><h3>Introduction:</h3></u>
+
+We also introduce a new Two-Stream Inflated 3D ConvNet (I3D) that is based on 2D ConvNet inflation: filters and pooling kernels of very deep image classification ConvNets are expanded into 3D, making it possible to learn seamless spatio-temporal feature extractors from video while leveraging successful ImageNet architecture designs and even their parameters. We show that, after pre-training on Kinetics, I3D models considerably improve upon the state-of-the-art in action classification, reaching `80.9%` on `HMDB-51` and `98.0%` on `UCF-101`.
 
 This architecture is basically an extension of the state-of-the art image classifier `Inception-V1` model by expanding the convolutional layers ,maxpooling layers from 2D to 3D in order by addition of a `temporal dimension` in order to learn spacio-temporal features.The model also adopts a 2-stream configuration, that is 3D convnets can directly learn spacio-temporal features from a `RGB Stream` but their performance can br increased by the addition of an `Optical flow Stream`. Due to the high dimensionality of their parameterization and the lack of labeled video data, previous 3D ConvNets have been relatively shallow (up to 8 layers). Here we make the observation that very deep image classification networks, suchas Inception, VGG-16 and ResNet can be trivially inflated into `spatio-temporal feature extractors`, and that their pre-trained weights provide a valuable initialization. We also find that a `two-stream configuration` is still useful.Many of these models (all but C3D) have an Imagenet pre-trained model as a subcomponent.
 
