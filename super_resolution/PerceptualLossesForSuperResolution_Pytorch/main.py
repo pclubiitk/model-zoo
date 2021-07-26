@@ -95,7 +95,7 @@ def main():
             c_target = transforms.CenterCrop(config.image_size)(c_target)
 
         Image.Image.save(
-            Image.fromarray(c_target.numpy().transpose(1, 2, 0)),
+            c_target,
             config.sample_path + "sample_target.jpg",
         )
 

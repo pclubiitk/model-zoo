@@ -100,7 +100,7 @@ def stylize(config, dataloader, stnet, samples=5):
 
 def train_sr(config, dataloader, srnet, lossnet, optimizer, c_x):
     steps = 0
-    net_content_loss, net_reg_loss = [0.0], [0.0], [0.0]
+    net_content_loss, net_reg_loss = [0.0], [0.0]
 
     srnet.train()
     while True:
