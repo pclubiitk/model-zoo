@@ -1,4 +1,4 @@
-# Show And Tell :  A Neural Image Caption Generator ( In Tensorflow )
+# Show And Tell :  A Neural Image Caption Generator
 
 ### Contributed By:
 [Akhil Agrawal](https://github.com/akhilagrawal1001/)
