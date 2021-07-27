@@ -44,7 +44,7 @@ patches (also referred to as tokens) shaped as a “patches × channels” table
 this dimensionality. Mixer makes use of two types of MLP layers as told above one is applied to image patches , which are created original image then we transpose the layer and apply MLP layer across patches  . The channel-mixing MLPs allow communication between different channels; It is similar to attention models. 
 
 
-![main architecture](https://github.com/imad08/model-zoo/blob/master/classification/MLP_MIXER_Pytorch/assets/Screenshot%20(2961).png)
+![main architecture](https://github.com/imad08/model-zoo/blob/master/classification/MLP/assets/Screenshot%20(2961).png)
 # How perceptrons layers of multiple patches are mixed
  Modern deep vision architectures consist of layers that mix features (i) at a given spatial location,
 (ii) between different spatial locations, or both at once. In CNNs, (ii) is implemented with N × N
@@ -54,13 +54,13 @@ In Vision Transformers and other attention-based architectures, self-attention l
 and (ii) and the MLP-blocks perform (i). The idea behind the Mixer architecture is to clearly separate
 the per-location (channel-mixing) operations (i) and cross-location (token-mixing) operations (ii).
 Both operations are implemented with MLPs.
-![single block of mlp](https://github.com/imad08/model-zoo/blob/master/classification/MLP_MIXER_Pytorch/assets/Screenshot%20(2963).png)
+![single block of mlp](https://github.com/imad08/model-zoo/blob/master/classification/MLP/assets/Screenshot%20(2963).png)
 
 
 # Results
 data - cifar 10 
 
-![results][]
+![results](https://github.com/imad08/model-zoo/blob/master/classification/MLP/assets/Screenshot%20(2965).png)
 
 ----------------------------------------------------------------
         Layer (type)               Output Shape         Param #
