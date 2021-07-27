@@ -54,7 +54,7 @@ In Vision Transformers and other attention-based architectures, self-attention l
 and (ii) and the MLP-blocks perform (i). The idea behind the Mixer architecture is to clearly separate
 the per-location (channel-mixing) operations (i) and cross-location (token-mixing) operations (ii).
 Both operations are implemented with MLPs.
-![single block of mlp](https://github.com/imad08/model-zoo/blob/master/classification/MLP/assets/Screenshot%20(2963).png)
+![single block of mlp](https://github.com/imad08/model-zoo/blob/master/classification/MLPMixer_Pytorch/assets/Screenshot%20(2963).png)
 
 
 # Results
