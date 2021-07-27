@@ -88,7 +88,7 @@ def parse_args():
 
 config = parse_args()
 
-model = REPVGG(
+model = MLPMixer(
         input_size=config["model_config"]["input_size"],
         patch=config["model_config"]["patch"],
         dim =config["model_config"]["dimension"],
