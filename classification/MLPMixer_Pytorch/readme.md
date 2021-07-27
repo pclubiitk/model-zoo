@@ -60,6 +60,8 @@ Both operations are implemented with MLPs.
 # Results
 data - cifar 10 
 acurracy aprox 90.1%
+
+
 ![results](https://github.com/imad08/model-zoo/blob/master/classification/MLPMixer_Pytorch/assets/Screenshot%20(2965).png)
 
 ----------------------------------------------------------------
