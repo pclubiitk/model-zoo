@@ -60,7 +60,7 @@ Both operations are implemented with MLPs.
 # Results
 data - cifar 10 
 
-![results](https://github.com/imad08/model-zoo/blob/master/classification/MLP/assets/Screenshot%20(2965).png)
+![results](https://github.com/imad08/model-zoo/blob/master/classification/MLPMixer_Pytorch/assets/Screenshot%20(2965).png)
 
 ----------------------------------------------------------------
         Layer (type)               Output Shape         Param #
