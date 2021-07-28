@@ -20,7 +20,7 @@ Run `main.py` for looking at the results.
 `$ python3 main.py`
 ### Contributed by:
 ---
-+[Prem Bharwani](https://github.com/prembharwani)
+* [Prem Bharwani](https://github.com/prembharwani)
 ### References
 ---
 * Title: MLP-Mixer: An all-MLP Architecture for Vision
