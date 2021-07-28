@@ -17,7 +17,7 @@ $ tar -xvf VOCtest_06-Nov-2007.tar
 
 - The results are stored in the results.npy file 
 ## Contributed by 
-* [Prem Bharwani](https://github.com/dirtbkr)
+* [Prem Bharwani](https://github.com/prembharwani)
 ## References 
  Research Paper Referred to : 
 - **Title** : You Only Look Once: Unified, Real-Time Object Detection
