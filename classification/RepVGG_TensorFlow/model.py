@@ -51,65 +51,7 @@ class repvgg(tf.keras.Model):
         x = layers.Input(shape=inp[0].shape)
         return tf.keras.Model(inputs=x, outputs=self.call(x))
 
-    def rep(self):
-        """
-        Returns the weights of the whole model.
-        a0, a1 = Weights of augmentation layers
-        w = contains all the kernels of the model stage-wise
-        b = contains all the biases of the model stage-wise
-        """
-
-        a0 = self.aug.get_layer(index=0).get_weights()
-        a1 = self.aug.get_layer(index=1).get_weights()
-        w = []
-        b = []
+    def repara(self):
         for i in range(5):
-            wi, bi = self.st[i].new_para()
-            w.append(wi)
-            b.append(bi)
-        d = self.end.get_weights()
-        return a0, a1, w, b, d
-
-    def inf(self):
-        """
-        Returns an inference-time model corresponding to the trained model,
-        using weights from self.rep()
-        """
-        inf_model = tf.keras.Sequential()
-
-        a0, a1, w, b, d = self.rep()
-
-        inf_model.add(layers.experimental.preprocessing.RandomCrop(32, 32, weights=a0))
-        inf_model.add(
-            layers.experimental.preprocessing.RandomFlip(
-                "horizontal_and_vertical", weights=a1
-            )
-        )
-
-        for i in range(5):
-            for j in range(self.l[i]):
-                if j == 0:
-                    inf_model.add(
-                        layers.Conv2D(
-                            self.f[i],
-                            kernel_size=3,
-                            strides=2,
-                            padding="same",
-                            weights=[w[i][j], b[i][j]],
-                        )
-                    )
-                    inf_model.add(layers.Activation(activations.relu))
-                else:
-                    inf_model.add(
-                        layers.Conv2D(
-                            self.f[i],
-                            kernel_size=3,
-                            padding="same",
-                            weights=[w[i][j], b[i][j]],
-                        )
-                    )
-                    inf_model.add(layers.Activation(activations.relu))
-
-        inf_model.add(layers.GlobalAveragePooling2D())
-        inf_model.add(layers.Dense(units=10, activation="softmax", weights=d))
-        return inf_model
+            self.st[i].repara()
+        return

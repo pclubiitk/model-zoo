@@ -55,5 +55,7 @@ history = model.fit(
     callbacks=[cb],
 )
 
+model.repara()
 
+model.evaluate(x_train, y_train)
 model.evaluate(x_test, y_test)

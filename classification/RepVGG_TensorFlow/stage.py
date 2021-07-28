@@ -13,7 +13,7 @@ class stage(layers.Layer):
         self.num = layer
         self.lay = []
         for i in range(self.num):
-            self.append(lay(filters, i == 0))
+            self.lay.append(lay(filters, i == 0))
 
     def call(self, inp):
         x = inp
@@ -21,14 +21,7 @@ class stage(layers.Layer):
             x = self.lay[i](x)
         return x
 
-    def new_para(self):
-        """
-        Collects the weights of the stage layer-wise and returns them.
-        """
-        w = []
-        b = []
+    def repara(self):
         for i in range(self.num):
-            wi, bi = self.lay[i].parameters()
-            w.append(wi)
-            b.append(bi)
-        return w, b
+            self.lay[i].repara()
+        return
