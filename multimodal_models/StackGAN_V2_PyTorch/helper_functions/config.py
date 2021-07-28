@@ -1,0 +1,13 @@
+stage1Res = 64
+stage3Res = 256
+channels = 3
+inception = False
+textDim = 1024
+numEmbedding = 4
+embeddingsDim = 128
+generatorDim = 64
+discriminatorDim = 64
+generatorLR = 2e-4
+discriminatorLR = 2e-4
+KL = 2
+rowsColums = 4
