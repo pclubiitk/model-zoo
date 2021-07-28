@@ -16,11 +16,13 @@ Now conifgure the parameters in the `model.py` file, Please note that I have pro
 
 If you're wanting to train the network by yourself, set the `train_bool = True` in `model.py` .
 
-Run `main.py` for looking at the results.
-`$ python3 main.py`
+Finally, You will have to run the `main.py` file to get the output according to your preferences entered.
+
+`$ python main.py`
+
 ### Contributed by:
 ---
-* [Prem Bharwani](https://github.com/prembharwani)
++[Prem Bharwani](https://github.com/prembharwani)
 ### References
 ---
 * Title: MLP-Mixer: An all-MLP Architecture for Vision
@@ -121,6 +123,6 @@ ________________________________________________________________________________
 ---
 I trained the model on CIFAR-100 myself, And I have uploaded my weights in the models directory.
 Here's one result of the trained model,
-![Test predicitons](/classification/MLP-Mixer_tensorflow/assets/test.png "Test Prediction")
+![Test predicitons](/classification/MLP-Mixer_tensorflow/test.png "Test Prediction")
 
 We could have improved using much more efficient parameters.
