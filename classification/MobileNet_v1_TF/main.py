@@ -13,9 +13,9 @@ import matplotlib.pyplot as plt
 
 def take_args():
 
-    parser = argparse.ArguementParser()
+    parser = argparse.ArgumentParser()
     parser.add_argument("--epochs", type=int, default=40)
-    parser.add_arguement("--model", type=str, default="mobilenetv1")
+    parser.add_argument("--model", type=str, default="mobilenetv1")
     args = parser.parse_args()
 
     num_epochs = args.epochs
