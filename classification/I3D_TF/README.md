@@ -103,3 +103,5 @@ like human-object,human-human interactions like washing dishes, moving lawns, op
 
 * The model couldn't be trained because of the huge size of the datasets and lack of resources(GPUs) so I have decided to use the weights of the model pre-trained on the         kinetics-400 and the imagenet datasets.
 
+* The sample gif is taken from the officla Deepmind repository for I3D model. [Data Link Here](https://github.com/deepmind/kinetics-i3d/tree/master/data)
+
