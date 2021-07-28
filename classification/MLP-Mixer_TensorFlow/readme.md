@@ -121,6 +121,6 @@ ________________________________________________________________________________
 ---
 I trained the model on CIFAR-100 myself, And I have uploaded my weights in the models directory.
 Here's one result of the trained model,
-![Test predicitons](/classification/MLP-Mixer_tensorflow/test.png "Test Prediction")
+![Test predicitons](/classification/MLP-Mixer_tensorflow/assets/test.png "Test Prediction")
 
 We could have improved using much more efficient parameters.
