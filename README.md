@@ -2,7 +2,9 @@
 
 This repository contains implementations of various deep learning research papers.
 
-The models are broadly categorised into the folders [Generative](/generative_models) (e.g. various generative models), [NLP](/NLP) (e.g. various recurrent neural networks (RNNs) and natural language processing (NLP) models), [Classification](/classification) (e.g. various CNN models to classify images), [Object Detection](/object_detection), [Multimodal](/multimodal_models) , [Super resolution](/super_resolution) , [3D Computer Vision](/vision3d). See the READMEs of respective models for more information.
+The models are broadly categorised into the folders [Generative](/generative_models) (e.g. various generative models), [NLP](/NLP) (e.g. various recurrent neural networks (RNNs) and natural language processing (NLP) models), [Classification](/classification) (e.g. various CNN models to classify images), [Object Detection](/object_detection), [Multimodal](/multimodal_models) , [Super resolution](/super_resolution) , [3D Computer Vision](/vision3d),
+ [Semantic Segmentation](/semantic_segmentation).
+ See the READMEs of respective models for more information.
 
 ## Model Listing
 
@@ -29,19 +31,37 @@ The models are broadly categorised into the folders [Generative](/generative_mod
 * classification
   * ResNet [PyTorch](classification/ResNet_PyTorch)
   * T3D ConvNets [TensorFlow](classification/T3D_TensorFlow)
+  * Inception_V1 [PyTorch](classification/Inception-V1_PyTorch)   [Tensorflow](classification/Inception-v1_Tensorflow)
+  * Inception_V3 [PyTorch](classification/Inception-V3_PyTorch)
+  * Xception [Tensorflow](classification/Xception_TF)
+  * MLP_Mixer [PyTorch](classification/MLP-Mixer_PyTorch) [Tensorflow](classification/MLP-Mixer_TensorFlow)
+  * MobileNet_V1 [Tensorflow](classification/MobileNet_v1_TF)
+  * I3D [Tensorflow](vision3d/I3D_TF)
+  * RepVGG [Tensorflow](classifcation/RepVGG_TensorFlow) [PyTorch](classifcation/RepVGG_PyTorch)
 * Multimodal models
   * StackGAN [PyTorch](multimodal_models/StackGAN_PyTorch)
   * VQA [TensorFlow](multimodal_models/VQA_TensorFlow)
   * WaveGAN [TensorFlow](multimodal_models/WaveGAN_TensorFlow)
-  * ImageCaption [TensorFlow](multimodal_models/ImageCaption_TensorFlow) [PyTorch](multimodal_models/ImageCaption_PyTorch)
+  * ImageCaption [TensorFlow](multimodal_models/ImageCaption_TensorFlow) [PyTorch](multimodal_models/ImageCaption_PyTorch) 
+  * Show and Tell [PyTorch](multimodal_models/ShowAndTell_PyTorch)
+  * StackGAN_V1 [Tensorflow](multimodal_models/StackGAN-v1_Tensorflow)
+  * StackGAN_V2 [PyTorch](multimodal_models/StackGAN_V2_PyTorch)
+* Semantic Segmentation
+  * UNet [Pytorch](semantic_segmentation/UNet_PyTorch)
+  * UNet++ [Pytorch](semantic_segmentation/UNet++_PyTorch)
 * Object detection
   * YOLOv2 [TensorFlow](object_detection/YOLOv2_TensorFlow)
   * YOLOv3 [TensorFlow](object_detection/YOLOv3_TensorFlow)
+  * YOLOv1 [Tensorflow](object_detection/YOLOv1_TensorFlow)
+  * Faster_RCNN [Tensorflow](object_detection/Faster_RCNN_Tensorflow)
+  * SSD [Tensorflow](object_detection/SSD300_VGG16_TensorFlow)
 * Super resolution
   * ContextEncoder [TensorFlow](super_resolution/ContextEncoder_TensorFlow) [PyTorch](super_resolution/ContextEncoder_PyTorch)
   * SRGAN [TensorFlow](super_resolution/SRGAN_TensorFlow) [PyTorch](super_resolution/SRGAN_PyTorch)
   * SRCNN [TensorFlow](super_resolution/SRCNN_TensorFlow)
   * VDSR [PyTorch](super_resolution/VDSR_PyTorch)
+  * Perceptual Loss for real-time Style Transfer and Super Resolution [PyTorch](super_resolution/Perceptual_Losses_For_Style_Transfer_And_Super_Resolution_PyTorch)
 * 3D Computer Vision
   * 3DGAN [PyTorch](vision3d/3DGAN_PyTorch)
+  
   
