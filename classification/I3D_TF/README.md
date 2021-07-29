@@ -101,7 +101,9 @@ The data used has been pre-processed for the model to fit on it.The sample video
 * The Kinetics-400 dataset contains numerous short videos which consists of actions 
 like human-object,human-human interactions like washing dishes, moving lawns, opening presents etc.The datasets consists of 400 classes with each class containing more than 400 videos and the videos lasts for not more than 10s.There are no untrimmed videos in the dataset.The test set consists of 100 clips for each class.
 
-* The model couldn't be trained because of the huge size of the datasets and lack of resources(GPUs) so I have decided to use the weights of the model pre-trained on the         kinetics-400 and the imagenet datasets.
+ * The model couldn't be trained because of the huge size of the datasets and lack of resources(GPUs) so I have decided to use the weights of the model pre-trained on the  kinetics-400 and the imagenet datasets.
+ 
+* The sample gif has been taken from the official Deepmind repository for I3D model.[Data_link_here](https://github.com/deepmind/kinetics-i3d/tree/master/data)
 
 * The sample gif is taken from the officla Deepmind repository for I3D model. [Data Link Here](https://github.com/deepmind/kinetics-i3d/tree/master/data)
 
