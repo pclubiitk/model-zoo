@@ -37,7 +37,7 @@ The models are broadly categorised into the folders [Generative](/generative_mod
   * MLP_Mixer [PyTorch](classification/MLP-Mixer_PyTorch) [Tensorflow](classification/MLP-Mixer_TensorFlow)
   * MobileNet_V1 [Tensorflow](classification/MobileNet_v1_TF)
   * I3D [Tensorflow](vision3d/I3D_TF)
-  * RegVGG [Tensorflow](classifcation/RepVGG_TensorFlow) [PyTorch](classifcation/RepVGG_PyTorch)
+  * RepVGG [Tensorflow](classifcation/RepVGG_TensorFlow) [PyTorch](classifcation/RepVGG_PyTorch)
 * Multimodal models
   * StackGAN [PyTorch](multimodal_models/StackGAN_PyTorch)
   * VQA [TensorFlow](multimodal_models/VQA_TensorFlow)
